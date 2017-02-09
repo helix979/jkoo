@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ml on Jinkyu Koo</title>
+    <link>https://helix979.github.io/jkoo/tags/ml/index.xml</link>
+    <description>Recent content in Ml on Jinkyu Koo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017 Jinkyu Koo</copyright>
+    <atom:link href="/jkoo/tags/ml/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Linear Regression</title>
+      <link>https://helix979.github.io/jkoo/post/ml-linear_regression/</link>
+      <pubDate>Thu, 02 Feb 2017 23:59:55 -0500</pubDate>
+      
+      <guid>https://helix979.github.io/jkoo/post/ml-linear_regression/</guid>
+      <description>
+
+&lt;p&gt;Linear regression is a means of modeling the relationship between one or
+more independent variables (inputs) and a single dependent variable (an
+output) by fitting a linear equation to observed data.&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;hypothesis-function&#34;&gt;Hypothesis function&lt;/h2&gt;
+
+&lt;p&gt;Given the $m$-th observation with inputs $\{ x_{m,1}, x_{m,2}, \ldots, x_{m,n} \}$
+where
+$x_{m,j} \in \mathbb{R}, \forall j$ and an output $y_m \in \mathbb{R}$,
+we define an input vector as&lt;/p&gt;
+
+&lt;p&gt;$$
+\mathbf{x}_m=
+\begin{bmatrix}
+x_{m,0} \\&lt;br /&gt;
+x_{m,1} \\&lt;br /&gt;
+\vdots \\&lt;br /&gt;
+x_{m,n}
+\end{bmatrix} \in \mathbb{R}^{n+1},
+\label{eq:input_vector}
+$$&lt;/p&gt;
+
+&lt;p&gt;where we always set $x_{m,0}=1$, which is called a &lt;strong&gt;bias input&lt;/strong&gt; and considered here for notational
+convenience. The goal of linear regression is to find an estimate
+$\hat{y}_m=h_{\mathbf{w}}(\mathbf{x}_{m})$ of the output $y_{m}$ that is
+of the form:&lt;/p&gt;
+
+&lt;p&gt;$$
+h_{\mathbf{w}}(\mathbf{x}_{m})=\mathbf{w}^T \mathbf{x}_{m}=w_0 + w_1 x_{m,1} + \ldots +w_n x_{m,n}.
+$$&lt;/p&gt;
+
+&lt;p&gt;We call $h_{\mathbf{w}}(\cdot)$ a &lt;strong&gt;hypothesis function&lt;/strong&gt;. By well
+choosing the value of $\mathbf{w}$, we want
+$h_{\mathbf{w}}(\mathbf{x}_{m})$ as close to $y_{m}$ as possible for
+$m=1,2,\ldots,M$. Again, $M$ is the number of observations in the
+training set.&lt;/p&gt;
+
+&lt;p&gt;Note that when $n=1$, the hypothesis function is represented as&lt;/p&gt;
+
+&lt;p&gt;$$
+h_{\mathbf{w}}(\mathbf{x}_{m})=w_0 + w_1 x_{m,1},
+$$&lt;/p&gt;
+
+&lt;p&gt;which is the form of a straight line. Thus, all we need to do here is to find the slope
+$w_1$ and the $y$-intercept $w_0$ of a straight line that fits best to
+given points ${(x_{m,1}, y_{m})}_{m=1}^{M}$. This case is called
+simple linear regression. Figure 1 shows an example of the simple linear regression.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://helix979.github.io/jkoo/img/simple_linear.PNG&#34; alt=&#34;The blue dots represent the training data $\{(x_{m,1}, y_{m})\}_{m=1}^{M}$. The result of the simple linear regression is the red line&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Simple linear regression.&lt;/h4&gt;
+        &lt;p&gt;
+        The blue dots represent the training data $\{(x_{m,1}, y_{m})\}_{m=1}^{M}$. The result of the simple linear regression is the red line
+        
+            
+        
+        &lt;/p&gt; 
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;cost-function&#34;&gt;Cost function&lt;/h2&gt;
+
+&lt;p&gt;We need a measure of how &amp;ldquo;well&amp;rdquo; we have selected the value of
+$\mathbf{w}$. To this end, the &lt;strong&gt;cost function&lt;/strong&gt; $J(\mathbf{w})$ can
+be defined as&lt;/p&gt;
+
+&lt;p&gt;$$
+J(\mathbf{w})=\frac{1}{M} \sum_{m=1}^{M} \left(h_{\mathbf{w}}(\mathbf{x}_{m})-y_{m} \right)^{2}.
+\tag{lr:1}\label{eq:mse}
+$$&lt;/p&gt;
+
+&lt;p&gt;Saying the value of $h_{\mathbf{w}}(\mathbf{x}_{m})-y_{m}$ is an error, the cost function
+above is the mean of squared errors. Then, the best value of
+$\mathbf{w}$, &lt;em&gt;i.e.&lt;/em&gt;, the solution $\mathbf{w}^{*}$, is chosen as the
+one that minimizes the cost function $J(\mathbf{w})$ in \eqref{eq:mse}.
+Such a solution is said to be optimal in the sense of minimizing mean-squared errors (MMSE).&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;learning&#34;&gt;Learning&lt;/h2&gt;
+
+&lt;p&gt;Formally, the solution $\mathbf{w}^{*}$ is obtained as
+$$
+\mathbf{w}^{*}=\arg \min_{\mathbf{w}} J(\mathbf{w}).
+$$&lt;/p&gt;
+
+&lt;p&gt;This can be solved numerically by using the gradient descent. Since
+$$
+J(\mathbf{w})=\frac{1}{M} \sum_{m=1}^{M} \left(w_0 + w_1 x_{m,1} + \ldots +w_n x_{m,n}-y_{m} \right)^{2},
+$$&lt;/p&gt;
+
+&lt;p&gt;we have
+$$
+\frac{\partial}{\partial w_j} J(\mathbf{w})= \frac{2}{M} \sum_{m=1}^{M} \left(w_0 + w_1 x_{m,1} + \ldots +w_n x_{m,n}-y_{m} \right)x_{m,j}.
+$$
+Therefore, from &lt;a href=&#34;https://helix979.github.io/jkoo/jkoo/post/ml-optimization/#mjx-eqn-eqopt&#34; target=&#34;_blank&#34;&gt;(opt.1)&lt;/a&gt;, the gradient descent equations for
+linear regression are&lt;/p&gt;
+
+&lt;p&gt;$$
+w_{j}^{(t+1)}=w_{j}^{(t)}-\alpha\frac{2}{M} \sum_{m=1}^{M} \left(w_0^{(t)} + w_1^{(t)} x_{m,1} + \ldots +w_n^{(t)} x_{m,n}-y_{m} \right)x_{m,j}
+$$&lt;/p&gt;
+
+&lt;p&gt;for all $j$.&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;prediction&#34;&gt;Prediction&lt;/h2&gt;
+
+&lt;p&gt;After we have found the solution $\mathbf{w}^{*}$, if an additional input vector
+$\mathbf{x} = \begin{bmatrix} 1 &amp;amp; x_1 &amp;amp; \ldots &amp;amp; x_n \end{bmatrix}^{T}$
+is given, its corresponding output $y$ can be predicted as follows:&lt;/p&gt;
+
+&lt;p&gt;$$
+y=h_{\mathbf{w}^{*}}(\mathbf{x})=w_0^{*} + w_1^{*} x_1 + \ldots +w_n^{*} x_n = \mathbf{w}^{*T} \mathbf{x}.
+$$&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;practice&#34;&gt;Practice&lt;/h2&gt;
+
+&lt;p&gt;The following code show an example of the simple lienar gression.
+Data used for training is created by adding noises around the straight line of y-intercept=10 and slope=1.
+The output would be like Figure 2.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import numpy as np
+import matplotlib.pyplot as plt
+import tensorflow as tf
+
+n_data = 100
+r_x = 100
+noise_std = 50
+x = None
+y = None
+y_ideal = None
+#----------------------------------------------------------------
+def create_data():
+    global x, y, y_ideal
+    y_intercept = 10
+    slope = 1
+    x = np.float32(np.random.rand(n_data)) * r_x
+    x = np.sort(x)
+    noise = (np.float32(np.random.rand(n_data)) - 0.5) * noise_std
+    y_ideal = slope * x + y_intercept
+    y = y_ideal + noise
+#----------------------------------------------------------------
+def draw(w1, w0):
+    y_hat = w1 * x + w0
+
+    plt.plot(x[:], y_ideal[:], &#39;r--&#39;, \
+             x[:], y[:], &#39;b.&#39;,\
+             x[:], y_hat[:], &#39;g--&#39;)
+
+    plt.xlim(0, r_x)
+    plt.legend([&#39;ideal&#39;, &#39;data&#39;, &#39;regression&#39;], loc=&#39;best&#39;)
+    plt.savefig(&#39;linear_one.pdf&#39;)
+#----------------------------------------------------------------
+
+# Create data for training
+create_data()
+
+# Model
+w_1 = tf.Variable(np.random.rand())
+w_0 = tf.Variable(np.random.rand())
+m = w_1 * x
+h = m + w_0   # Note w_0 is broadcasted to be the same shape as m
+
+J = tf.reduce_mean(tf.square(h - y))
+optimizer = tf.train.GradientDescentOptimizer(0.0001)
+train = optimizer.minimize(J)
+
+init = tf.initialize_all_variables()
+sess=tf.InteractiveSession()
+sess.run(init)
+
+# Learning
+step = 0
+while 1:
+    try:
+        step += 1
+        sess.run(train)
+        if step % 100 == 0:
+            print step, J.eval(), w_1.eval(), w_0.eval()
+
+    # Ctrl+c will stop training
+    except KeyboardInterrupt:
+        break
+
+# Plot the result
+draw(w_1.eval(), w_0.eval())
+
+sess.close()
+&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://helix979.github.io/jkoo/img/linear_one.PNG&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Simple linear gression&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;The following code is doing the similar thing as above, but this time we consider the case of $n=2$.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import tensorflow as tf
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import cm
+from mpl_toolkits.mplot3d import Axes3D
+
+N_data = 20
+R_x = 100
+noise_std = 100
+xs = None
+ys = None
+zs = None
+zs_ideal = None
+X = None
+Y = None
+#----------------------------------------------------------------
+def create_data():
+    global xs, ys, zs, zs_ideal, X, Y
+    slope_x = -2
+    slope_y = 1
+    z_intercept = 4
+    x = np.random.rand(N_data) * R_x
+    x = np.sort(x)
+    y = np.random.rand(N_data) * R_x
+    y = np.sort(y)
+    X, Y = np.meshgrid(x, y)
+    zf = lambda x, y: slope_x * x + slope_y * y + z_intercept
+    xs = np.float32(np.ravel(X))
+    ys = np.float32(np.ravel(Y))
+    zs_ideal = np.array([zf(x,y) for x,y in zip(xs, ys)])
+    zs = zs_ideal + (np.float32(np.random.rand(len(zs_ideal))) - 0.5) * noise_std
+#----------------------------------------------------------------
+def draw(w_est, w_0_est):
+    zf_est = lambda x, y: w_est[0][0] * x + w_est[0][1] * y + w_0_est
+    zs_est = np.array([zf_est(x,y) for x,y in zip(xs, ys)])
+    Z_est = zs_est.reshape(X.shape)
+
+    fig = plt.figure()
+    ax = fig.gca(projection=&#39;3d&#39;)
+    ax.plot_wireframe(X, Y, Z_est)
+
+    for x,y,z in zip(xs, ys, zs[:]):
+        ax.scatter(x,y,z, c=&#39;r&#39;, marker=&#39;.&#39;, s=20)
+
+    ax.set_xlabel(&#39;x_1&#39;)
+    ax.set_ylabel(&#39;x_2&#39;)
+    ax.set_zlabel(&#39;z&#39;)
+
+    plt.show()
+#----------------------------------------------------------------
+
+# Create data for training
+create_data()
+
+# Model
+w_0 = tf.Variable(np.float32(np.random.rand()))
+w = tf.Variable(np.float32(np.random.rand(1,2)))
+h = tf.matmul(w, np.stack((xs,ys)) ) + w_0
+loss = tf.reduce_mean(tf.square(h - zs))
+optimizer = tf.train.GradientDescentOptimizer(0.0001)
+train = optimizer.minimize(loss)
+
+init = tf.initialize_all_variables()
+sess=tf.InteractiveSession()
+sess.run(init)
+
+# Learning
+step = 0
+while 1:
+    try:
+        step += 1
+        sess.run(train)
+        if step % 100 == 0:
+            print step, loss.eval(), w.eval()[0][0], w.eval()[0][1], w_0.eval()
+
+    # Ctrl+c will stop training
+    except KeyboardInterrupt:
+        break
+
+# Plot the result
+draw(w.eval(), w_0.eval())
+
+sess.close()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Below is what we can obtained from the code.
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://helix979.github.io/jkoo/img/linear_multiple.PNG&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Linear regression ($n=2$)&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Optimization</title>
+      <link>https://helix979.github.io/jkoo/post/ml-optimization/</link>
+      <pubDate>Tue, 31 Jan 2017 23:59:55 -0500</pubDate>
+      
+      <guid>https://helix979.github.io/jkoo/post/ml-optimization/</guid>
+      <description>
+
+&lt;p&gt;Machine learning often ends up with a mathematical optimization problem,
+typically minimizing a cost function $J(\mathbf{w})$ for a given parameter $\mathbf{w} = \begin{bmatrix} w_0 &amp;amp; w_1 &amp;amp; \cdots &amp;amp; w_n \end{bmatrix}^{T} \in \mathbb{R}^{n+1}$ that has the form:&lt;/p&gt;
+
+&lt;p&gt;$$
+J(\mathbf{w})=\frac{1}{M} \sum_{m=1}^{M} J_m(\mathbf{w}).
+\tag{opt:1}\label{eq:opt}
+$$&lt;/p&gt;
+
+&lt;p&gt;Here, $J_m(\mathbf{w})$ is the cost associated with the
+$m$-th observation in a training set, and $M$ denotes the total number
+of observations. Thus, one can say that given the parameter
+$\mathbf{w}$, the cost function $J(\mathbf{w})$ represents the average
+cost over all observations in the training set. Among all the possible
+parameters, the one that results in the smallest value of the cost
+function is called the &lt;strong&gt;minimizer, or solution&lt;/strong&gt;, and we denote it by $\mathbf{w}^{*}$.
+The term &amp;ldquo;learning&amp;rdquo; in the machine learning means a
+procedure for finding the solution $\mathbf{w}^{*}$.&lt;/p&gt;
+
+&lt;h2 id=&#34;gradient-descent&#34;&gt;&lt;strong&gt;Gradient descent&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;Now, how can we find the solution $\mathbf{w}^{*}$ to \eqref{eq:opt}? One
+simple way is the &lt;strong&gt;gradient descent&lt;/strong&gt;. The method of gradient descent
+is to find a &lt;strong&gt;local minimum&lt;/strong&gt; of a cost function $J(\mathbf{w})$,
+taking steps in the opposite direction to the gradient
+$\nabla{J(\mathbf{w})}$, where&lt;/p&gt;
+
+&lt;p&gt;$$
+\nabla{J(\mathbf{w})})=
+\begin{bmatrix}
+\frac{\partial}{\partial w_0} J(\mathbf{w}) \\&lt;br /&gt;
+\frac{\partial}{\partial w_1} J(\mathbf{w}) \\&lt;br /&gt;
+\vdots \\&lt;br /&gt;
+\frac{\partial}{\partial w_n} J(\mathbf{w})
+\end{bmatrix}.
+$$&lt;/p&gt;
+
+&lt;p&gt;Consider the Taylor series of
+$J(\mathbf{w}-\alpha \nabla{J(\mathbf{w})})$ as a function of $\alpha$:
+$$J(\mathbf{w}-\alpha \nabla{J(\mathbf{w})})=J(\mathbf{w})-\alpha\Vert \nabla{J(\mathbf{w})}\Vert^2 + o(\alpha).$$
+If $\nabla{J(\mathbf{w})} \ne 0$, then for sufficiently small
+$\alpha&amp;gt;0$, we have
+$$J(\mathbf{w}-\alpha \nabla{J(\mathbf{w})})&amp;lt;J(\mathbf{w}).$$ This means
+that the parameter $\mathbf{w}-\alpha \nabla{J(\mathbf{w})}$ leads to
+the smaller value of the cost function than the parameter $\mathbf{w}$.
+Intuitively, the gradient $\nabla{J(\mathbf{w})}$ is the direction of
+the maximum rate of increase at the parameter $\mathbf{w}$, so moving in
+the opposite direction lowers the value of the cost function.&lt;/p&gt;
+
+&lt;p&gt;Thus, we can start with a random guess $\mathbf{w}^{(0)}$ and keep
+moving to $\mathbf{w}^{(1)}$, $\mathbf{w}^{(2)}$, $\ldots$,
+$\mathbf{w}^{(t)}$ in such a way that
+$$
+\mathbf{w}^{(t+1)} = \mathbf{w}^{(t)}-\alpha \nabla{J(\mathbf{w}^{(t)})},
+\tag{opt:2}\label{eq:gd}
+$$
+or in other form
+$$
+w_{j}^{(t+1)} = w_{j}^{(t)}-\alpha \left. \frac{\partial J(\mathbf{w})}{\partial w_{j}} \right\vert_{\mathbf{w}=\mathbf{w}^{(t)}}\text{ for all } j.
+\label{eq:gd_element}
+$$
+Then, for sufficiently small $\alpha&amp;gt;0$, we have, for every $t$,
+$$J(\mathbf{w}^{(t+1)}) &amp;lt; J(\mathbf{w}^{(t)}),$$ and $\mathbf{w}^{(t)}$
+converges to a local minimum as $t$ grows. When the cost function
+$J(\mathbf{w})$ is convex, the local minimum is also the global minimum,
+so in such a case, $\mathbf{w}^{(t)}$ can converge to the solution
+$\mathbf{w}^{*}$. For non-convex cost functions, the gradient descent
+does not guarantee us finding the global minimum. Instead, depending on
+the initial guess, we will end up with different local minimum, which is
+exemplified in Figure 1.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://helix979.github.io/jkoo/img/gd_initial.PNG&#34; alt=&#34;The red and green dots represent the trajectories of the gradient descent corresponding to the initial values $w^{(0)}=-135$ and $w^{(0)}=30$, respectively.&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;The effect of the initial guess when $J(w)=(w&amp;#43;90)(w-50)(w/2&amp;#43;50)(w-90)/1000000$.&lt;/h4&gt;
+        &lt;p&gt;
+        The red and green dots represent the trajectories of the gradient descent corresponding to the initial values $w^{(0)}=-135$ and $w^{(0)}=30$, respectively.
+        
+            
+        
+        &lt;/p&gt; 
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;learning-rate&#34;&gt;&lt;strong&gt;Learning rate&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;In \eqref{eq:gd}, the value of $\alpha$ is called the &lt;strong&gt;learning rate&lt;/strong&gt;. This value determines how fast or slow the parameter moves
+towards the optimal solution. Figure 2 illustrates
+the effect of the learning rate.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://helix979.github.io/jkoo/img/gd_learning_rate.PNG&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;The effect of the learning rate when $J(w)=\frac{1}{2}w^2$ and $w^{(0)}=-20$.&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;If $\alpha$ is too small, the gradient descent may take too long to converge. In contrast, the gradient descent
+may fail to converge with too large value of $\alpha$.&lt;/p&gt;
+
+&lt;p&gt;Choosing the proper value of the learning rate is not that trivial. In
+practice, we often use simply a small enough constant by keeping
+decreasing the value until the parameter seems to converge to a certain
+point. Or in order to get more accurate solution, one can halve the
+value of the learning rate as convergence slows down over iterations.
+Another method is to adaptively change the learning rate at every
+iteration $t$ in the way that the difference
+$ J(\mathbf{w}^{(t)})-J(\mathbf{w}^{(t+1)})$ is maximized. For more
+detail on this method, refer to the &lt;strong&gt;steepest descent&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;stochastic-gradient-descent&#34;&gt;&lt;strong&gt;Stochastic gradient descent&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;From \eqref{eq:opt}, the gradient $\nabla{J(\mathbf{w})}$ is represented
+as
+$$
+\nabla{J(\mathbf{w})}=\frac{1}{M} \sum_{m=1}^{M} \nabla{J_m(\mathbf{w})}.
+\label{eq:gradient}
+$$
+ This implies that computing $\nabla{J(\mathbf{w})}$ is equivalent to taking the average of
+$\nabla{J_m(\mathbf{w})}$, the gradient of the cost specific to the
+$m$-th observation, over the full training set. However, in practice,
+the training set is often very large, and thus averaging over the entire
+set can take a significant time. For this reason, the &lt;strong&gt;stochastic
+gradient descent&lt;/strong&gt; simply approximates the true gradient by a
+gradient at a single observation as follows:
+$$\nabla{J(\mathbf{w})}\approxeq\nabla{J_m(\mathbf{w})}.
+\label{eq:gradient_approx}$$ Thus, with the stochastic gradient descent,
+the parameter update equation in \eqref{eq:gd} can be rewritten as
+$$
+\mathbf{w}^{(t+1)} = \mathbf{w}^{(t)}-\alpha \nabla{J_t(\mathbf{w}^{(t)})}.
+\label{eq:sto_gd}
+$$&lt;/p&gt;
+
+&lt;p&gt;As a compromise between the true gradient and the gradient at a single
+observation, one may also consider the gradient averaged over a few
+training samples.&lt;/p&gt;
+
+&lt;h3 id=&#34;practice .unnumbered&#34;&gt;&lt;strong&gt;Practice&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;Tensorflow provides a function that implements the gradient descent
+algorithm. Thus, you can just use it without deriving an actual
+gradient. What you need to do is to choose the value of the learning
+rate. The following shows an example.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import tensorflow as tf
+import numpy as np
+
+w = tf.Variable(100.0)  # initial guess = 100.0
+J = tf.pow(w, 2)        # J(w) = w^2
+
+optimizer = tf.train.GradientDescentOptimizer(0.05)     # learning rate = 0.05
+train = optimizer.minimize(J)
+
+# Initialize variables
+init = tf.initialize_all_variables()
+
+sess = tf.InteractiveSession()
+sess.run(init)
+
+for step in range(0, 201):
+    sess.run(train)
+    if step % 20 == 0:
+        print &amp;quot;%3d, %10.5f, %10.5f&amp;quot; % (step, w.eval(), J.eval())
+
+sess.close()        
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The output of the script would be as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  0,   90.00000, 8100.00000
+ 20,   10.94190,  119.72514
+ 40,    1.33028,    1.76964
+ 60,    0.16173,    0.02616
+ 80,    0.01966,    0.00039
+100,    0.00239,    0.00001
+120,    0.00029,    0.00000
+140,    0.00004,    0.00000
+160,    0.00000,    0.00000
+180,    0.00000,    0.00000
+200,    0.00000,    0.00000
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

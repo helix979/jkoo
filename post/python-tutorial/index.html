@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.18.1" />
+  <meta name="author" content="Jinkyu Koo">
+  <meta name="description" content="research scientist / dad / ice hockey player in dreams">
+
+  
+  
+  
+    
+  
+  
+    
+    
+    <link rel="stylesheet" href="/jkoo/css/highlight.min.css">
+    
+  
+  <link rel="stylesheet" href="/jkoo/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/jkoo/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/jkoo/css/academicons.min.css">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700|Merriweather|Roboto+Mono">
+  <link rel="stylesheet" href="/jkoo/css/hugo-academic.css">
+  
+
+  <link rel="alternate" href="https://helix979.github.io/jkoo/index.xml" type="application/rss+xml" title="Jinkyu Koo">
+  <link rel="feed" href="https://helix979.github.io/jkoo/index.xml" type="application/rss+xml" title="Jinkyu Koo">
+
+  <link rel="icon" type="image/png" href="/jkoo/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/jkoo/img/apple-touch-icon.png">
+
+  <link rel="canonical" href="https://helix979.github.io/jkoo/post/python-tutorial/">
+
+  
+
+  <title>Python in half an hour | Jinkyu Koo</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#navbar-main" data-offset="71">
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/jkoo/">Jinkyu Koo</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/jkoo/#about">
+            
+            <span>Home</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/jkoo/#ml">
+            
+            <span>Machine Learning</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/jkoo/#misc">
+            
+            <span>Misc</span>
+          </a>
+        </li>
+
+        
+        
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+  <div class="article-container">
+    <h1 itemprop="name">Python in half an hour</h1>
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    <time datetime="2015-11-29 11:00:00 &#43;0000 UTC" itemprop="datePublished">
+      Sun, Nov 29, 2015
+    </time>
+  </span>
+
+  
+
+  
+  
+  
+  <span class="article-tags">
+    <i class="fa fa-tags"></i>
+    
+    <a href="/jkoo/tags/python">python</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fpython-tutorial%2f"
+         target="_blank">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Python%20in%20half%20an%20hour&amp;url=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fpython-tutorial%2f"
+         target="_blank">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fpython-tutorial%2f&amp;title=Python%20in%20half%20an%20hour"
+         target="_blank">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fpython-tutorial%2f&amp;title=Python%20in%20half%20an%20hour"
+         target="_blank">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Python%20in%20half%20an%20hour&amp;body=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fpython-tutorial%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<p>In what follows in this tutorial, the result of a statement is expressed
+in the form of <code>#result#</code>, unless otherwise mentioned.</p>
+
+<ul>
+<li><p>Basic arithmetic operations</p>
+
+<pre><code># Comments start with a hash sign (#).
+
+1 + 2   # Addition 
+1 / 2   #0# Division
+1 / 2.  #0.5# If either one of the numbers in a division is a float,
+        #     so does the result.
+3 % 2   #1# Modulus
+2 ** 3  #8# Power. Equivalent to pow(2,3).
+</code></pre></li>
+
+<li><p>Variables</p>
+
+<pre><code># A valid name of a variable is an alpha-numeric string
+# consisting of one or more letters, digits or underscore characters,
+# just like in C.
+
+x = 3           # Assignment
+x + 1           #4#
+x = None        # None is is a built-in constant
+                # that represents the absence of a value.
+x, y = 1, 2     # Multiple assignments at a time
+</code></pre></li>
+
+<li><p>Import modules</p>
+
+<pre><code>import math
+math.sqrt(4)
+
+# If you do not want to write the module name each time you call the function
+from math import *
+sqrt(4)
+
+# If you are sure that you only need sqrt() in the math module
+from math import sqrt
+sqrt(4)
+
+# Module alias
+import math as m
+m.sqrt(4)
+
+# Function alias
+from math import sqrt as sq
+sq(4)
+</code></pre></li>
+
+<li><p>Strings</p>
+
+<pre><code># Strings can be expressed with double quotes (&quot;) or single quotes (').
+# There is no difference bettwen double quotes and single quotes.
+x = &quot;abc&quot;
+x = 'abc'   # Exactly the same as above
+y = &quot;ab'cd'ef&quot;  # 'cd' is part of the string.
+z = 'ab&quot;cd&quot;ef'  # &quot;cd&quot; is part of the string. The strings y and z are not the same.
+
+# String formatting
+# Use C-like conversion specifiers.
+'test %s %d %.1f' % ('abc', 10, 10.33)   #'test abc 10 10.3'#
+
+# String methods
+'  /sys/fs  '.strip()    #'/sys/fs'# Remove whitespaces on the left and the right.
+'/sys/fs'.split('/')     #['', 'sys', 'fs']#
+</code></pre></li>
+
+<li><p>Lists</p>
+
+<pre><code># Lists start with [ and end with ].
+# Elements are separated by a comma (,).
+x = [1, 2, 3]
+
+# A list can hold different types of elements.
+y = [1, 2, &quot;abc&quot;, [5,6]]
+
+# List methods
+z = ['b', 'a']
+z.append('c')   #['b','a','c']#
+z.index('b')    #0# Returns the index of the first occurrence of a value
+z.sort()        #['a','b','c']#
+z.remove('a')   # Removes the element that appears first.
+</code></pre></li>
+
+<li><p>Tuples</p>
+
+<pre><code># Tuples start with ( and end with ).
+# Tuples are just like lists with an exception that they cannot be changed.
+x = (1, 2)
+
+# Values separated by commas automatically becomes a tuple.
+x = 1, 2    # The same as above.
+
+# A tuple with a single element
+x = (1,)    # Here the comma is important. (1) is just 1. 
+</code></pre></li>
+
+<li><p>Sequence commons: strings, lists, and tuples are called sequences.</p>
+
+<pre><code>x = '123'
+y = [1, 2, 3]
+z = (1, 2, 3)
+
+# Sequences can be indexed as follows:
+x[0]        #'1'#
+y[0:2]      #[1,2]# Returns a list with elements such that 0&lt;=index&lt;2.
+z[1:]       #(2,3)# Return a tuple with elements such that 1&lt;=index.
+x[:2]       #'12'# Returns a string with elements such that index&lt;2. 
+y[-1]       #3# Returns the last element.
+z[-2]       #2# Returns the second last element.
+y[:]        #[1, 2, 3]# Returns a list with all elements.
+
+# Addition and multiplication for sequences
+# Two objects of the same type can be added.
+x + '4'     #'1234'#
+y + [4, 5]  #[1, 2, 3, 4, 5]#
+z + (4,)    #(1, 2, 3, 4)#
+
+# Multiplication can be understood as multiple additions.
+y*3         #[1, 2, 3, 1, 2, 3, 1, 2, 3]# Regard it as y+y+y.
+
+# Pairing elements of two sequences
+x = [1, 2, 3]
+y = [4, 5, 6]
+zip(x, y)   #[(1, 4), (2, 5), (3, 6)]#
+
+# * operator: argument unpacking
+z = [x, y]
+zip(*z)     #[(1, 4), (2, 5), (3, 6)]# The same as zip(x,y)
+</code></pre></li>
+
+<li><p>Dictionaries</p>
+
+<pre><code># A dictionary starts with { and ends with },
+# and it is like a hash table that maps a key to a value.
+
+# An element is defined as a pair of a key and a value.
+d = {'key1':'value1', 'key2':'value2'}
+d = {}                  # An empty dictionary
+d['key3'] = 'value3'    # Adds a key-value pair.
+d['key3']               #'value3'# Returns a value for the key
+
+# The key must be immutable.
+d['abc'] = 3        # OK
+d[(a,b)] = [1,2]    # OK
+d[3] = 'abc'        # OK
+d[[1,2,3]] = 2      # Not OK, since a list is mutable.
+
+# Dictionary methods
+d.get(key)      # Returns a value corresponding to the key.
+d.has_key(key)  # Returns True if the key in the dictionary, and False otherwise.
+d.items()       # Returns a list of (key, value) tuple pairs.
+d.keys()        # Returns a list of keys.
+d.values()      # Returns a list of values.
+d.copy()        # Return a dictionary object that
+                # has exactly the same contents as d.
+</code></pre></li>
+
+<li><p>Print to screen</p>
+
+<pre><code># Note that what is shown here valid in Python 2.7 only.
+# Syntax for print is quite changed in Python 3.4.
+x = 1
+y = [1,2]
+print 3                 #3#
+print 3, &quot;abc&quot;          #3 abc#
+print &quot;%d %d&quot; % (3, 4)  #3 4#
+print x,                #1# Trailing comma suppresses newline.
+print str(y)            #[1, 2]# str() transforms an object into a string.
+print repr(y)           #[1, 2]# 
+                        # Most of times, repr() results in the same as str().
+</code></pre></li>
+
+<li><p>Assignment is by reference!</p>
+
+<pre><code># One thing to remember
+# when you assign a list or a dictionary (i.e., mutable objects) to another variable:
+# Assignment is always by reference, not by copy.
+x = [1, 2, 3]
+y = x           # Here, y get a reference to what x points to, i.e., [1, 2, 3]
+y[0] = 4
+x               #[4, 2, 3]# Note that x is changed by y.
+
+# To copy a list
+y = x[:]        # Creates a new list that contains all elements of x.
+y[0] = 4
+x               #[1 ,2 ,3]#
+
+# To copy a dictionary
+x = {1: 1}
+y = x
+z = x.copy()    # Use the copy() method.
+y[1] = 2
+z[1] = 3
+print str(x), str(y), str(z)    #{1: 2} {1: 2} {1: 3}#
+</code></pre></li>
+
+<li><p>Conditionals</p>
+
+<pre><code>if x == 5:          # Note that there is a colon (:) at the end.
+    # VERY IMPORTANT:
+    # All statements in a block must be indented by the same amount.
+    # Otherwise, you will see an error.
+    x += 1
+    y = x + 2
+    print x, y
+elif x in [4,5,6]:  # True if x is one of 4, 5, or 6.
+    if x != 2:      # Conditions can be nested.
+        print x
+else:
+    # Empty blocks are not allowed.
+    # Put 'pass' for a placeholder when you want do nothing.
+    pass            
+</code></pre></li>
+
+<li><p>The for-loops</p>
+
+<pre><code>x = [1, 2, 3]
+for v in x:         # Iterates the elements of x from the first to the last.
+    print v,        #1 2 3#
+
+range(3)            #[0, 1, 2]# Returns a list of integers from 0 to 3-1.
+range(1,4)          #[1, 2, 3]# Returns a list of integers from 1 to 4-1.
+
+for i in range(3):
+    print x[i],     #1 2 3#
+</code></pre></li>
+
+<li><p>The while-loops</p>
+
+<pre><code>x = 5
+while x &gt; 0:
+    x -= 1
+    if x == 3:
+        continue    # continue as in C
+    if x == 1:
+        break       # break as in C
+    print x,        #4 2#
+</code></pre></li>
+
+<li><p>List comprehension: making a list from other list</p>
+
+<pre><code>x = [i*2 for i in range(5)]
+y = [i*2 for i in range(5) if i%2 == 0]
+x       #[0, 2, 4, 6, 8]#
+y       #[0, 4, 8]#
+</code></pre></li>
+
+<li><p>Iterating over a dictionary</p>
+
+<pre><code>d = {1: 'a', 2: 'b', 3: 'c'}
+for k, v in d.items():
+    print str(k) + ':' + v,   #1:a 2:b 3:c#
+
+# The following is the same as above.
+key = d.keys()
+value = d.values()
+for k, v in zip(key, value):
+    print str(k) + ':' + v,   #1:a 2:b 3:c#
+</code></pre></li>
+
+<li><p>Functions</p>
+
+<pre><code># Writing your own functions
+def foo(arg1):      # Do not forget the colon at the end.
+    x = arg1 + 1
+    return x        # You can omit the return statement
+                    # if there is nothing to return.
+
+def bar(arg1, arg2 = 3):    # arg2 gets its value as 3 by default.
+    x = arg2 + 1
+    return arg1[0], x       # Here, arg1 can be of any type except
+                            # a literal constant.
+
+q, w = bar('abc')       # You can omit the argument that has its default value.
+print q, w              #a 4#
+print bar('abc')        #('a', 4)# arg1 is a string.
+print bar('abc', 4)     #('a', 5)# Put something to change the default value.
+print bar([1, 2])       #(1, 4)# arg1 is a list.
+print bar((5, 6))       #(5, 4)# arg1 is a tuple.
+print bar(7)            # An error
+
+# Make use of argument unpacking operator (*).
+x = (1, 2)
+def add(a, b):
+    return a+b
+
+print add(*x)              #3# Just add(x) will cause an error.
+
+# A function can have a different name.
+my_add = add
+my_add(1,2)                #3#
+
+# Lambda expressions
+add2 = lambda arg1, arg2: arg1+arg2
+add2(1,2)                  #3#
+
+# Lambda expressions may be used when you pass an argument that is a function.
+a = [(4,2),(1,3)]
+sorted(a, key=lambda x:x[0])    #[(1, 3), (4, 2)]#
+                                # Sort by the first element of tuples
+sorted(a, key=lambda x:x[1])    #[(4, 2), (1, 3)]#
+                                # Sort by the second element of tuples
+
+# To change global variables within a function
+x = 1
+def foo(a):
+    global x        # Without this, x won't be changed.
+    x += a
+    return
+</code></pre></li>
+
+<li><p>Exceptions</p>
+
+<pre><code># If something bad happens within a try block, an exception is raised.
+def foo(x):
+    y = 1
+    try:                        
+        y = y/x
+    except ZeroDivisionError:   # You can specify the type of
+                                # an exception to deal with.
+        print &quot;divided by zero&quot;
+    except:                     # All exceptions other than
+                                # the above are handled here.
+        print &quot;something else&quot;
+
+foo(0)                          #divided by zero#
+foo('1')                        #something else#
+
+# Raise exceptions and catch exception objects.
+import traceback                    # To use print_exc()
+try:
+    raise Exception(&quot;my exception&quot;) # Raise an exception with some argument.
+except Exception as e:              # The 'Exception' is the base of all exception
+                                    # objects, so it can catch all exceptions.
+    if e.args == (&quot;my exception&quot;,): # You can check what argument is in.
+        print &quot;my exception occurs&quot;
+    print e.args[0]                 #my exception#
+                                    # Print the argument of the exception.
+    # Print exception information by which you can locate the culprit.
+    traceback.print_exc()           
+
+# The else-clause: executed when there is no problem in the try block.
+while True:
+    default = '1'
+    menu = 1
+    try:
+        # Take an input from a user
+        # Just typing the enter key will cause the default value to be chosen.
+        t = raw_input(&quot;Enter a number (default=&quot;+default+&quot;): &quot;) or default
+        menu = int(t) % 10
+        print 'You selected ' + str(menu)
+    except:
+        print 'Invalid input'    # e.g., character inputs will come to here.
+    else:           
+        break       # Executed if no exceptions are raised in the try block.
+</code></pre></li>
+
+<li><p>Reading from and writing to a file</p>
+
+<pre><code>fr = open('text.txt', 'r')      # Open text.txt to read.
+fw = open('result.txt', 'w')    # Open result.txt to write.
+for line in fr.readlines():     # Iterate text.txt line by line.
+    fw.write(line + ' some')    # Write a string as a a line
+fr.close()                      # Do not forget to close files
+fw.close()
+</code></pre></li>
+
+<li><p>Some useful built-in functions</p>
+
+<pre><code>x = [1, 0, 2]
+len(x)              #3# Returns a length of a sequence.
+max(x)              #2$ Returns the largest element.
+min(x)              #0# Returns the smallest element.
+sorted(x)           # Returns a list of sorted elements of a sequence.
+sum(x)              #3# Returns the sum of all elements.
+
+# The 'in' operator returns True if a value is in a sequence and False otherwise.
+2 in x              #True# 
+
+# To delete an element of a list or a dictionary
+del x[1]            # Here, 1 is an index.
+
+d = {1:2, 3:4}
+del d[1]            # Here, 1 is a key.
+
+# Convert a string or a number to an integer or an floating number.
+int('12')           #12#
+int(12.3)           #12# 
+float(&quot;3.3&quot;)        #3.3#
+</code></pre></li>
+</ul>
+
+<p><br><br></p>
+
+<h1 id="drawing-a-graph">Drawing a graph</h1>
+
+<p>You may need to additionally install numpy and matplotlib modules to
+plot a graph. In Ubuntu, the easiest way to get them is to type:</p>
+
+<p><code>$ sudo apt-get install python-numpy python-matplotlib</code></p>
+
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+x1 = [1, 4, 8]
+y1 = [0.5, 2, 4]
+
+x2 = [1, 2, 3]
+x2_array = np.array(x2)     # np.array() makes an array object.
+y2_array = x2_array ** 2    # The array object enables
+                            # MATLAB-like element-wise operations
+
+# plt.plot() takes lists or arrays as its data arguments.
+plt.plot(x1, y1, x2_array, y2_array)
+
+# The following commands are self-explanatory.
+plt.title('title')
+plt.xlabel('label for x-axis')
+plt.ylabel('label for y-axis', fontsize=15)
+plt.grid()
+plt.legend(['x/2', 'pow(x,2)'])
+plt.xlim(0, 9)
+plt.ylim(0, 10)
+plt.savefig('fig1.png', format='png')   # Try pdf, eps, ... almost all you can imagine.
+
+
+# Whenever you want another figure
+plt.figure()    
+
+plt.subplot(211)
+plt.plot(x1, y1, 'r--')
+
+plt.subplot(212)
+plt.plot(x2_array, y2_array, 'b.', markersize=30)
+plt.xlim(0, 4)
+plt.ylim(0, 10)
+
+plt.savefig('fig2.png')
+</code></pre>
+
+<p><br><br></p>
+
+<h1 id="redirect-a-text-stream-to-your-python-script">Redirect a text stream to your Python script</h1>
+
+<p>Sometimes you may want to process the output of Linux commands within
+Python scripts by redirecting. Use the following example script in such
+a case. Say you write the codes in <code>find_keyword.py</code> and you want to
+catch the lines that contain ‘kworker’ from /proc/kmsg. Then, type:</p>
+
+<p><code>$ sudo cat /proc/kmsg | python find_keyword.py kworker file1.txt</code></p>
+
+<pre><code>import sys
+
+if (len(sys.argv) != 3):
+    print '\n Usage example:'
+    print ' When you want to find lines from /proc/kmsg that contain &quot;kworker&quot;,'
+    print ' print them to screen, and store them into file1.txt,'
+    print ' sudo cat /proc/kmsg | python '+sys.argv[0]+' kworker file1.txt\n'
+    sys.exit(1)
+
+fo = open(sys.argv[2], &quot;w&quot;)
+
+while True:
+    try:
+        line = sys.stdin.readline() # Reads a line from stdin
+    except KeyboardInterrupt:       # until a user hits ctrl+c
+        break
+
+    if not line:                    # or until there is nothing left to read
+        break
+
+    if sys.argv[1] in line:
+        print line
+        fo.write(line + '\n')
+
+fo.close()
+</code></pre>
+
+<p><br><br></p>
+
+<h1 id="regular-expressions">Regular expressions</h1>
+
+<p>A regular expression specifies a set of strings that matches it. You may
+have to spend non-trivial time to be familiar with all pattern syntaxes
+of regular expressions. Here, we show just a few of use cases. For more
+detail, refer to:</p>
+
+<p><code>https://docs.python.org/2/library/re.html</code></p>
+
+<pre><code>import re
+
+text1 = 'Fig. 1: initially there are 60 points in each class.'
+text2 = 'My phone number is 123-456-7890.'
+text3 = 'MemFree:           50116 kB'
+lines = [text1, text2, text3]
+
+# See if text1 contains 'where'.
+m1 = re.search('where', text1, flags=0)
+print repr(m1)   #None#
+if m1:           # None is equivalent to False in a condition.
+    print &quot;This won'n be printed.&quot;
+
+
+# See if text1 is a string that contains 'there' somewhere in it.
+m2 = re.search('.*there.*', text1, flags=0)    
+# '.*' means any character of 0 or more occurrences.
+
+if m2:            # If matched, m2 is not None.
+    # m2.group() is the whole string that matches the pattern '.*there.*'.
+    print m2.group()    
+
+
+# Use parentheses for grouping
+m3 = re.search(r'.*([A-Z]).*there.*\s(\d+).*', text1, flags=0)
+# Why 'r' before the opening quote? Check raw strings!
+# Without the 'r', all backslashes must be twice-typed.
+# To avoid confusion, patterns in Python code are
+# usually expressed in raw string notation.
+# '[A-Z]' means an alphabet between A and Z,
+# '\s' a white space, and
+# '\d+' a digit of 1 or more occurrences.
+
+if m3:
+    print m3.group()      
+    print m3.group(1)   #F# The string captured within the first parentheses.
+    print m3.group(2)   #60# The string captured within the second parentheses.
+
+
+# See if text2 contains a phone number
+m4 = re.search(r'\d{3}-\d{3}-\d{4}', text2, flags=0)
+if m4:
+    print m4.group()    #123-456-7890#
+
+
+# Parse the number that corresponds to Memfree from a list of strings.
+for line in lines:
+    m5 = re.search(r'MemFree:\s+(\d+)\s+kB', line, flags=0)
+    if m5:
+        print m5.group(1)    #50116#
+</code></pre>
+
+<p><br><br></p>
+
+<h1 id="classes">Classes</h1>
+
+<p>Python provides all the standard features of object oriented programming
+by classes:</p>
+
+<pre><code>class Person:
+    # Class variables defined in this way
+    # are shared by all instances,
+    # like static member variables in C++.
+    cnt = 0       
+
+    # The initializer method, like a constructor in C++.
+    def __init__(self, name_):
+        # Class variables defined in this way
+        # are unique to each instance.
+        self.name = name_
+
+        # Access like a static member variable in C++.
+        Person.cnt += 1
+
+    # Class methods
+    def showCount(self):
+        print &quot;The number of Persons are %d.&quot; % (Person.cnt)
+
+    def showName(self):
+        print &quot;My name is %s.&quot; % (self.name)
+
+
+# Creating instances
+p1 = Person('James')
+p2 = Person('Matt')
+p1.showName()       #My name is James.#
+p2.showName()       #My name is Matt.#
+p1.showCount()      #The number of Persons are 2.#
+
+# Class members are normally all public in C++ terminology.
+print Person.cnt, p1.name, p2.name      #2 James Matt#
+
+
+# Add or remove attributes of class instances.
+p1.age = 10
+del p1.age
+
+
+# Inheritance
+class Student(Person):  # Inherits from Persion
+    def __init__(self, name_, grade_):
+        self.grade = grade_
+        Person.__init__(self, name_)
+    def showGrade(self):
+        print &quot;Hmm.. My grade is %s.&quot; % (self.grade)
+
+    # All methods in Python are virtual in C++ terminology:
+    # Derived classes override methods of the same name defined in their base classes.
+    def showName(self):
+        # This is how to extend rather than simply replace
+        # the base class method of the same name.
+        Person.showName(self)
+        print 'And I am a student.'
+
+s = Student('Aaron', 'A+')
+s.showName()        #My name is Aaron.\nAnd I am a student.#
+s.showGrade()       #Hmm.. My grade is A+.#
+</code></pre>
+
+    </div>
+  </div>
+
+</article>
+
+<div class="container">
+  <nav>
+  <ul class="pager">
+    
+    <li class="previous"><a href="https://helix979.github.io/jkoo/post/os-scheduler/"><span
+      aria-hidden="true">&larr;</span> Linux kernel scheduler</a></li>
+    
+
+    
+    <li class="next"><a href="https://helix979.github.io/jkoo/post/ml-optimization/">Optimization <span
+      aria-hidden="true">&rarr;</span></a></li>
+    
+  </ul>
+</nav>
+
+</div>
+
+<div class="article-container">
+  
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2017 Jinkyu Koo &middot; 
+
+      Powered by the <a href="https://github.com/gcushen/hugo-academic" target="_blank">Academic
+      theme</a> for <a href="http://gohugo.io" target="_blank">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/ScrollToPlugin.min.js"></script>
+    <script src="/jkoo/js/jquery-1.12.3.min.js"></script>
+    <script src="/jkoo/js/bootstrap.min.js"></script>
+    <script src="/jkoo/js/isotope.pkgd.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js"></script>
+    <script src="/jkoo/js/hugo-academic.js"></script>
+    
+
+    
+
+    
+    
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" },
+                   extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js"],
+                   noErrors: {
+                        multiLine: true
+                   }
+            },        
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                displayMath: [['$$','$$'], ['\[','\]']]
+            }
+        });
+    </script>
+    <script async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"></script>
+    
+
+  </body>
+</html>
+

@@ -1,0 +1,276 @@
+<!DOCTYPE HTML>
+
+<!-- 
+Strata by HTML5 UP
+html5up.net | @n33co
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>optimization &middot; Jinkyu Koo</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="author" content="Jinkyu Koo">
+		<meta name="description" content="Describe your website">
+		<meta http-equiv="content-language" content="en-us" />
+
+		
+		<meta name="og:site_name" content="Jinkyu Koo">
+		<meta name="og:title" content="optimization">
+		<meta name="og:url" content="https://example.org/post/ml/optimization.html">
+		<meta name="og:image" content="https://example.org/images/15.JPG">
+		
+
+		<meta name="generator" content="Hugo 0.18.1" />
+
+		<!--[if lte IE 8]><script src='https://example.org/js/ie/html5shiv.js'></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://example.org/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="https://example.org//css/ie8.css"><![endif]-->
+
+		
+		
+	</head>
+
+	<body id="top">
+		<!-- Header -->
+<header id="header">
+	<a href="https://example.org/" class="image avatar"><img src="https://example.org/images/15.JPG" alt="" /></a>
+	
+		<h1><strong>Jinkyu Koo</strong><br>research scientist / dad /<br> ice hockey player in a dream</h1>
+	
+
+	
+		<nav id="sidebar">
+			<ul>
+			
+				<li><a href="https://example.org/">Home</a></li>
+			
+				<li><a href="https://example.org/post/ml/">Machine Learning</a></li>
+			
+				<li><a href="https://example.org/post/os/">Operating Systems</a></li>
+			
+			</ul>
+		</nav>
+	
+</header>
+
+
+		<!-- Main -->
+		<div id="main">
+			
+	<span>
+		<h1>optimization</h1>
+
+		<i class="fa fa-calendar"></i>&nbsp;&nbsp;
+<time datetime="2017-01-30 23:59:55 -0500 EST">2017-01-30</time>&nbsp;&nbsp;
+
+
+    
+    
+
+
+
+   
+   
+
+
+	</span>
+
+	<p>
+	    
+
+<h1 id="optimization">Optimization</h1>
+
+<p>Machine learning often ends up with a mathematical optimization problem, typically {\bf minimizing a cost function} $J(\mathbf{w})$ for a given parameter $\mathbf{w} = \begin{bmatrix} w_0 &amp; w_1 &amp; \cdots &amp; w<em>n \end{bmatrix}^{T} \in \mathbb{R}^{n+1}$ that has the form:
+\begin{equation}
+J(\mathbf{w})=\frac{1}{M} \sum</em>{m=1}^{M} J_m(\mathbf{w}).
+\label{eq:opt}
+\end{equation}
+Here, $J_m(\mathbf{w})$ is the cost associated with the $m$-th observation in a training set, and $M$ denotes the total number of observations. Thus, one can say that given the parameter $\mathbf{w}$, the cost function $J(\mathbf{w})$ represents the average cost over all observations in the training set. Among all the possible parameters, the one that results in the smallest value of the cost function is called the {\bf minimizer, or solution}, and we denote it by $\mathbf{w}^{<em>}$. The term ``learning&rdquo; in the machine learning means a procedure for finding the solution $\mathbf{w}^{</em>}$.</p>
+
+<p>\subsubsection<em>{\bf Gradient descent}
+Now, how can we find the solution $\mathbf{w}^{</em>}$ to (\ref{eq:opt})? One simple way is the \textbf{gradient descent}. The method of gradient descent is to find a \textbf{local minimum} of a cost function $J(\mathbf{w})$, taking steps in the opposite direction to the gradient $\nabla{J(\mathbf{w})}$, where
+\begin{equation}
+\nabla{J(\mathbf{w})})=
+\begin{bmatrix}
+\frac{\partial}{\partial w_0} J(\mathbf{w}) <br />
+\frac{\partial}{\partial w_1} J(\mathbf{w}) <br />
+\vdots <br />
+\frac{\partial}{\partial w_n} J(\mathbf{w})
+\end{bmatrix}.
+\end{equation}</p>
+
+<p>Consider the Taylor series of $J(\mathbf{w}-\alpha \nabla{J(\mathbf{w})})$ as a function of $\alpha$:
+\begin{equation}
+J(\mathbf{w}-\alpha \nabla{J(\mathbf{w})})=J(\mathbf{w})-\alpha\Vert \nabla{J(\mathbf{w})}\Vert^2 + o(\alpha).
+\end{equation}
+If $\nabla{J(\mathbf{w})} \ne 0$, then for sufficiently small $\alpha&gt;0$, we have
+\begin{equation}
+J(\mathbf{w}-\alpha \nabla{J(\mathbf{w})})&lt;J(\mathbf{w}).
+\end{equation}
+This means that the parameter $\mathbf{w}-\alpha \nabla{J(\mathbf{w})}$ leads to the smaller value of the cost function than the parameter $\mathbf{w}$.
+Intuitively, the gradient $\nabla{J(\mathbf{w})}$ is the direction of the maximum rate of increase at the parameter $\mathbf{w}$, so moving in the opposite direction lowers the value of the cost function.</p>
+
+<p>Thus, we can start with a random guess $\mathbf{w}^{(0)}$ and keep moving to  $\mathbf{w}^{(1)}$, $\mathbf{w}^{(2)}$, $\ldots$, $\mathbf{w}^{(t)}$ in such a way that
+\begin{equation}
+\mathbf{w}^{(t+1)} = \mathbf{w}^{(t)}-\alpha \nabla{J(\mathbf{w}^{(t)})},
+\label{eq:gd}
+\end{equation}
+or in other form
+\begin{align}
+w<em>{j}^{(t+1)}=
+w</em>{j}^{(t)}-\alpha \left. \frac{\partial J(\mathbf{w})}{\partial w<em>j} \right\vert</em>{\mathbf{w}=\mathbf{w}^{(t)}}
+\text{ for all } j.
+\label{eq:gd_element}
+\end{align}
+Then, for sufficiently small $\alpha&gt;0$, we have, for every $t$,
+\begin{equation}
+J(\mathbf{w}^{(t+1)}) &lt; J(\mathbf{w}^{(t)}),
+\end{equation}
+and $\mathbf{w}^{(t)}$ converges to a local minimum as $t$ grows. When the cost function $J(\mathbf{w})$ is convex, the local minimum is also the global minimum, so in such a case, $\mathbf{w}^{(t)}$ can converge to the solution $\mathbf{w}^{*}$.
+For non-convex cost functions, the gradient descent does not guarantee us finding the global minimum. Instead, depending on the initial guess, we will end up with different local minimum, which is exemplified in Figure \ref{fig:gd_initial}.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{pic/gd_initial}
+\caption{The effect of the initial guess when $J(w)=(w+90)(w-50)(w/2+50)(w-90)/1000000$. The red and green dots represent the trajectories of the gradient descent corresponding to the initial values $w^{(0)}=-135$ and $w^{(0)}=30$, respectively.}
+\label{fig:gd_initial}
+\end{figure}</p>
+
+<p>\subsubsection*{\bf Learning rate}
+In (\ref{eq:gd}), the value of $\alpha$ is called the {\bf learning rate}. This value determines how fast or slow the parameter moves towards the optimal solution. Figure \ref{fig:learning_rate} illustrates the effect of the learning rate.
+If $\alpha$ is too small, the gradient descent may take too long to converge.
+In contrast, the gradient descent may fail to converge with too large value of $\alpha$.</p>
+
+<p>\begin{figure}[h]
+\centering</p>
+
+<p>\subfigure[$\alpha=0.1$]
+          {\includegraphics[width=0.3\textwidth]{pic/gd_a01}}
+\subfigure[$\alpha=0.5$]
+          {\includegraphics[width=0.3\textwidth]{pic/gd_a05}}
+%\hspace{1em}
+\subfigure[$\alpha=2.1$]
+          {\includegraphics[width=0.3\textwidth]{pic/gd_a21}}</p>
+
+<p>\caption{The effect of the learning rate when $J(w)=\frac{1}{2}w^2$ and $w^{(0)}=-20$.}
+\label{fig:learning_rate}
+\end{figure}</p>
+
+<p>Choosing the proper value of the learning rate is not that easy. In practice, we often use simply a small enough constant by keeping decreasing the value until the parameter seems to converge to a certain point. Or in order to get more accurate solution, one can halve the value of the learning rate as convergence slows down over iterations. Another method is to adaptively change the learning rate at every iteration $t$ in the way that the difference $ J(\mathbf{w}^{(t)})-J(\mathbf{w}^{(t+1)})$ is maximized. For more detail on this method, refer to the {\bf steepest descent}.</p>
+
+<p>\subsubsection*{\bf Stochastic gradient descent}
+From (\ref{eq:opt}), the gradient $\nabla{J(\mathbf{w})}$ is represented as
+\begin{equation}
+\nabla{J(\mathbf{w})}=\frac{1}{M} \sum_{m=1}^{M} \nabla{J_m(\mathbf{w})}.
+\label{eq:gradient}
+\end{equation}
+This implies that computing $\nabla{J(\mathbf{w})}$ is equivalent to taking the average of $\nabla{J_m(\mathbf{w})}$, the gradient of the cost specific to the $m$-th observation, over the full training set. However, in practice, the training set is often very large, and thus averaging over the entire set can take a significant time. For this reason, the {\bf stochastic gradient descent} simply approximates the true gradient by a gradient at a single observation as follows:
+\begin{equation}
+\nabla{J(\mathbf{w})}\approxeq\nabla{J_m(\mathbf{w})}.
+\label{eq:gradient_approx}
+\end{equation}
+Thus, with the stochastic gradient descent, the parameter update equation in (\ref{eq:gd}) can be rewritten as
+\begin{equation}
+\mathbf{w}^{(t+1)} = \mathbf{w}^{(t)}-\alpha \nabla{J_t(\mathbf{w}^{(t)})}.
+\label{eq:sto_gd}
+\end{equation}</p>
+
+<p>As a compromise between the true gradient and the gradient at a single observation, one may also consider the gradient averaged over a few training samples.</p>
+
+<p>\subsubsection*{\bf Practice}
+Tensorflow provides a function that implements the gradient descent algorithm. Thus, you can just use it without deriving an actual gradient. What you need to do is to choose the value of the learning rate. Listing \ref{lst:gd} shows an example.
+\begin{lstlisting}[caption={Gradient descent},label={lst:gd}]
+import tensorflow as tf
+import numpy as np</p>
+
+<p>w = tf.Variable(100.0)  # initial guess = 100.0
+J = tf.pow(w, 2)        # J(w) = w^2</p>
+
+<p>optimizer = tf.train.GradientDescentOptimizer(0.05)     # learning rate = 0.05
+train = optimizer.minimize(J)</p>
+
+<h1 id="initialize-variables">Initialize variables</h1>
+
+<p>init = tf.initialize_all_variables()</p>
+
+<p>sess = tf.InteractiveSession()
+sess.run(init)</p>
+
+<p>for step in range(0, 201):
+    sess.run(train)
+    if step % 20 == 0:
+        print &ldquo;%3d, %10.5f, %10.5f&rdquo; % (step, w.eval(), J.eval())</p>
+
+<p>sess.close()<br />
+\end{lstlisting}</p>
+
+<p>The output of the script is as follows:
+\begin{verbatim}
+  0,   90.00000, 8100.00000
+ 20,   10.94190,  119.72514
+ 40,    1.33028,    1.76964
+ 60,    0.16173,    0.02616
+ 80,    0.01966,    0.00039
+100,    0.00239,    0.00001
+120,    0.00029,    0.00000
+140,    0.00004,    0.00000
+160,    0.00000,    0.00000
+180,    0.00000,    0.00000
+200,    0.00000,    0.00000
+\end{verbatim}</p>
+
+	</p>
+
+	<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'spf13';
+    var disqus_identifier = 'https:\/\/example.org\/post\/ml\/optimization.html';
+    var disqus_title = 'optimization';
+    var disqus_url = 'https:\/\/example.org\/post\/ml\/optimization.html';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+		</div>
+
+		<!-- Footer -->
+<footer id="footer">
+	<ul class="icons">
+		
+		
+		
+		
+		
+		
+		
+		
+	</ul>
+
+	<ul class="copyright">
+		
+		<li>&copy; Jinkyu Koo</li>
+		
+	</ul>
+</footer>
+
+<!-- Scripts -->
+<script src="https://example.org/js/jquery.min.js"></script>
+<script src="https://example.org/js/jquery.poptrox.min.js"></script>
+<script src="https://example.org/js/skel.min.js"></script>
+<script src="https://example.org/js/util.js"></script>
+
+<script src="https://example.org/js/main.js"></script>
+
+
+
+
+
+	</body>
+</html>

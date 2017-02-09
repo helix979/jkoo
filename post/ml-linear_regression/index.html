@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.18.1" />
+  <meta name="author" content="Jinkyu Koo">
+  <meta name="description" content="research scientist / dad / ice hockey player in dreams">
+
+  
+  
+  
+    
+  
+  
+    
+    
+    <link rel="stylesheet" href="/jkoo/css/highlight.min.css">
+    
+  
+  <link rel="stylesheet" href="/jkoo/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/jkoo/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/jkoo/css/academicons.min.css">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700|Merriweather|Roboto+Mono">
+  <link rel="stylesheet" href="/jkoo/css/hugo-academic.css">
+  
+
+  <link rel="alternate" href="https://helix979.github.io/jkoo/index.xml" type="application/rss+xml" title="Jinkyu Koo">
+  <link rel="feed" href="https://helix979.github.io/jkoo/index.xml" type="application/rss+xml" title="Jinkyu Koo">
+
+  <link rel="icon" type="image/png" href="/jkoo/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/jkoo/img/apple-touch-icon.png">
+
+  <link rel="canonical" href="https://helix979.github.io/jkoo/post/ml-linear_regression/">
+
+  
+
+  <title>Linear Regression | Jinkyu Koo</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#navbar-main" data-offset="71">
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/jkoo/">Jinkyu Koo</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/jkoo/#about">
+            
+            <span>Home</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/jkoo/#ml">
+            
+            <span>Machine Learning</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/jkoo/#misc">
+            
+            <span>Misc</span>
+          </a>
+        </li>
+
+        
+        
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+  <div class="article-container">
+    <h1 itemprop="name">Linear Regression</h1>
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    <time datetime="2017-02-02 23:59:55 -0500 EST" itemprop="datePublished">
+      Thu, Feb 2, 2017
+    </time>
+  </span>
+
+  
+  
+  
+  
+
+  
+  
+  
+  <span class="article-tags">
+    <i class="fa fa-tags"></i>
+    
+    <a href="/jkoo/tags/ml">ml</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fml-linear_regression%2f"
+         target="_blank">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Linear%20Regression&amp;url=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fml-linear_regression%2f"
+         target="_blank">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fml-linear_regression%2f&amp;title=Linear%20Regression"
+         target="_blank">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fml-linear_regression%2f&amp;title=Linear%20Regression"
+         target="_blank">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Linear%20Regression&amp;body=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fml-linear_regression%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<p>Linear regression is a means of modeling the relationship between one or
+more independent variables (inputs) and a single dependent variable (an
+output) by fitting a linear equation to observed data.</p>
+
+<p><br></p>
+
+<h2 id="hypothesis-function">Hypothesis function</h2>
+
+<p>Given the $m$-th observation with inputs $\{ x_{m,1}, x_{m,2}, \ldots, x_{m,n} \}$
+where
+$x_{m,j} \in \mathbb{R}, \forall j$ and an output $y_m \in \mathbb{R}$,
+we define an input vector as</p>
+
+<p>$$
+\mathbf{x}_m=
+\begin{bmatrix}
+x_{m,0} \\<br />
+x_{m,1} \\<br />
+\vdots \\<br />
+x_{m,n}
+\end{bmatrix} \in \mathbb{R}^{n+1},
+\label{eq:input_vector}
+$$</p>
+
+<p>where we always set $x_{m,0}=1$, which is called a <strong>bias input</strong> and considered here for notational
+convenience. The goal of linear regression is to find an estimate
+$\hat{y}_m=h_{\mathbf{w}}(\mathbf{x}_{m})$ of the output $y_{m}$ that is
+of the form:</p>
+
+<p>$$
+h_{\mathbf{w}}(\mathbf{x}_{m})=\mathbf{w}^T \mathbf{x}_{m}=w_0 + w_1 x_{m,1} + \ldots +w_n x_{m,n}.
+$$</p>
+
+<p>We call $h_{\mathbf{w}}(\cdot)$ a <strong>hypothesis function</strong>. By well
+choosing the value of $\mathbf{w}$, we want
+$h_{\mathbf{w}}(\mathbf{x}_{m})$ as close to $y_{m}$ as possible for
+$m=1,2,\ldots,M$. Again, $M$ is the number of observations in the
+training set.</p>
+
+<p>Note that when $n=1$, the hypothesis function is represented as</p>
+
+<p>$$
+h_{\mathbf{w}}(\mathbf{x}_{m})=w_0 + w_1 x_{m,1},
+$$</p>
+
+<p>which is the form of a straight line. Thus, all we need to do here is to find the slope
+$w_1$ and the $y$-intercept $w_0$ of a straight line that fits best to
+given points ${(x_{m,1}, y_{m})}_{m=1}^{M}$. This case is called
+simple linear regression. Figure 1 shows an example of the simple linear regression.</p>
+
+
+<figure >
+    
+        <img src="/img/simple_linear.PNG" alt="The blue dots represent the training data $\{(x_{m,1}, y_{m})\}_{m=1}^{M}$. The result of the simple linear regression is the red line" />
+    
+    
+    <figcaption>
+        <h4>Simple linear regression.</h4>
+        <p>
+        The blue dots represent the training data $\{(x_{m,1}, y_{m})\}_{m=1}^{M}$. The result of the simple linear regression is the red line
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+
+
+<p><br></p>
+
+<h2 id="cost-function">Cost function</h2>
+
+<p>We need a measure of how &ldquo;well&rdquo; we have selected the value of
+$\mathbf{w}$. To this end, the <strong>cost function</strong> $J(\mathbf{w})$ can
+be defined as</p>
+
+<p>$$
+J(\mathbf{w})=\frac{1}{M} \sum_{m=1}^{M} \left(h_{\mathbf{w}}(\mathbf{x}_{m})-y_{m} \right)^{2}.
+\tag{lr:1}\label{eq:mse}
+$$</p>
+
+<p>Saying the value of $h_{\mathbf{w}}(\mathbf{x}_{m})-y_{m}$ is an error, the cost function
+above is the mean of squared errors. Then, the best value of
+$\mathbf{w}$, <em>i.e.</em>, the solution $\mathbf{w}^{*}$, is chosen as the
+one that minimizes the cost function $J(\mathbf{w})$ in \eqref{eq:mse}.
+Such a solution is said to be optimal in the sense of minimizing mean-squared errors (MMSE).</p>
+
+<p><br></p>
+
+<h2 id="learning">Learning</h2>
+
+<p>Formally, the solution $\mathbf{w}^{*}$ is obtained as
+$$
+\mathbf{w}^{*}=\arg \min_{\mathbf{w}} J(\mathbf{w}).
+$$</p>
+
+<p>This can be solved numerically by using the gradient descent. Since
+$$
+J(\mathbf{w})=\frac{1}{M} \sum_{m=1}^{M} \left(w_0 + w_1 x_{m,1} + \ldots +w_n x_{m,n}-y_{m} \right)^{2},
+$$</p>
+
+<p>we have
+$$
+\frac{\partial}{\partial w_j} J(\mathbf{w})= \frac{2}{M} \sum_{m=1}^{M} \left(w_0 + w_1 x_{m,1} + \ldots +w_n x_{m,n}-y_{m} \right)x_{m,j}.
+$$
+Therefore, from <a href="/jkoo/post/ml-optimization/#mjx-eqn-eqopt" target="_blank">(opt.1)</a>, the gradient descent equations for
+linear regression are</p>
+
+<p>$$
+w_{j}^{(t+1)}=w_{j}^{(t)}-\alpha\frac{2}{M} \sum_{m=1}^{M} \left(w_0^{(t)} + w_1^{(t)} x_{m,1} + \ldots +w_n^{(t)} x_{m,n}-y_{m} \right)x_{m,j}
+$$</p>
+
+<p>for all $j$.</p>
+
+<p><br></p>
+
+<h2 id="prediction">Prediction</h2>
+
+<p>After we have found the solution $\mathbf{w}^{*}$, if an additional input vector
+$\mathbf{x} = \begin{bmatrix} 1 &amp; x_1 &amp; \ldots &amp; x_n \end{bmatrix}^{T}$
+is given, its corresponding output $y$ can be predicted as follows:</p>
+
+<p>$$
+y=h_{\mathbf{w}^{*}}(\mathbf{x})=w_0^{*} + w_1^{*} x_1 + \ldots +w_n^{*} x_n = \mathbf{w}^{*T} \mathbf{x}.
+$$</p>
+
+<p><br></p>
+
+<h2 id="practice">Practice</h2>
+
+<p>The following code show an example of the simple lienar gression.
+Data used for training is created by adding noises around the straight line of y-intercept=10 and slope=1.
+The output would be like Figure 2.</p>
+
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+import tensorflow as tf
+
+n_data = 100
+r_x = 100
+noise_std = 50
+x = None
+y = None
+y_ideal = None
+#----------------------------------------------------------------
+def create_data():
+    global x, y, y_ideal
+    y_intercept = 10
+    slope = 1
+    x = np.float32(np.random.rand(n_data)) * r_x
+    x = np.sort(x)
+    noise = (np.float32(np.random.rand(n_data)) - 0.5) * noise_std
+    y_ideal = slope * x + y_intercept
+    y = y_ideal + noise
+#----------------------------------------------------------------
+def draw(w1, w0):
+    y_hat = w1 * x + w0
+
+    plt.plot(x[:], y_ideal[:], 'r--', \
+             x[:], y[:], 'b.',\
+             x[:], y_hat[:], 'g--')
+
+    plt.xlim(0, r_x)
+    plt.legend(['ideal', 'data', 'regression'], loc='best')
+    plt.savefig('linear_one.pdf')
+#----------------------------------------------------------------
+
+# Create data for training
+create_data()
+
+# Model
+w_1 = tf.Variable(np.random.rand())
+w_0 = tf.Variable(np.random.rand())
+m = w_1 * x
+h = m + w_0   # Note w_0 is broadcasted to be the same shape as m
+
+J = tf.reduce_mean(tf.square(h - y))
+optimizer = tf.train.GradientDescentOptimizer(0.0001)
+train = optimizer.minimize(J)
+
+init = tf.initialize_all_variables()
+sess=tf.InteractiveSession()
+sess.run(init)
+
+# Learning
+step = 0
+while 1:
+    try:
+        step += 1
+        sess.run(train)
+        if step % 100 == 0:
+            print step, J.eval(), w_1.eval(), w_0.eval()
+
+    # Ctrl+c will stop training
+    except KeyboardInterrupt:
+        break
+
+# Plot the result
+draw(w_1.eval(), w_0.eval())
+
+sess.close()
+</code></pre>
+
+
+<figure >
+    
+        <img src="/img/linear_one.PNG" />
+    
+    
+    <figcaption>
+        <h4>Simple linear gression</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<p>The following code is doing the similar thing as above, but this time we consider the case of $n=2$.</p>
+
+<pre><code>import tensorflow as tf
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import cm
+from mpl_toolkits.mplot3d import Axes3D
+
+N_data = 20
+R_x = 100
+noise_std = 100
+xs = None
+ys = None
+zs = None
+zs_ideal = None
+X = None
+Y = None
+#----------------------------------------------------------------
+def create_data():
+    global xs, ys, zs, zs_ideal, X, Y
+    slope_x = -2
+    slope_y = 1
+    z_intercept = 4
+    x = np.random.rand(N_data) * R_x
+    x = np.sort(x)
+    y = np.random.rand(N_data) * R_x
+    y = np.sort(y)
+    X, Y = np.meshgrid(x, y)
+    zf = lambda x, y: slope_x * x + slope_y * y + z_intercept
+    xs = np.float32(np.ravel(X))
+    ys = np.float32(np.ravel(Y))
+    zs_ideal = np.array([zf(x,y) for x,y in zip(xs, ys)])
+    zs = zs_ideal + (np.float32(np.random.rand(len(zs_ideal))) - 0.5) * noise_std
+#----------------------------------------------------------------
+def draw(w_est, w_0_est):
+    zf_est = lambda x, y: w_est[0][0] * x + w_est[0][1] * y + w_0_est
+    zs_est = np.array([zf_est(x,y) for x,y in zip(xs, ys)])
+    Z_est = zs_est.reshape(X.shape)
+
+    fig = plt.figure()
+    ax = fig.gca(projection='3d')
+    ax.plot_wireframe(X, Y, Z_est)
+
+    for x,y,z in zip(xs, ys, zs[:]):
+        ax.scatter(x,y,z, c='r', marker='.', s=20)
+
+    ax.set_xlabel('x_1')
+    ax.set_ylabel('x_2')
+    ax.set_zlabel('z')
+
+    plt.show()
+#----------------------------------------------------------------
+
+# Create data for training
+create_data()
+
+# Model
+w_0 = tf.Variable(np.float32(np.random.rand()))
+w = tf.Variable(np.float32(np.random.rand(1,2)))
+h = tf.matmul(w, np.stack((xs,ys)) ) + w_0
+loss = tf.reduce_mean(tf.square(h - zs))
+optimizer = tf.train.GradientDescentOptimizer(0.0001)
+train = optimizer.minimize(loss)
+
+init = tf.initialize_all_variables()
+sess=tf.InteractiveSession()
+sess.run(init)
+
+# Learning
+step = 0
+while 1:
+    try:
+        step += 1
+        sess.run(train)
+        if step % 100 == 0:
+            print step, loss.eval(), w.eval()[0][0], w.eval()[0][1], w_0.eval()
+
+    # Ctrl+c will stop training
+    except KeyboardInterrupt:
+        break
+
+# Plot the result
+draw(w.eval(), w_0.eval())
+
+sess.close()
+</code></pre>
+
+<p>Below is what we can obtained from the code.
+
+<figure >
+    
+        <img src="/img/linear_multiple.PNG" />
+    
+    
+    <figcaption>
+        <h4>Linear regression ($n=2$)</h4>
+        
+    </figcaption>
+    
+</figure>
+</p>
+
+    </div>
+  </div>
+
+</article>
+
+<div class="container">
+  <nav>
+  <ul class="pager">
+    
+    <li class="previous"><a href="https://helix979.github.io/jkoo/post/ml-optimization/"><span
+      aria-hidden="true">&larr;</span> Optimization</a></li>
+    
+
+    
+  </ul>
+</nav>
+
+</div>
+
+<div class="article-container">
+  
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2017 Jinkyu Koo &middot; 
+
+      Powered by the <a href="https://github.com/gcushen/hugo-academic" target="_blank">Academic
+      theme</a> for <a href="http://gohugo.io" target="_blank">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/ScrollToPlugin.min.js"></script>
+    <script src="/jkoo/js/jquery-1.12.3.min.js"></script>
+    <script src="/jkoo/js/bootstrap.min.js"></script>
+    <script src="/jkoo/js/isotope.pkgd.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js"></script>
+    <script src="/jkoo/js/hugo-academic.js"></script>
+    
+
+    
+
+    
+    
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" },
+                   extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js"],
+                   noErrors: {
+                        multiLine: true
+                   }
+            },        
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                displayMath: [['$$','$$'], ['\[','\]']]
+            }
+        });
+    </script>
+    <script async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"></script>
+    
+
+  </body>
+</html>
+

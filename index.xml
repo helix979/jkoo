@@ -1,0 +1,2111 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jinkyu Koo on Jinkyu Koo</title>
+    <link>https://helix979.github.io/jkoo/index.xml</link>
+    <description>Recent content in Jinkyu Koo on Jinkyu Koo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017 Jinkyu Koo</copyright>
+    <lastBuildDate>Wed, 20 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/jkoo/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Linear Regression</title>
+      <link>https://helix979.github.io/jkoo/post/ml-linear_regression/</link>
+      <pubDate>Thu, 02 Feb 2017 23:59:55 -0500</pubDate>
+      
+      <guid>https://helix979.github.io/jkoo/post/ml-linear_regression/</guid>
+      <description>
+
+&lt;p&gt;Linear regression is a means of modeling the relationship between one or
+more independent variables (inputs) and a single dependent variable (an
+output) by fitting a linear equation to observed data.&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;hypothesis-function&#34;&gt;Hypothesis function&lt;/h2&gt;
+
+&lt;p&gt;Given the $m$-th observation with inputs $\{ x_{m,1}, x_{m,2}, \ldots, x_{m,n} \}$
+where
+$x_{m,j} \in \mathbb{R}, \forall j$ and an output $y_m \in \mathbb{R}$,
+we define an input vector as&lt;/p&gt;
+
+&lt;p&gt;$$
+\mathbf{x}_m=
+\begin{bmatrix}
+x_{m,0} \\&lt;br /&gt;
+x_{m,1} \\&lt;br /&gt;
+\vdots \\&lt;br /&gt;
+x_{m,n}
+\end{bmatrix} \in \mathbb{R}^{n+1},
+\label{eq:input_vector}
+$$&lt;/p&gt;
+
+&lt;p&gt;where we always set $x_{m,0}=1$, which is called a &lt;strong&gt;bias input&lt;/strong&gt; and considered here for notational
+convenience. The goal of linear regression is to find an estimate
+$\hat{y}_m=h_{\mathbf{w}}(\mathbf{x}_{m})$ of the output $y_{m}$ that is
+of the form:&lt;/p&gt;
+
+&lt;p&gt;$$
+h_{\mathbf{w}}(\mathbf{x}_{m})=\mathbf{w}^T \mathbf{x}_{m}=w_0 + w_1 x_{m,1} + \ldots +w_n x_{m,n}.
+$$&lt;/p&gt;
+
+&lt;p&gt;We call $h_{\mathbf{w}}(\cdot)$ a &lt;strong&gt;hypothesis function&lt;/strong&gt;. By well
+choosing the value of $\mathbf{w}$, we want
+$h_{\mathbf{w}}(\mathbf{x}_{m})$ as close to $y_{m}$ as possible for
+$m=1,2,\ldots,M$. Again, $M$ is the number of observations in the
+training set.&lt;/p&gt;
+
+&lt;p&gt;Note that when $n=1$, the hypothesis function is represented as&lt;/p&gt;
+
+&lt;p&gt;$$
+h_{\mathbf{w}}(\mathbf{x}_{m})=w_0 + w_1 x_{m,1},
+$$&lt;/p&gt;
+
+&lt;p&gt;which is the form of a straight line. Thus, all we need to do here is to find the slope
+$w_1$ and the $y$-intercept $w_0$ of a straight line that fits best to
+given points ${(x_{m,1}, y_{m})}_{m=1}^{M}$. This case is called
+simple linear regression. Figure 1 shows an example of the simple linear regression.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://helix979.github.io/jkoo/img/simple_linear.PNG&#34; alt=&#34;The blue dots represent the training data $\{(x_{m,1}, y_{m})\}_{m=1}^{M}$. The result of the simple linear regression is the red line&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Simple linear regression.&lt;/h4&gt;
+        &lt;p&gt;
+        The blue dots represent the training data $\{(x_{m,1}, y_{m})\}_{m=1}^{M}$. The result of the simple linear regression is the red line
+        
+            
+        
+        &lt;/p&gt; 
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;cost-function&#34;&gt;Cost function&lt;/h2&gt;
+
+&lt;p&gt;We need a measure of how &amp;ldquo;well&amp;rdquo; we have selected the value of
+$\mathbf{w}$. To this end, the &lt;strong&gt;cost function&lt;/strong&gt; $J(\mathbf{w})$ can
+be defined as&lt;/p&gt;
+
+&lt;p&gt;$$
+J(\mathbf{w})=\frac{1}{M} \sum_{m=1}^{M} \left(h_{\mathbf{w}}(\mathbf{x}_{m})-y_{m} \right)^{2}.
+\tag{lr:1}\label{eq:mse}
+$$&lt;/p&gt;
+
+&lt;p&gt;Saying the value of $h_{\mathbf{w}}(\mathbf{x}_{m})-y_{m}$ is an error, the cost function
+above is the mean of squared errors. Then, the best value of
+$\mathbf{w}$, &lt;em&gt;i.e.&lt;/em&gt;, the solution $\mathbf{w}^{*}$, is chosen as the
+one that minimizes the cost function $J(\mathbf{w})$ in \eqref{eq:mse}.
+Such a solution is said to be optimal in the sense of minimizing mean-squared errors (MMSE).&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;learning&#34;&gt;Learning&lt;/h2&gt;
+
+&lt;p&gt;Formally, the solution $\mathbf{w}^{*}$ is obtained as
+$$
+\mathbf{w}^{*}=\arg \min_{\mathbf{w}} J(\mathbf{w}).
+$$&lt;/p&gt;
+
+&lt;p&gt;This can be solved numerically by using the gradient descent. Since
+$$
+J(\mathbf{w})=\frac{1}{M} \sum_{m=1}^{M} \left(w_0 + w_1 x_{m,1} + \ldots +w_n x_{m,n}-y_{m} \right)^{2},
+$$&lt;/p&gt;
+
+&lt;p&gt;we have
+$$
+\frac{\partial}{\partial w_j} J(\mathbf{w})= \frac{2}{M} \sum_{m=1}^{M} \left(w_0 + w_1 x_{m,1} + \ldots +w_n x_{m,n}-y_{m} \right)x_{m,j}.
+$$
+Therefore, from &lt;a href=&#34;https://helix979.github.io/jkoo/jkoo/post/ml-optimization/#mjx-eqn-eqopt&#34; target=&#34;_blank&#34;&gt;(opt.1)&lt;/a&gt;, the gradient descent equations for
+linear regression are&lt;/p&gt;
+
+&lt;p&gt;$$
+w_{j}^{(t+1)}=w_{j}^{(t)}-\alpha\frac{2}{M} \sum_{m=1}^{M} \left(w_0^{(t)} + w_1^{(t)} x_{m,1} + \ldots +w_n^{(t)} x_{m,n}-y_{m} \right)x_{m,j}
+$$&lt;/p&gt;
+
+&lt;p&gt;for all $j$.&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;prediction&#34;&gt;Prediction&lt;/h2&gt;
+
+&lt;p&gt;After we have found the solution $\mathbf{w}^{*}$, if an additional input vector
+$\mathbf{x} = \begin{bmatrix} 1 &amp;amp; x_1 &amp;amp; \ldots &amp;amp; x_n \end{bmatrix}^{T}$
+is given, its corresponding output $y$ can be predicted as follows:&lt;/p&gt;
+
+&lt;p&gt;$$
+y=h_{\mathbf{w}^{*}}(\mathbf{x})=w_0^{*} + w_1^{*} x_1 + \ldots +w_n^{*} x_n = \mathbf{w}^{*T} \mathbf{x}.
+$$&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;practice&#34;&gt;Practice&lt;/h2&gt;
+
+&lt;p&gt;The following code show an example of the simple lienar gression.
+Data used for training is created by adding noises around the straight line of y-intercept=10 and slope=1.
+The output would be like Figure 2.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import numpy as np
+import matplotlib.pyplot as plt
+import tensorflow as tf
+
+n_data = 100
+r_x = 100
+noise_std = 50
+x = None
+y = None
+y_ideal = None
+#----------------------------------------------------------------
+def create_data():
+    global x, y, y_ideal
+    y_intercept = 10
+    slope = 1
+    x = np.float32(np.random.rand(n_data)) * r_x
+    x = np.sort(x)
+    noise = (np.float32(np.random.rand(n_data)) - 0.5) * noise_std
+    y_ideal = slope * x + y_intercept
+    y = y_ideal + noise
+#----------------------------------------------------------------
+def draw(w1, w0):
+    y_hat = w1 * x + w0
+
+    plt.plot(x[:], y_ideal[:], &#39;r--&#39;, \
+             x[:], y[:], &#39;b.&#39;,\
+             x[:], y_hat[:], &#39;g--&#39;)
+
+    plt.xlim(0, r_x)
+    plt.legend([&#39;ideal&#39;, &#39;data&#39;, &#39;regression&#39;], loc=&#39;best&#39;)
+    plt.savefig(&#39;linear_one.pdf&#39;)
+#----------------------------------------------------------------
+
+# Create data for training
+create_data()
+
+# Model
+w_1 = tf.Variable(np.random.rand())
+w_0 = tf.Variable(np.random.rand())
+m = w_1 * x
+h = m + w_0   # Note w_0 is broadcasted to be the same shape as m
+
+J = tf.reduce_mean(tf.square(h - y))
+optimizer = tf.train.GradientDescentOptimizer(0.0001)
+train = optimizer.minimize(J)
+
+init = tf.initialize_all_variables()
+sess=tf.InteractiveSession()
+sess.run(init)
+
+# Learning
+step = 0
+while 1:
+    try:
+        step += 1
+        sess.run(train)
+        if step % 100 == 0:
+            print step, J.eval(), w_1.eval(), w_0.eval()
+
+    # Ctrl+c will stop training
+    except KeyboardInterrupt:
+        break
+
+# Plot the result
+draw(w_1.eval(), w_0.eval())
+
+sess.close()
+&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://helix979.github.io/jkoo/img/linear_one.PNG&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Simple linear gression&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;The following code is doing the similar thing as above, but this time we consider the case of $n=2$.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import tensorflow as tf
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import cm
+from mpl_toolkits.mplot3d import Axes3D
+
+N_data = 20
+R_x = 100
+noise_std = 100
+xs = None
+ys = None
+zs = None
+zs_ideal = None
+X = None
+Y = None
+#----------------------------------------------------------------
+def create_data():
+    global xs, ys, zs, zs_ideal, X, Y
+    slope_x = -2
+    slope_y = 1
+    z_intercept = 4
+    x = np.random.rand(N_data) * R_x
+    x = np.sort(x)
+    y = np.random.rand(N_data) * R_x
+    y = np.sort(y)
+    X, Y = np.meshgrid(x, y)
+    zf = lambda x, y: slope_x * x + slope_y * y + z_intercept
+    xs = np.float32(np.ravel(X))
+    ys = np.float32(np.ravel(Y))
+    zs_ideal = np.array([zf(x,y) for x,y in zip(xs, ys)])
+    zs = zs_ideal + (np.float32(np.random.rand(len(zs_ideal))) - 0.5) * noise_std
+#----------------------------------------------------------------
+def draw(w_est, w_0_est):
+    zf_est = lambda x, y: w_est[0][0] * x + w_est[0][1] * y + w_0_est
+    zs_est = np.array([zf_est(x,y) for x,y in zip(xs, ys)])
+    Z_est = zs_est.reshape(X.shape)
+
+    fig = plt.figure()
+    ax = fig.gca(projection=&#39;3d&#39;)
+    ax.plot_wireframe(X, Y, Z_est)
+
+    for x,y,z in zip(xs, ys, zs[:]):
+        ax.scatter(x,y,z, c=&#39;r&#39;, marker=&#39;.&#39;, s=20)
+
+    ax.set_xlabel(&#39;x_1&#39;)
+    ax.set_ylabel(&#39;x_2&#39;)
+    ax.set_zlabel(&#39;z&#39;)
+
+    plt.show()
+#----------------------------------------------------------------
+
+# Create data for training
+create_data()
+
+# Model
+w_0 = tf.Variable(np.float32(np.random.rand()))
+w = tf.Variable(np.float32(np.random.rand(1,2)))
+h = tf.matmul(w, np.stack((xs,ys)) ) + w_0
+loss = tf.reduce_mean(tf.square(h - zs))
+optimizer = tf.train.GradientDescentOptimizer(0.0001)
+train = optimizer.minimize(loss)
+
+init = tf.initialize_all_variables()
+sess=tf.InteractiveSession()
+sess.run(init)
+
+# Learning
+step = 0
+while 1:
+    try:
+        step += 1
+        sess.run(train)
+        if step % 100 == 0:
+            print step, loss.eval(), w.eval()[0][0], w.eval()[0][1], w_0.eval()
+
+    # Ctrl+c will stop training
+    except KeyboardInterrupt:
+        break
+
+# Plot the result
+draw(w.eval(), w_0.eval())
+
+sess.close()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Below is what we can obtained from the code.
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://helix979.github.io/jkoo/img/linear_multiple.PNG&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Linear regression ($n=2$)&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Optimization</title>
+      <link>https://helix979.github.io/jkoo/post/ml-optimization/</link>
+      <pubDate>Tue, 31 Jan 2017 23:59:55 -0500</pubDate>
+      
+      <guid>https://helix979.github.io/jkoo/post/ml-optimization/</guid>
+      <description>
+
+&lt;p&gt;Machine learning often ends up with a mathematical optimization problem,
+typically minimizing a cost function $J(\mathbf{w})$ for a given parameter $\mathbf{w} = \begin{bmatrix} w_0 &amp;amp; w_1 &amp;amp; \cdots &amp;amp; w_n \end{bmatrix}^{T} \in \mathbb{R}^{n+1}$ that has the form:&lt;/p&gt;
+
+&lt;p&gt;$$
+J(\mathbf{w})=\frac{1}{M} \sum_{m=1}^{M} J_m(\mathbf{w}).
+\tag{opt:1}\label{eq:opt}
+$$&lt;/p&gt;
+
+&lt;p&gt;Here, $J_m(\mathbf{w})$ is the cost associated with the
+$m$-th observation in a training set, and $M$ denotes the total number
+of observations. Thus, one can say that given the parameter
+$\mathbf{w}$, the cost function $J(\mathbf{w})$ represents the average
+cost over all observations in the training set. Among all the possible
+parameters, the one that results in the smallest value of the cost
+function is called the &lt;strong&gt;minimizer, or solution&lt;/strong&gt;, and we denote it by $\mathbf{w}^{*}$.
+The term &amp;ldquo;learning&amp;rdquo; in the machine learning means a
+procedure for finding the solution $\mathbf{w}^{*}$.&lt;/p&gt;
+
+&lt;h2 id=&#34;gradient-descent&#34;&gt;&lt;strong&gt;Gradient descent&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;Now, how can we find the solution $\mathbf{w}^{*}$ to \eqref{eq:opt}? One
+simple way is the &lt;strong&gt;gradient descent&lt;/strong&gt;. The method of gradient descent
+is to find a &lt;strong&gt;local minimum&lt;/strong&gt; of a cost function $J(\mathbf{w})$,
+taking steps in the opposite direction to the gradient
+$\nabla{J(\mathbf{w})}$, where&lt;/p&gt;
+
+&lt;p&gt;$$
+\nabla{J(\mathbf{w})})=
+\begin{bmatrix}
+\frac{\partial}{\partial w_0} J(\mathbf{w}) \\&lt;br /&gt;
+\frac{\partial}{\partial w_1} J(\mathbf{w}) \\&lt;br /&gt;
+\vdots \\&lt;br /&gt;
+\frac{\partial}{\partial w_n} J(\mathbf{w})
+\end{bmatrix}.
+$$&lt;/p&gt;
+
+&lt;p&gt;Consider the Taylor series of
+$J(\mathbf{w}-\alpha \nabla{J(\mathbf{w})})$ as a function of $\alpha$:
+$$J(\mathbf{w}-\alpha \nabla{J(\mathbf{w})})=J(\mathbf{w})-\alpha\Vert \nabla{J(\mathbf{w})}\Vert^2 + o(\alpha).$$
+If $\nabla{J(\mathbf{w})} \ne 0$, then for sufficiently small
+$\alpha&amp;gt;0$, we have
+$$J(\mathbf{w}-\alpha \nabla{J(\mathbf{w})})&amp;lt;J(\mathbf{w}).$$ This means
+that the parameter $\mathbf{w}-\alpha \nabla{J(\mathbf{w})}$ leads to
+the smaller value of the cost function than the parameter $\mathbf{w}$.
+Intuitively, the gradient $\nabla{J(\mathbf{w})}$ is the direction of
+the maximum rate of increase at the parameter $\mathbf{w}$, so moving in
+the opposite direction lowers the value of the cost function.&lt;/p&gt;
+
+&lt;p&gt;Thus, we can start with a random guess $\mathbf{w}^{(0)}$ and keep
+moving to $\mathbf{w}^{(1)}$, $\mathbf{w}^{(2)}$, $\ldots$,
+$\mathbf{w}^{(t)}$ in such a way that
+$$
+\mathbf{w}^{(t+1)} = \mathbf{w}^{(t)}-\alpha \nabla{J(\mathbf{w}^{(t)})},
+\tag{opt:2}\label{eq:gd}
+$$
+or in other form
+$$
+w_{j}^{(t+1)} = w_{j}^{(t)}-\alpha \left. \frac{\partial J(\mathbf{w})}{\partial w_{j}} \right\vert_{\mathbf{w}=\mathbf{w}^{(t)}}\text{ for all } j.
+\label{eq:gd_element}
+$$
+Then, for sufficiently small $\alpha&amp;gt;0$, we have, for every $t$,
+$$J(\mathbf{w}^{(t+1)}) &amp;lt; J(\mathbf{w}^{(t)}),$$ and $\mathbf{w}^{(t)}$
+converges to a local minimum as $t$ grows. When the cost function
+$J(\mathbf{w})$ is convex, the local minimum is also the global minimum,
+so in such a case, $\mathbf{w}^{(t)}$ can converge to the solution
+$\mathbf{w}^{*}$. For non-convex cost functions, the gradient descent
+does not guarantee us finding the global minimum. Instead, depending on
+the initial guess, we will end up with different local minimum, which is
+exemplified in Figure 1.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://helix979.github.io/jkoo/img/gd_initial.PNG&#34; alt=&#34;The red and green dots represent the trajectories of the gradient descent corresponding to the initial values $w^{(0)}=-135$ and $w^{(0)}=30$, respectively.&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;The effect of the initial guess when $J(w)=(w&amp;#43;90)(w-50)(w/2&amp;#43;50)(w-90)/1000000$.&lt;/h4&gt;
+        &lt;p&gt;
+        The red and green dots represent the trajectories of the gradient descent corresponding to the initial values $w^{(0)}=-135$ and $w^{(0)}=30$, respectively.
+        
+            
+        
+        &lt;/p&gt; 
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;learning-rate&#34;&gt;&lt;strong&gt;Learning rate&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;In \eqref{eq:gd}, the value of $\alpha$ is called the &lt;strong&gt;learning rate&lt;/strong&gt;. This value determines how fast or slow the parameter moves
+towards the optimal solution. Figure 2 illustrates
+the effect of the learning rate.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://helix979.github.io/jkoo/img/gd_learning_rate.PNG&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;The effect of the learning rate when $J(w)=\frac{1}{2}w^2$ and $w^{(0)}=-20$.&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;If $\alpha$ is too small, the gradient descent may take too long to converge. In contrast, the gradient descent
+may fail to converge with too large value of $\alpha$.&lt;/p&gt;
+
+&lt;p&gt;Choosing the proper value of the learning rate is not that trivial. In
+practice, we often use simply a small enough constant by keeping
+decreasing the value until the parameter seems to converge to a certain
+point. Or in order to get more accurate solution, one can halve the
+value of the learning rate as convergence slows down over iterations.
+Another method is to adaptively change the learning rate at every
+iteration $t$ in the way that the difference
+$ J(\mathbf{w}^{(t)})-J(\mathbf{w}^{(t+1)})$ is maximized. For more
+detail on this method, refer to the &lt;strong&gt;steepest descent&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;stochastic-gradient-descent&#34;&gt;&lt;strong&gt;Stochastic gradient descent&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;From \eqref{eq:opt}, the gradient $\nabla{J(\mathbf{w})}$ is represented
+as
+$$
+\nabla{J(\mathbf{w})}=\frac{1}{M} \sum_{m=1}^{M} \nabla{J_m(\mathbf{w})}.
+\label{eq:gradient}
+$$
+ This implies that computing $\nabla{J(\mathbf{w})}$ is equivalent to taking the average of
+$\nabla{J_m(\mathbf{w})}$, the gradient of the cost specific to the
+$m$-th observation, over the full training set. However, in practice,
+the training set is often very large, and thus averaging over the entire
+set can take a significant time. For this reason, the &lt;strong&gt;stochastic
+gradient descent&lt;/strong&gt; simply approximates the true gradient by a
+gradient at a single observation as follows:
+$$\nabla{J(\mathbf{w})}\approxeq\nabla{J_m(\mathbf{w})}.
+\label{eq:gradient_approx}$$ Thus, with the stochastic gradient descent,
+the parameter update equation in \eqref{eq:gd} can be rewritten as
+$$
+\mathbf{w}^{(t+1)} = \mathbf{w}^{(t)}-\alpha \nabla{J_t(\mathbf{w}^{(t)})}.
+\label{eq:sto_gd}
+$$&lt;/p&gt;
+
+&lt;p&gt;As a compromise between the true gradient and the gradient at a single
+observation, one may also consider the gradient averaged over a few
+training samples.&lt;/p&gt;
+
+&lt;h3 id=&#34;practice .unnumbered&#34;&gt;&lt;strong&gt;Practice&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;Tensorflow provides a function that implements the gradient descent
+algorithm. Thus, you can just use it without deriving an actual
+gradient. What you need to do is to choose the value of the learning
+rate. The following shows an example.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import tensorflow as tf
+import numpy as np
+
+w = tf.Variable(100.0)  # initial guess = 100.0
+J = tf.pow(w, 2)        # J(w) = w^2
+
+optimizer = tf.train.GradientDescentOptimizer(0.05)     # learning rate = 0.05
+train = optimizer.minimize(J)
+
+# Initialize variables
+init = tf.initialize_all_variables()
+
+sess = tf.InteractiveSession()
+sess.run(init)
+
+for step in range(0, 201):
+    sess.run(train)
+    if step % 20 == 0:
+        print &amp;quot;%3d, %10.5f, %10.5f&amp;quot; % (step, w.eval(), J.eval())
+
+sess.close()        
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The output of the script would be as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  0,   90.00000, 8100.00000
+ 20,   10.94190,  119.72514
+ 40,    1.33028,    1.76964
+ 60,    0.16173,    0.02616
+ 80,    0.01966,    0.00039
+100,    0.00239,    0.00001
+120,    0.00029,    0.00000
+140,    0.00004,    0.00000
+160,    0.00000,    0.00000
+180,    0.00000,    0.00000
+200,    0.00000,    0.00000
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Example Talk</title>
+      <link>https://helix979.github.io/jkoo/talk/example-talk/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://helix979.github.io/jkoo/talk/example-talk/</guid>
+      <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://gcushen.github.io/hugo-academic-demo/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Deep Learning</title>
+      <link>https://helix979.github.io/jkoo/project/deep-learning/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://helix979.github.io/jkoo/project/deep-learning/</guid>
+      <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+
+&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
+
+&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
+
+&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
+
+&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>External Project</title>
+      <link>https://helix979.github.io/jkoo/project/example-external-project/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://helix979.github.io/jkoo/project/example-external-project/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python in half an hour</title>
+      <link>https://helix979.github.io/jkoo/post/python-tutorial/</link>
+      <pubDate>Sun, 29 Nov 2015 11:00:00 +0000</pubDate>
+      
+      <guid>https://helix979.github.io/jkoo/post/python-tutorial/</guid>
+      <description>
+
+&lt;p&gt;In what follows in this tutorial, the result of a statement is expressed
+in the form of &lt;code&gt;#result#&lt;/code&gt;, unless otherwise mentioned.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Basic arithmetic operations&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Comments start with a hash sign (#).
+
+1 + 2   # Addition 
+1 / 2   #0# Division
+1 / 2.  #0.5# If either one of the numbers in a division is a float,
+        #     so does the result.
+3 % 2   #1# Modulus
+2 ** 3  #8# Power. Equivalent to pow(2,3).
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Variables&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# A valid name of a variable is an alpha-numeric string
+# consisting of one or more letters, digits or underscore characters,
+# just like in C.
+
+x = 3           # Assignment
+x + 1           #4#
+x = None        # None is is a built-in constant
+                # that represents the absence of a value.
+x, y = 1, 2     # Multiple assignments at a time
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Import modules&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import math
+math.sqrt(4)
+
+# If you do not want to write the module name each time you call the function
+from math import *
+sqrt(4)
+
+# If you are sure that you only need sqrt() in the math module
+from math import sqrt
+sqrt(4)
+
+# Module alias
+import math as m
+m.sqrt(4)
+
+# Function alias
+from math import sqrt as sq
+sq(4)
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Strings&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Strings can be expressed with double quotes (&amp;quot;) or single quotes (&#39;).
+# There is no difference bettwen double quotes and single quotes.
+x = &amp;quot;abc&amp;quot;
+x = &#39;abc&#39;   # Exactly the same as above
+y = &amp;quot;ab&#39;cd&#39;ef&amp;quot;  # &#39;cd&#39; is part of the string.
+z = &#39;ab&amp;quot;cd&amp;quot;ef&#39;  # &amp;quot;cd&amp;quot; is part of the string. The strings y and z are not the same.
+
+# String formatting
+# Use C-like conversion specifiers.
+&#39;test %s %d %.1f&#39; % (&#39;abc&#39;, 10, 10.33)   #&#39;test abc 10 10.3&#39;#
+
+# String methods
+&#39;  /sys/fs  &#39;.strip()    #&#39;/sys/fs&#39;# Remove whitespaces on the left and the right.
+&#39;/sys/fs&#39;.split(&#39;/&#39;)     #[&#39;&#39;, &#39;sys&#39;, &#39;fs&#39;]#
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Lists&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Lists start with [ and end with ].
+# Elements are separated by a comma (,).
+x = [1, 2, 3]
+
+# A list can hold different types of elements.
+y = [1, 2, &amp;quot;abc&amp;quot;, [5,6]]
+
+# List methods
+z = [&#39;b&#39;, &#39;a&#39;]
+z.append(&#39;c&#39;)   #[&#39;b&#39;,&#39;a&#39;,&#39;c&#39;]#
+z.index(&#39;b&#39;)    #0# Returns the index of the first occurrence of a value
+z.sort()        #[&#39;a&#39;,&#39;b&#39;,&#39;c&#39;]#
+z.remove(&#39;a&#39;)   # Removes the element that appears first.
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Tuples&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Tuples start with ( and end with ).
+# Tuples are just like lists with an exception that they cannot be changed.
+x = (1, 2)
+
+# Values separated by commas automatically becomes a tuple.
+x = 1, 2    # The same as above.
+
+# A tuple with a single element
+x = (1,)    # Here the comma is important. (1) is just 1. 
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Sequence commons: strings, lists, and tuples are called sequences.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;x = &#39;123&#39;
+y = [1, 2, 3]
+z = (1, 2, 3)
+
+# Sequences can be indexed as follows:
+x[0]        #&#39;1&#39;#
+y[0:2]      #[1,2]# Returns a list with elements such that 0&amp;lt;=index&amp;lt;2.
+z[1:]       #(2,3)# Return a tuple with elements such that 1&amp;lt;=index.
+x[:2]       #&#39;12&#39;# Returns a string with elements such that index&amp;lt;2. 
+y[-1]       #3# Returns the last element.
+z[-2]       #2# Returns the second last element.
+y[:]        #[1, 2, 3]# Returns a list with all elements.
+
+# Addition and multiplication for sequences
+# Two objects of the same type can be added.
+x + &#39;4&#39;     #&#39;1234&#39;#
+y + [4, 5]  #[1, 2, 3, 4, 5]#
+z + (4,)    #(1, 2, 3, 4)#
+
+# Multiplication can be understood as multiple additions.
+y*3         #[1, 2, 3, 1, 2, 3, 1, 2, 3]# Regard it as y+y+y.
+
+# Pairing elements of two sequences
+x = [1, 2, 3]
+y = [4, 5, 6]
+zip(x, y)   #[(1, 4), (2, 5), (3, 6)]#
+
+# * operator: argument unpacking
+z = [x, y]
+zip(*z)     #[(1, 4), (2, 5), (3, 6)]# The same as zip(x,y)
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Dictionaries&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# A dictionary starts with { and ends with },
+# and it is like a hash table that maps a key to a value.
+
+# An element is defined as a pair of a key and a value.
+d = {&#39;key1&#39;:&#39;value1&#39;, &#39;key2&#39;:&#39;value2&#39;}
+d = {}                  # An empty dictionary
+d[&#39;key3&#39;] = &#39;value3&#39;    # Adds a key-value pair.
+d[&#39;key3&#39;]               #&#39;value3&#39;# Returns a value for the key
+
+# The key must be immutable.
+d[&#39;abc&#39;] = 3        # OK
+d[(a,b)] = [1,2]    # OK
+d[3] = &#39;abc&#39;        # OK
+d[[1,2,3]] = 2      # Not OK, since a list is mutable.
+
+# Dictionary methods
+d.get(key)      # Returns a value corresponding to the key.
+d.has_key(key)  # Returns True if the key in the dictionary, and False otherwise.
+d.items()       # Returns a list of (key, value) tuple pairs.
+d.keys()        # Returns a list of keys.
+d.values()      # Returns a list of values.
+d.copy()        # Return a dictionary object that
+                # has exactly the same contents as d.
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Print to screen&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Note that what is shown here valid in Python 2.7 only.
+# Syntax for print is quite changed in Python 3.4.
+x = 1
+y = [1,2]
+print 3                 #3#
+print 3, &amp;quot;abc&amp;quot;          #3 abc#
+print &amp;quot;%d %d&amp;quot; % (3, 4)  #3 4#
+print x,                #1# Trailing comma suppresses newline.
+print str(y)            #[1, 2]# str() transforms an object into a string.
+print repr(y)           #[1, 2]# 
+                        # Most of times, repr() results in the same as str().
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Assignment is by reference!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# One thing to remember
+# when you assign a list or a dictionary (i.e., mutable objects) to another variable:
+# Assignment is always by reference, not by copy.
+x = [1, 2, 3]
+y = x           # Here, y get a reference to what x points to, i.e., [1, 2, 3]
+y[0] = 4
+x               #[4, 2, 3]# Note that x is changed by y.
+
+# To copy a list
+y = x[:]        # Creates a new list that contains all elements of x.
+y[0] = 4
+x               #[1 ,2 ,3]#
+
+# To copy a dictionary
+x = {1: 1}
+y = x
+z = x.copy()    # Use the copy() method.
+y[1] = 2
+z[1] = 3
+print str(x), str(y), str(z)    #{1: 2} {1: 2} {1: 3}#
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Conditionals&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if x == 5:          # Note that there is a colon (:) at the end.
+    # VERY IMPORTANT:
+    # All statements in a block must be indented by the same amount.
+    # Otherwise, you will see an error.
+    x += 1
+    y = x + 2
+    print x, y
+elif x in [4,5,6]:  # True if x is one of 4, 5, or 6.
+    if x != 2:      # Conditions can be nested.
+        print x
+else:
+    # Empty blocks are not allowed.
+    # Put &#39;pass&#39; for a placeholder when you want do nothing.
+    pass            
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The for-loops&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;x = [1, 2, 3]
+for v in x:         # Iterates the elements of x from the first to the last.
+    print v,        #1 2 3#
+
+range(3)            #[0, 1, 2]# Returns a list of integers from 0 to 3-1.
+range(1,4)          #[1, 2, 3]# Returns a list of integers from 1 to 4-1.
+
+for i in range(3):
+    print x[i],     #1 2 3#
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The while-loops&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;x = 5
+while x &amp;gt; 0:
+    x -= 1
+    if x == 3:
+        continue    # continue as in C
+    if x == 1:
+        break       # break as in C
+    print x,        #4 2#
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;List comprehension: making a list from other list&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;x = [i*2 for i in range(5)]
+y = [i*2 for i in range(5) if i%2 == 0]
+x       #[0, 2, 4, 6, 8]#
+y       #[0, 4, 8]#
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Iterating over a dictionary&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;d = {1: &#39;a&#39;, 2: &#39;b&#39;, 3: &#39;c&#39;}
+for k, v in d.items():
+    print str(k) + &#39;:&#39; + v,   #1:a 2:b 3:c#
+
+# The following is the same as above.
+key = d.keys()
+value = d.values()
+for k, v in zip(key, value):
+    print str(k) + &#39;:&#39; + v,   #1:a 2:b 3:c#
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Functions&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Writing your own functions
+def foo(arg1):      # Do not forget the colon at the end.
+    x = arg1 + 1
+    return x        # You can omit the return statement
+                    # if there is nothing to return.
+
+def bar(arg1, arg2 = 3):    # arg2 gets its value as 3 by default.
+    x = arg2 + 1
+    return arg1[0], x       # Here, arg1 can be of any type except
+                            # a literal constant.
+
+q, w = bar(&#39;abc&#39;)       # You can omit the argument that has its default value.
+print q, w              #a 4#
+print bar(&#39;abc&#39;)        #(&#39;a&#39;, 4)# arg1 is a string.
+print bar(&#39;abc&#39;, 4)     #(&#39;a&#39;, 5)# Put something to change the default value.
+print bar([1, 2])       #(1, 4)# arg1 is a list.
+print bar((5, 6))       #(5, 4)# arg1 is a tuple.
+print bar(7)            # An error
+
+# Make use of argument unpacking operator (*).
+x = (1, 2)
+def add(a, b):
+    return a+b
+
+print add(*x)              #3# Just add(x) will cause an error.
+
+# A function can have a different name.
+my_add = add
+my_add(1,2)                #3#
+
+# Lambda expressions
+add2 = lambda arg1, arg2: arg1+arg2
+add2(1,2)                  #3#
+
+# Lambda expressions may be used when you pass an argument that is a function.
+a = [(4,2),(1,3)]
+sorted(a, key=lambda x:x[0])    #[(1, 3), (4, 2)]#
+                                # Sort by the first element of tuples
+sorted(a, key=lambda x:x[1])    #[(4, 2), (1, 3)]#
+                                # Sort by the second element of tuples
+
+# To change global variables within a function
+x = 1
+def foo(a):
+    global x        # Without this, x won&#39;t be changed.
+    x += a
+    return
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Exceptions&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# If something bad happens within a try block, an exception is raised.
+def foo(x):
+    y = 1
+    try:                        
+        y = y/x
+    except ZeroDivisionError:   # You can specify the type of
+                                # an exception to deal with.
+        print &amp;quot;divided by zero&amp;quot;
+    except:                     # All exceptions other than
+                                # the above are handled here.
+        print &amp;quot;something else&amp;quot;
+
+foo(0)                          #divided by zero#
+foo(&#39;1&#39;)                        #something else#
+
+# Raise exceptions and catch exception objects.
+import traceback                    # To use print_exc()
+try:
+    raise Exception(&amp;quot;my exception&amp;quot;) # Raise an exception with some argument.
+except Exception as e:              # The &#39;Exception&#39; is the base of all exception
+                                    # objects, so it can catch all exceptions.
+    if e.args == (&amp;quot;my exception&amp;quot;,): # You can check what argument is in.
+        print &amp;quot;my exception occurs&amp;quot;
+    print e.args[0]                 #my exception#
+                                    # Print the argument of the exception.
+    # Print exception information by which you can locate the culprit.
+    traceback.print_exc()           
+
+# The else-clause: executed when there is no problem in the try block.
+while True:
+    default = &#39;1&#39;
+    menu = 1
+    try:
+        # Take an input from a user
+        # Just typing the enter key will cause the default value to be chosen.
+        t = raw_input(&amp;quot;Enter a number (default=&amp;quot;+default+&amp;quot;): &amp;quot;) or default
+        menu = int(t) % 10
+        print &#39;You selected &#39; + str(menu)
+    except:
+        print &#39;Invalid input&#39;    # e.g., character inputs will come to here.
+    else:           
+        break       # Executed if no exceptions are raised in the try block.
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Reading from and writing to a file&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;fr = open(&#39;text.txt&#39;, &#39;r&#39;)      # Open text.txt to read.
+fw = open(&#39;result.txt&#39;, &#39;w&#39;)    # Open result.txt to write.
+for line in fr.readlines():     # Iterate text.txt line by line.
+    fw.write(line + &#39; some&#39;)    # Write a string as a a line
+fr.close()                      # Do not forget to close files
+fw.close()
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Some useful built-in functions&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;x = [1, 0, 2]
+len(x)              #3# Returns a length of a sequence.
+max(x)              #2$ Returns the largest element.
+min(x)              #0# Returns the smallest element.
+sorted(x)           # Returns a list of sorted elements of a sequence.
+sum(x)              #3# Returns the sum of all elements.
+
+# The &#39;in&#39; operator returns True if a value is in a sequence and False otherwise.
+2 in x              #True# 
+
+# To delete an element of a list or a dictionary
+del x[1]            # Here, 1 is an index.
+
+d = {1:2, 3:4}
+del d[1]            # Here, 1 is a key.
+
+# Convert a string or a number to an integer or an floating number.
+int(&#39;12&#39;)           #12#
+int(12.3)           #12# 
+float(&amp;quot;3.3&amp;quot;)        #3.3#
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;drawing-a-graph&#34;&gt;Drawing a graph&lt;/h1&gt;
+
+&lt;p&gt;You may need to additionally install numpy and matplotlib modules to
+plot a graph. In Ubuntu, the easiest way to get them is to type:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ sudo apt-get install python-numpy python-matplotlib&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import numpy as np
+import matplotlib.pyplot as plt
+
+x1 = [1, 4, 8]
+y1 = [0.5, 2, 4]
+
+x2 = [1, 2, 3]
+x2_array = np.array(x2)     # np.array() makes an array object.
+y2_array = x2_array ** 2    # The array object enables
+                            # MATLAB-like element-wise operations
+
+# plt.plot() takes lists or arrays as its data arguments.
+plt.plot(x1, y1, x2_array, y2_array)
+
+# The following commands are self-explanatory.
+plt.title(&#39;title&#39;)
+plt.xlabel(&#39;label for x-axis&#39;)
+plt.ylabel(&#39;label for y-axis&#39;, fontsize=15)
+plt.grid()
+plt.legend([&#39;x/2&#39;, &#39;pow(x,2)&#39;])
+plt.xlim(0, 9)
+plt.ylim(0, 10)
+plt.savefig(&#39;fig1.png&#39;, format=&#39;png&#39;)   # Try pdf, eps, ... almost all you can imagine.
+
+
+# Whenever you want another figure
+plt.figure()    
+
+plt.subplot(211)
+plt.plot(x1, y1, &#39;r--&#39;)
+
+plt.subplot(212)
+plt.plot(x2_array, y2_array, &#39;b.&#39;, markersize=30)
+plt.xlim(0, 4)
+plt.ylim(0, 10)
+
+plt.savefig(&#39;fig2.png&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;redirect-a-text-stream-to-your-python-script&#34;&gt;Redirect a text stream to your Python script&lt;/h1&gt;
+
+&lt;p&gt;Sometimes you may want to process the output of Linux commands within
+Python scripts by redirecting. Use the following example script in such
+a case. Say you write the codes in &lt;code&gt;find_keyword.py&lt;/code&gt; and you want to
+catch the lines that contain ‘kworker’ from /proc/kmsg. Then, type:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ sudo cat /proc/kmsg | python find_keyword.py kworker file1.txt&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import sys
+
+if (len(sys.argv) != 3):
+    print &#39;\n Usage example:&#39;
+    print &#39; When you want to find lines from /proc/kmsg that contain &amp;quot;kworker&amp;quot;,&#39;
+    print &#39; print them to screen, and store them into file1.txt,&#39;
+    print &#39; sudo cat /proc/kmsg | python &#39;+sys.argv[0]+&#39; kworker file1.txt\n&#39;
+    sys.exit(1)
+
+fo = open(sys.argv[2], &amp;quot;w&amp;quot;)
+
+while True:
+    try:
+        line = sys.stdin.readline() # Reads a line from stdin
+    except KeyboardInterrupt:       # until a user hits ctrl+c
+        break
+
+    if not line:                    # or until there is nothing left to read
+        break
+
+    if sys.argv[1] in line:
+        print line
+        fo.write(line + &#39;\n&#39;)
+
+fo.close()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;regular-expressions&#34;&gt;Regular expressions&lt;/h1&gt;
+
+&lt;p&gt;A regular expression specifies a set of strings that matches it. You may
+have to spend non-trivial time to be familiar with all pattern syntaxes
+of regular expressions. Here, we show just a few of use cases. For more
+detail, refer to:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;https://docs.python.org/2/library/re.html&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import re
+
+text1 = &#39;Fig. 1: initially there are 60 points in each class.&#39;
+text2 = &#39;My phone number is 123-456-7890.&#39;
+text3 = &#39;MemFree:           50116 kB&#39;
+lines = [text1, text2, text3]
+
+# See if text1 contains &#39;where&#39;.
+m1 = re.search(&#39;where&#39;, text1, flags=0)
+print repr(m1)   #None#
+if m1:           # None is equivalent to False in a condition.
+    print &amp;quot;This won&#39;n be printed.&amp;quot;
+
+
+# See if text1 is a string that contains &#39;there&#39; somewhere in it.
+m2 = re.search(&#39;.*there.*&#39;, text1, flags=0)    
+# &#39;.*&#39; means any character of 0 or more occurrences.
+
+if m2:            # If matched, m2 is not None.
+    # m2.group() is the whole string that matches the pattern &#39;.*there.*&#39;.
+    print m2.group()    
+
+
+# Use parentheses for grouping
+m3 = re.search(r&#39;.*([A-Z]).*there.*\s(\d+).*&#39;, text1, flags=0)
+# Why &#39;r&#39; before the opening quote? Check raw strings!
+# Without the &#39;r&#39;, all backslashes must be twice-typed.
+# To avoid confusion, patterns in Python code are
+# usually expressed in raw string notation.
+# &#39;[A-Z]&#39; means an alphabet between A and Z,
+# &#39;\s&#39; a white space, and
+# &#39;\d+&#39; a digit of 1 or more occurrences.
+
+if m3:
+    print m3.group()      
+    print m3.group(1)   #F# The string captured within the first parentheses.
+    print m3.group(2)   #60# The string captured within the second parentheses.
+
+
+# See if text2 contains a phone number
+m4 = re.search(r&#39;\d{3}-\d{3}-\d{4}&#39;, text2, flags=0)
+if m4:
+    print m4.group()    #123-456-7890#
+
+
+# Parse the number that corresponds to Memfree from a list of strings.
+for line in lines:
+    m5 = re.search(r&#39;MemFree:\s+(\d+)\s+kB&#39;, line, flags=0)
+    if m5:
+        print m5.group(1)    #50116#
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;classes&#34;&gt;Classes&lt;/h1&gt;
+
+&lt;p&gt;Python provides all the standard features of object oriented programming
+by classes:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Person:
+    # Class variables defined in this way
+    # are shared by all instances,
+    # like static member variables in C++.
+    cnt = 0       
+
+    # The initializer method, like a constructor in C++.
+    def __init__(self, name_):
+        # Class variables defined in this way
+        # are unique to each instance.
+        self.name = name_
+
+        # Access like a static member variable in C++.
+        Person.cnt += 1
+
+    # Class methods
+    def showCount(self):
+        print &amp;quot;The number of Persons are %d.&amp;quot; % (Person.cnt)
+
+    def showName(self):
+        print &amp;quot;My name is %s.&amp;quot; % (self.name)
+
+
+# Creating instances
+p1 = Person(&#39;James&#39;)
+p2 = Person(&#39;Matt&#39;)
+p1.showName()       #My name is James.#
+p2.showName()       #My name is Matt.#
+p1.showCount()      #The number of Persons are 2.#
+
+# Class members are normally all public in C++ terminology.
+print Person.cnt, p1.name, p2.name      #2 James Matt#
+
+
+# Add or remove attributes of class instances.
+p1.age = 10
+del p1.age
+
+
+# Inheritance
+class Student(Person):  # Inherits from Persion
+    def __init__(self, name_, grade_):
+        self.grade = grade_
+        Person.__init__(self, name_)
+    def showGrade(self):
+        print &amp;quot;Hmm.. My grade is %s.&amp;quot; % (self.grade)
+
+    # All methods in Python are virtual in C++ terminology:
+    # Derived classes override methods of the same name defined in their base classes.
+    def showName(self):
+        # This is how to extend rather than simply replace
+        # the base class method of the same name.
+        Person.showName(self)
+        print &#39;And I am a student.&#39;
+
+s = Student(&#39;Aaron&#39;, &#39;A+&#39;)
+s.showName()        #My name is Aaron.\nAnd I am a student.#
+s.showGrade()       #Hmm.. My grade is A+.#
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>A Person Re-Identification System For Mobile Devices</title>
+      <link>https://helix979.github.io/jkoo/publication/person-re-identification/</link>
+      <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://helix979.github.io/jkoo/publication/person-re-identification/</guid>
+      <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Linux kernel scheduler</title>
+      <link>https://helix979.github.io/jkoo/post/os-scheduler/</link>
+      <pubDate>Mon, 05 Jan 2015 11:00:00 +0000</pubDate>
+      
+      <guid>https://helix979.github.io/jkoo/post/os-scheduler/</guid>
+      <description>
+
+&lt;h3 id=&#34;what-is-the-kernel&#34;&gt;What is the kernel?&lt;/h3&gt;
+
+&lt;p&gt;The kernel is fundamental part of an operating system (OS) that manages
+the computer’s hardwares, and allows softwares to run and use hardware
+resources in shared manners. Typically, the hardware resources to take
+into account are: (1) processors, (2) memory, and (3) input/output (I/O)
+devices such as keyboard, disk drives, network interface cards, and so
+on.&lt;/p&gt;
+
+&lt;p&gt;Rough distinction between an OS and a kernel is that an OS is the kernel
+plus some useful utilities and applications such as administration tools
+and GUIs.&lt;/p&gt;
+
+&lt;h3 id=&#34;monolithic-kernels-and-modules&#34;&gt;Monolithic kernels and modules&lt;/h3&gt;
+
+&lt;p&gt;Linux has a monolithic kernel that contains all of the code necessary to
+perform every kernel related task in a single binary file. However,
+Linux can extend its functionality by adding modules. Here, the modules
+are pieces of code that can be loaded and unloaded into the kernel upon
+demand while a system is up and running.&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;process&#34;&gt;Process&lt;/h1&gt;
+
+&lt;p&gt;A process is an instance of a computer program that is being executed.
+Each process has its own address space, which is protected from being
+accessed by other processes except through a legitimate means, that is,
+an inter-process communication mechanism.&lt;/p&gt;
+
+&lt;p&gt;The address space is typically partitioned into several regions: text, data, bss, heap and stack. The
+text segment contains the compiled code of a program, &lt;em&gt;i.e.&lt;/em&gt;, a set of
+instructions. The data segment stores initialized global and static
+variables, and constant variables like strings. The uninitialized global
+and static variables are located in the bss segment. The heap is the
+region set aside for dynamic memory allocation. The stack is where local
+variables are allocated within functions.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://helix979.github.io/jkoo/img/address_space.PNG&#34; alt=&#34;No sharing between processes; threads within a process share text, data, bss.&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Address spaces.&lt;/h4&gt;
+        &lt;p&gt;
+        No sharing between processes; threads within a process share text, data, bss.
+        
+            
+        
+        &lt;/p&gt; 
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;A thread is also the programmed code in execution. The thread is the
+smallest unit that can be managed independently by a kernel scheduler.
+However, unlike a process, the thread runs inside the address space of a
+process that it belongs to (refer to Figure 1.)
+Multiple threads can exist within the same process and share memory.
+Thanks to the shared memory, threads can easily communicate with one
+another. Although each thread has a separate stack for local variables
+and function calls, the stacks are allocated from the shared data area
+in the process’ address space.&lt;/p&gt;
+
+&lt;p&gt;In Linux kernel terms, a thread is often called a task. In the meantime,
+since by default Linux kernel creates a process with a single thread by
+which actual work of the process is done, a thread may look like a
+process. For that reason, we sometimes refer to a process as a task as
+well.&lt;/p&gt;
+
+&lt;h3 id=&#34;creating-a-new-process-fork-and-exec&#34;&gt;Creating a new process: fork() and exec()&lt;/h3&gt;
+
+&lt;p&gt;Linux kernel generates a new process using &lt;code&gt;fork()&lt;/code&gt; system call directly
+followed by &lt;code&gt;exec()&lt;/code&gt; system call.&lt;/p&gt;
+
+&lt;p&gt;When a process invokes &lt;code&gt;fork()&lt;/code&gt;, a separate address space is created for
+a new process (called a child process), and all the memory segments of
+the original process (called a parent process) are copied into there. As
+a result, both the parent and the child have the exact same content in
+their own address space. The &lt;code&gt;fork()&lt;/code&gt; returns the process ID (PID) of a
+new child process to the parent process, and returns zero to the child
+process.&lt;/p&gt;
+
+&lt;p&gt;When the child process calls &lt;code&gt;exec()&lt;/code&gt;, all data in the original program
+is replaced with a running copy of the new program. In other words,
+&lt;code&gt;exec()&lt;/code&gt; replaces the current process with a new process of an
+executable binary file specified in its arguments.&lt;/p&gt;
+
+&lt;h3 id=&#34;waiting-until-a-child-process-terminates&#34;&gt;Waiting until a child process terminates&lt;/h3&gt;
+
+&lt;p&gt;The &lt;code&gt;wait()&lt;/code&gt; system call allows the parent process to halt execution
+until its child process finishes. A call to &lt;code&gt;wait()&lt;/code&gt; returns the PID of
+the child process on success.&lt;/p&gt;
+
+&lt;h3 id=&#34;zombie-processes&#34;&gt;Zombie processes&lt;/h3&gt;
+
+&lt;p&gt;When a child process terminates, it still exists as an entry in the
+process table. This entry is required until the parent process reads its
+child’s exit status by calling &lt;code&gt;wait()&lt;/code&gt; system call, which then removes
+the entry from the process table.&lt;/p&gt;
+
+&lt;p&gt;Thus, the ended child process becomes a meaningless process and just
+remains until the parent process terminates or it calls &lt;code&gt;wait()&lt;/code&gt;. The
+process in this defunct state is called the zombie process.&lt;/p&gt;
+
+&lt;h3 id=&#34;copy-on-write&#34;&gt;Copy-on-write&lt;/h3&gt;
+
+&lt;p&gt;A naive approach to implement &lt;code&gt;fork()&lt;/code&gt; is that when &lt;code&gt;fork()&lt;/code&gt; is called,
+the kernel literally makes the copies of all the data belonging to the
+parent process, and puts them into the address space for the child
+process. This is inefficient in that although it takes too much time to
+duplicate the data, the child may not use any of them in certain cases.
+For example, if the child issues &lt;code&gt;exec()&lt;/code&gt; right after &lt;code&gt;fork()&lt;/code&gt;, all the
+effort to copy becomes wasteful. Even when the data is indeed used in
+the child, read-only data can just be shared by having pointers without
+burdensome copying jobs.&lt;/p&gt;
+
+&lt;p&gt;To avoid such inefficiency, the Linux kernel uses what is called the
+copy-on-write to implement &lt;code&gt;fork()&lt;/code&gt;. The copy-on-write is a technique by
+which copying involved in &lt;code&gt;fork()&lt;/code&gt; occurs only when either the parent or
+the child writes. Instead of duplicating all the data upon &lt;code&gt;fork()&lt;/code&gt;, the
+parent and the child share the data, marking them to be read-only. When
+some page (the smallest unit of data for memory management) is modified
+by any of the two processes, a page fault occurs, which makes each
+process get a unique copy of the page marked read-write.&lt;/p&gt;
+
+&lt;h3 id=&#34;pid-tid-ppid-and-tgid&#34;&gt;PID, TID, PPID, and TGID&lt;/h3&gt;
+
+&lt;p&gt;The smallest scheduling entity in the Linux kernel is a thread, not a
+process. Each thread is assigned a unique number for this purpose. In
+the kernel terms, confusingly enough, this number is called a process ID
+(PID). The process that threads belong to is accounted for as the thread
+group ID (TGID).&lt;/p&gt;
+
+&lt;p&gt;When a new process starts by invoking &lt;code&gt;fork()&lt;/code&gt;, it is assigned a new
+TGID. This newly forked process is created with a single thread, whose
+PID is the same as the TGID. The parent’s TGID is called a parent PID
+(PPID). If the thread creates another thread, the new thread gets a
+different PID, but the same TGID is taken over.&lt;/p&gt;
+
+&lt;p&gt;In the mean time, some user space applications (&lt;em&gt;e.g.&lt;/em&gt;, &lt;code&gt;ps&lt;/code&gt;) have a
+different (probably better) naming convention: the PID and the TGID in
+kernel-space view are, respectively, called a thread ID (TID) and a PID
+in these userland applications. Figure 2 summarizes the
+relationship among these IDs.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://helix979.github.io/jkoo/img/pid.PNG&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Relationship among PID, TID, PPID, and TGID.&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;scheduler&#34;&gt;Scheduler&lt;/h1&gt;
+
+&lt;h3 id=&#34;what-the-scheduler-does&#34;&gt;What the scheduler does&lt;/h3&gt;
+
+&lt;p&gt;In modern computer systems, there may be many threads waiting to be
+served at the same time. Thus, one of the most important jobs of the
+kernel is to decide which thread to run for how long. The part of the
+kernel in charge of this business is called the scheduler.&lt;/p&gt;
+
+&lt;p&gt;On a single processor system, the scheduler alternates different threads
+in a time-division manner, which may lead to the illusion of multiple
+threads running concurrently. On a multi-processor system, the scheduler
+assigns a thread at each processor so that the threads can be truly
+concurrent.&lt;/p&gt;
+
+&lt;h3 id=&#34;priority&#34;&gt;Priority&lt;/h3&gt;
+
+&lt;p&gt;Most of scheduling algorithms are priority-based. A thread is assigned a
+priority according to its importance and need for processor time. The
+general idea, which isn’t exactly implemented on Linux, is that threads
+with a higher priority run before those with a lower priority, whereas
+threads with the same priority are scheduled in a round-robin fashion.&lt;/p&gt;
+
+&lt;h3 id=&#34;preemptive-scheduling&#34;&gt;Preemptive scheduling&lt;/h3&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://helix979.github.io/jkoo/img/preemption.PNG&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Preemption.&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;Linux kernel features a preemptive scheduling, which means that a thread
+can stop to execute another thread before it completes as shown in
+Figure 3. A thread can be preempted by a pending thread
+that is more important (&lt;em&gt;e.g.&lt;/em&gt;, of a higher priority). The preempted
+thread resumes its execution after the preempting thread finishes or
+blocks.&lt;/p&gt;
+
+&lt;h3 id=&#34;context-switching&#34;&gt;Context switching&lt;/h3&gt;
+
+&lt;p&gt;All information that describes the states of the currently running
+thread is referred to as the “context&amp;rdquo;. The context of a thread are
+mainly the contents of hardware registers including the program counter,
+the address space, and memory map (which will be explained later).
+Simply put, the context tells up to what point the instructions of the
+thread is executed, what the outcomes is, and where the content of
+memory pertinent to the thread exist. These are all you need to know in
+order to resume the thread at a later time.&lt;/p&gt;
+
+&lt;p&gt;When a processor changes a thread to execute from one to another (as a
+result of scheduling for instance), the context of the old thread is
+saved somewhere, and the context of the new thread gets loaded. This
+procedure is called the context switching. The context switching happens
+fast and frequently enough that the users feel like the threads are
+running at the same time.&lt;/p&gt;
+
+&lt;h3 id=&#34;thread-states&#34;&gt;Thread states&lt;/h3&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://helix979.github.io/jkoo/img/state.PNG&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Thread states.&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;The scheduler needs to know which threads are runnable at a given time
+so that it can choose a right one to run next. For that reason, each
+thread maintains its current state. In general terms, a thread may stay
+in one out of the following states (see also Figure 4).&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Ready: The thread is ready to run, but not allowed to, because all
+processors are busy executing other threads. The ready thread is
+awaiting execution until the scheduler chooses itself to run next.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Running: Instructions of the thread are being executed on a
+processor.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Blocked: The thread is blocked waiting for some external event such
+as I/O or a signal. The blocked thread is not a candidate to
+schedule, &lt;em&gt;i.e.&lt;/em&gt;, it cannot run.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;io-bound-vs.-cpu-bound&#34;&gt;I/O-bound vs. CPU-bound&lt;/h3&gt;
+
+&lt;p&gt;Threads (or processes) can be classified into two major types: I/O-bound
+and CPU-bound.&lt;/p&gt;
+
+&lt;p&gt;The I/O-bound threads are mostly waiting for arrivals of inputs (&lt;em&gt;e.g.&lt;/em&gt;,
+keyboard strokes) or the completion of outputs (&lt;em&gt;e.g.&lt;/em&gt;, writing into
+disks). In general, these threads do not stay running for very long, and
+block themselves voluntarily to wait for I/O events. What matters with
+the I/O-bound threads is that they need to be processed in quick, since
+otherwise users may feel that the system has no good responsiveness.
+Therefore, a common rule is that a scheduler puts more urgency into
+serving the I/O-bound threads.&lt;/p&gt;
+
+&lt;p&gt;The CPU-bound threads are ones that spend much of their time in doing
+calculations (&lt;em&gt;e.g.&lt;/em&gt;, compiling a program). Since there are not many I/O
+events involved, they tend to run as long as the scheduler allows.
+Typically, users do not expect the system to be responsive while the
+CPU-bound threads are running. Thus, the CPU-bound threads are picked to
+run by a scheduler less frequently. However, once chosen, they holds a
+CPU for a longer time.&lt;/p&gt;
+
+&lt;h3 id=&#34;real-time-vs.-non-real-time&#34;&gt;Real-time vs. non-real-time&lt;/h3&gt;
+
+&lt;p&gt;Another criterion that categorizes threads is if they are real-time
+threads or not.&lt;/p&gt;
+
+&lt;p&gt;The real-time threads are ones that should be processed with a strict
+time constraint, often referred to as a deadline. The operational
+correctness of a real-time thread depends not only on computation
+results, but also on whether the results are produced before the
+deadline. Therefore, the scheduler, in general, takes care of the
+real-time threads with a high priority.&lt;/p&gt;
+
+&lt;p&gt;Real-time threads can be further classified into hard real-time or soft
+real-time ones by the consequence of missing a deadline. Hard real-time
+threads require all deadlines to be met with no exception; otherwise, a
+system may fall into catastrophic failure. For the soft real-time
+threads, missing a deadline results in degraded quality for the intended
+service, but a system can still go on.&lt;/p&gt;
+
+&lt;p&gt;Non-real-time threads are not associated with any deadlines. They could
+be human-interactive threads or batch threads. Here, the batch threads
+are ones that process a large amount of data without manual
+intervention. For the batch threads, a fast response time is not
+critical, and so they can be scheduled to run as resources allow.&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;core-scheduler&#34;&gt;Core Scheduler&lt;/h2&gt;
+
+&lt;h3 id=&#34;scheduling-classes&#34;&gt;Scheduling classes&lt;/h3&gt;
+
+&lt;p&gt;One may say that the Linux kernel scheduler consists of mainly two
+different scheduling algorithms, which are what are called the real-time
+scheduler and the completely fair scheduler. Scheduling classes allow
+for implementing these algorithms in a modular way. In detail, a
+scheduling class is a set of function pointers, defined through
+&lt;code&gt;struct sched_class&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;struct sched_class {
+    const struct sched_class *next;
+    ...
+    struct task_struct * (*pick_next_task) (struct rq *rq, struct task_struct *prev);
+    void (*put_prev_task) (struct rq *rq, struct task_struct *p);
+    ...
+    void (*task_tick) (struct rq *rq, struct task_struct *p, int queued);
+    ...
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Each scheduling algorithm gets an instance of
+&lt;code&gt;struct sched_class&lt;/code&gt; and connects the function pointers with their
+corresponding implementations.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;rt_sched_class&lt;/code&gt; implements so-called real-time (RT) scheduler.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const struct sched_class rt_sched_class = {
+    .next           = &amp;amp;fair_sched_class,
+    ...
+    .pick_next_task     = pick_next_task_rt,
+    .put_prev_task      = put_prev_task_rt,
+    ...
+    .task_tick      = task_tick_rt,
+    ...
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As its name implies, the RT scheduler targets to deals with the real-time
+threads. The RT scheduler assigns a priority to every thread to
+schedule, and processes the threads in order of their priorities. The RT
+scheduler is proved good enough by many people’s experience, but there
+is no guarantee that all deadlines are met. Namely, the RT scheduler in
+the Linux kernel only addresses the needs of threads with soft real-time
+requirements.&lt;/p&gt;
+
+&lt;p&gt;The completely fair scheduler (CFS) is implemented by the
+&lt;code&gt;fair_sched_class&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const struct sched_class fair_sched_class = {
+    .next           = &amp;amp;idle_sched_class,
+    ...
+    .pick_next_task     = pick_next_task_fair,
+    .put_prev_task      = put_prev_task_fair,
+    ...
+    .task_tick      = task_tick_fair,
+    ...
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The CFS also assigns a priority to a thread.
+However, unlike in the RT scheduler, this priority does not directly
+mean the order of being processed. Rather, it decides how long a thread
+can occupies a processor compared to others. In other words, the
+priority in CFS determines the proportion of processor time that a
+thread can use. Threads with a high priority can hold a processor longer
+than threads with a low priority. Meanwhile, the CFS may allow a
+long-waited low-priority thread to run even though there are
+high-priority threads ready. This is because each thread is guaranteed
+to use its own fraction of processor time for a certain time interval
+according to its priority, which is why the term “fair&amp;rdquo; comes in the
+name of this scheduling algorithm.&lt;/p&gt;
+
+&lt;p&gt;The core logics of the kernel scheduler iterate over scheduler classes
+in order of their priority: &lt;code&gt;rt_sched_class&lt;/code&gt; processed prior to
+&lt;code&gt;fair_sched_class&lt;/code&gt;. That way, codes in the &lt;code&gt;rt_sched_class&lt;/code&gt; does not
+need to interact with codes in the &lt;code&gt;fair_sched_class&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;scheduling-policies&#34;&gt;Scheduling policies&lt;/h3&gt;
+
+&lt;p&gt;When created, each thread gets assigned a scheduling policy that is in
+turn treated by a specific scheduling algorithm. Different scheduling
+policies may result in different outcomes even with the same scheduling
+algorithm.&lt;/p&gt;
+
+&lt;p&gt;The RT scheduler supports the following two scheduling policies:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;SCHED_RR&lt;/code&gt;: Threads of this type run one by one for a pre-defined
+time interval in their turn (round robin).&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;SCHED_FIFO&lt;/code&gt;: Threads of this type run until done once selected
+(first-in/first-out).&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The scheduling polices dealt with by the CFS include:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;SCHED_BATCH&lt;/code&gt;: This policy handles the threads that have a
+batch-characteristic, &lt;em&gt;i.e.&lt;/em&gt;, CPU-bounded and non-interactive.
+Threads of this type never preempt non-idle threads.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;SCHED_NORMAL&lt;/code&gt;: Normal threads fall into this type.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;run-queues&#34;&gt;Run queues&lt;/h3&gt;
+
+&lt;p&gt;The core scheduler manages ready threads by enqueueing them into a run
+queue, which is implemented by &lt;code&gt;struct rq&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;struct rq {
+    ...
+    struct cfs_rq cfs;
+    struct rt_rq rt;
+    ...
+    struct task_struct *curr, *idle, *stop;
+    ...
+    u64 clock;
+    ...
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Each CPU has its own run queue, &lt;em&gt;i.e.&lt;/em&gt;, there are as many run queues as the number of CPUs in a
+system. A ready thread can belong to a single run queue at a time, since
+it is impossible that multiple CPUs process the same thread
+simultaneously. Here comes the need of load balancing among CPUs in
+multi-core systems. Without a special effort to balance load, threads
+may wait in a specific CPU’s run queue, while other CPUs have nothing in
+their run queue, which, of course, means performance degradation.&lt;/p&gt;
+
+&lt;p&gt;A run queue includes &lt;code&gt;struct cfs_rq cfs&lt;/code&gt; and &lt;code&gt;struct rt_rq rt&lt;/code&gt;, which
+are sub-run queues for the CFS and the RT scheduler, respectively.
+Enqueueing a thread into a run queue eventually means enqueueing it into
+either of these sub-run queues depending on the scheduler class of the
+thread. The thread that is currently running on a CPU is pointed by
+&lt;code&gt;struct task_struct *curr&lt;/code&gt; defined in the run queue of the CPU. The
+per-run queue variable &lt;code&gt;clock&lt;/code&gt; is used to store the latest time at which
+the corresponding CPU reads a clock source.&lt;/p&gt;
+
+&lt;h3 id=&#34;the-main-body-__schedule&#34;&gt;The main body: &lt;code&gt;__schedule()&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;The function &lt;code&gt;__schedule()&lt;/code&gt; is the main body of the core scheduler. What
+it does includes putting the previously running thread into a run queue,
+picking a new thread to run next, and lastly switching context between
+the two threads.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;static void __sched __schedule(void)
+{
+    ...
+    cpu = smp_processor_id();
+    rq = cpu_rq(cpu);
+    prev = rq-&amp;gt;curr;
+    ...
+    put_prev_task(rq, prev);
+    ...
+    next = pick_next_task(rq);
+    ...
+    if (likely(prev != next)) {
+        ...
+        rq-&amp;gt;curr = next;
+        ...
+        context_switch(rq, prev, next);
+        ...
+    }
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Most work in &lt;code&gt;__schedule()&lt;/code&gt; is delegated to the scheduling classes. For
+example, when &lt;code&gt;put_prev_task()&lt;/code&gt; is invoked in &lt;code&gt;__schedule()&lt;/code&gt;, actual
+work is done by the function registered to the function pointer
+&lt;code&gt;put_prev_task&lt;/code&gt; of the scheduling class that the previously running task
+belongs to.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;static void put_prev_task(struct rq *rq, struct task_struct *prev)
+{
+    ...
+    prev-&amp;gt;sched_class-&amp;gt;put_prev_task(rq, prev);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As shown in &lt;code&gt;rt_sched_class&lt;/code&gt; and &lt;code&gt;fair_sched_class&lt;/code&gt;, this is &lt;code&gt;put_prev_task_rt()&lt;/code&gt; for the RT
+scheduler and &lt;code&gt;put_prev_task_fair()&lt;/code&gt; for the CFS. A similar thing
+applies when &lt;code&gt;pick_next_task()&lt;/code&gt; is invoked.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#define for_each_class(class) \
+   for (class = sched_class_highest; class; class = class-&amp;gt;next)
+
+static inline struct task_struct *pick_next_task(struct rq *rq)
+{
+    const struct sched_class *class;
+    struct task_struct *p;
+    ...
+    for_each_class(class) {
+        p = class-&amp;gt;pick_next_task(rq);
+        if (p)
+            return p;
+    }
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The function
+&lt;code&gt;pick_next_task()&lt;/code&gt; seeks the next-running thread using the function
+pointer &lt;code&gt;pick_next_task&lt;/code&gt; of a scheduling class by which
+&lt;code&gt;pick_next_task_fair()&lt;/code&gt; and &lt;code&gt;pick_next_task_rt()&lt;/code&gt; are called for the CFS
+and the RT scheduler, respectively. Note that by the &lt;code&gt;for_each_class(class)&lt;/code&gt; loop,
+scheduling classes are processed one by one in order of their priority,
+by which &lt;code&gt;fair_sched_class&lt;/code&gt; can be taken care of only if there is
+nothing to do with the &lt;code&gt;rt_sched_class&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The function &lt;code&gt;__schedule()&lt;/code&gt; is invoked at many places of the kernel,
+where there is a need to reschedule threads. One of such cases is after
+interrupt handling, since by an interrupt, some thread (&lt;em&gt;e.g.&lt;/em&gt;, a
+high-priority RT thread) may need to run immediately. Another case is
+when someone calls it explicitly. For example, a system call
+&lt;code&gt;sched_yield()&lt;/code&gt; that causes the calling thread to relinquish the CPU is
+implemented using &lt;code&gt;__schedule()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;periodic-accounting-scheduler_tick&#34;&gt;Periodic accounting: &lt;code&gt;scheduler_tick()&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;The function &lt;code&gt;scheduler_tick()&lt;/code&gt; is periodically called by the kernel
+with the frequency &lt;code&gt;HZ&lt;/code&gt;, which is the tick rate of the system timer
+defined on system boot.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;void scheduler_tick(void)
+{
+    int cpu = smp_processor_id();
+    struct rq *rq = cpu_rq(cpu);
+    struct task_struct *curr = rq-&amp;gt;curr;
+    ...
+    update_rq_clock(rq);
+    curr-&amp;gt;sched_class-&amp;gt;task_tick(rq, curr, 0);
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first thing among what &lt;code&gt;scheduler_tick()&lt;/code&gt;
+does is updating clocks invoking &lt;code&gt;update_rq_clock()&lt;/code&gt;. The
+&lt;code&gt;update_rq_clock()&lt;/code&gt; reads a clock source and updates the &lt;code&gt;clock&lt;/code&gt; of the
+run queue, which the scheduler’s time accounting is based on. The second
+thing is checking if the current thread is running for too long, and if
+it is, setting a flag that indicates that &lt;code&gt;__schedule()&lt;/code&gt; must be called
+to replace the running task with another. This done by calling
+&lt;code&gt;task_tick&lt;/code&gt; in a scheduler class. Again, actual work is delegated to a
+scheduler-class-specific function pointed by this function pointer.&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;completely-fair-scheduler-cfs&#34;&gt;Completely Fair Scheduler (CFS)&lt;/h2&gt;
+
+&lt;h3 id=&#34;nice-values-priorities-in-the-cfs&#34;&gt;Nice values: priorities in the CFS&lt;/h3&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://helix979.github.io/jkoo/img/nice.PNG&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Nice-to-weight conversion.&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;The priority managed by the CFS is called the nice value in particular,
+which ranges between $-20$ and $19$. Lower values mean higher priorities
+(&lt;em&gt;i.e.&lt;/em&gt;, $-20$ for the highest priority and $19$ for the lowest
+priority). The default nice value is $0$ unless otherwise inherited from
+a parent process. Each nice value has a corresponding weight value,
+which predefined as Figure 5. Note that there is an
+inverse relationship between weight values and nice values. The weight
+value determines how large proportion of CPU time a thread gets compared
+to other threads. Refer to “time slice&amp;rdquo; for more detail.&lt;/p&gt;
+
+&lt;h3 id=&#34;time-slice&#34;&gt;Time slice&lt;/h3&gt;
+
+&lt;p&gt;The CFS sets what is called a time slice that is an interval for which a
+thread is allowed to run without being preempted. The time slice for a
+thread is proportional to the weight of the thread divided by the total
+weight of all threads in a run queue. Therefore, the thread that has a
+relatively high priority is likely to run longer than the other ready
+threads.&lt;/p&gt;
+
+&lt;p&gt;The function &lt;code&gt;__scheduler_tick&lt;/code&gt; that is periodically called by a timer
+interrupt invokes &lt;code&gt;task_tick&lt;/code&gt; of the scheduling class of the current
+thread. In the CFS, this function pointer eventually executes the
+function &lt;code&gt;check_preempt_tick()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;static void check_preempt_tick(struct cfs_rq *cfs_rq, struct sched_entity *curr)
+{
+    ...
+    ideal_runtime = sched_slice(cfs_rq, curr);
+    delta_exec = curr-&amp;gt;sum_exec_runtime - curr-&amp;gt;prev_sum_exec_runtime;
+    if (delta_exec &amp;gt; ideal_runtime) {
+        resched_task(rq_of(cfs_rq)-&amp;gt;curr);
+        ...
+        return;
+    }
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;check_preempt_tick()&lt;/code&gt; is responsible for checking if the current
+thread is running any longer than its time slice. If that is the case,
+&lt;code&gt;check_preempt_tick()&lt;/code&gt; calls &lt;code&gt;resched_task()&lt;/code&gt; that marks that
+&lt;code&gt;__schedule()&lt;/code&gt; should be executed now to change the running thread. The
+function &lt;code&gt;sched_slice()&lt;/code&gt; is the one that calculates the time slice for
+the currently running thread.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;static u64 sched_slice(struct cfs_rq *cfs_rq, struct sched_entity *se)
+{
+    u64 slice = __sched_period(cfs_rq-&amp;gt;nr_running + !se-&amp;gt;on_rq);
+    ...
+    cfs_rq = cfs_rq_of(se);
+    load = &amp;amp;cfs_rq-&amp;gt;load;
+    ...
+    slice = calc_delta_mine(slice, se-&amp;gt;load.weight, load);
+    ...
+    return slice;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The Linux kernel sets a scheduling period during which all ready threads
+are guaranteed to run at least once. The function &lt;code&gt;__sched_period&lt;/code&gt;
+updates the scheduling period considering the number of ready threads.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;static u64 __sched_period(unsigned long nr_running)
+{
+    u64 period = sysctl_sched_latency;
+    unsigned long nr_latency = sched_nr_latency;
+    if (unlikely(nr_running &amp;gt; nr_latency)) {
+        period = sysctl_sched_min_granularity;
+        period *= nr_running;
+    }
+    return period;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;By default, the kernel targets to
+serve &lt;code&gt;sched_nr_latency&lt;/code&gt; threads for &lt;code&gt;sysctl_sched_latency&lt;/code&gt; ms, assuming
+that a thread is supposed to run at a time for at least
+&lt;code&gt;sysctl_min_granularity&lt;/code&gt; ms, which is defined as follows:&lt;/p&gt;
+
+&lt;p&gt;$$
+\mbox{sysctl_min_granularity}=\frac{\mbox{sysctl_sched_latency}}{\mbox{sched_nr_latency}}
+$$&lt;/p&gt;
+
+&lt;p&gt;That is, the default scheduling period is &lt;code&gt;sysctl_sched_latency&lt;/code&gt; ms.
+However, if there are more than &lt;code&gt;sched_nr_latency&lt;/code&gt; threads in a run
+queue, the scheduling period is set to &lt;code&gt;sysctl_min_granularity&lt;/code&gt; ms
+multiplied by the number of ready threads.&lt;/p&gt;
+
+&lt;p&gt;The updated scheduling period is scaled by the function
+&lt;code&gt;calc_delta_mine()&lt;/code&gt; that finalizes the time slice for the currently
+running thread in the following way:&lt;/p&gt;
+
+&lt;p&gt;$$
+\mbox{time slice of the current thread} \\&lt;br /&gt;
+= (\mbox{scheduling period}) * \left(\frac{\mbox{weight of the current thread}}{\mbox{sum of the weights of all threads}}\right).
+$$&lt;/p&gt;
+
+&lt;h3 id=&#34;virtual-runtime&#34;&gt;Virtual runtime&lt;/h3&gt;
+
+&lt;p&gt;Time accounting in the CFS is done by using the so-called virtual
+runtime. For a given thread, its virtual runtime is defined as follows:&lt;/p&gt;
+
+&lt;p&gt;$$
+\mbox{virtual runtime} = (\mbox{actual runtime}) * 1024 / \mbox{weight}.
+$$&lt;/p&gt;
+
+&lt;p&gt;Since a weight is proportional to a priority, the virtual runtime of a
+high priority thread goes slower than that of a low priority thread,
+when the actual runtime is the same. Note that in the above, $1024$ is
+the weight value for the nice $0$. Thus, the virtual runtime for the
+thread of nice $0$ is equal to its actual runtime.&lt;/p&gt;
+
+&lt;p&gt;All updates to the virtual runtime are performed in &lt;code&gt;update_curr()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;static void update_curr(struct cfs_rq *cfs_rq)
+{
+    struct sched_entity *curr = cfs_rq-&amp;gt;curr;
+    u64 now = rq_of(cfs_rq)-&amp;gt;clock_task;
+    unsigned long delta_exec;
+    ...
+    delta_exec = (unsigned long)(now - curr-&amp;gt;exec_start);
+    ...
+    __update_curr(cfs_rq, curr, delta_exec);
+    curr-&amp;gt;exec_start = now;
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;clock_task&lt;/code&gt; is used to get a timestamp &lt;code&gt;now&lt;/code&gt; at the moment when
+&lt;code&gt;update_curr()&lt;/code&gt; is invoked. The &lt;code&gt;clock_task&lt;/code&gt; returns &lt;code&gt;rq-&amp;gt;clock&lt;/code&gt; minus
+time stolen by handling IRQs. &lt;code&gt;curr-&amp;gt;exec_start&lt;/code&gt; holds the timestamp
+that was made when the current thread updated its virtual runtime most
+recently. Thus, the difference between &lt;code&gt;now&lt;/code&gt; and &lt;code&gt;curr-&amp;gt;exec_start&lt;/code&gt; is
+the actual runtime elapsed since the last update to the virtual runtime
+of the current thread. This actual time increment is fed into
+&lt;code&gt;__update_curr()&lt;/code&gt; where conversion to virtual time increment is done by &lt;code&gt;calc_delta_fair()&lt;/code&gt; below.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;static inline void
+__update_curr(struct cfs_rq *cfs_rq, struct sched_entity *curr,
+          unsigned long delta_exec)
+{
+    ...
+    delta_exec_weighted = calc_delta_fair(delta_exec, curr);
+    curr-&amp;gt;vruntime += delta_exec_weighted;
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;putting-a-running-thread-back-into-a-runqueue&#34;&gt;Putting a running thread back into a runqueue&lt;/h3&gt;
+
+&lt;p&gt;In order to change the running thread, the previously-running thread
+should be first back into a runqueue. For this matter, the CFS uses
+&lt;code&gt;put_prev_task_fair()&lt;/code&gt; that in turn calls &lt;code&gt;put_prev_entity()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;static void put_prev_entity(struct cfs_rq *cfs_rq, struct sched_entity *prev)
+{
+    if (prev-&amp;gt;on_rq)
+        update_curr(cfs_rq);
+    ...
+    if (prev-&amp;gt;on_rq) {
+        ...
+        __enqueue_entity(cfs_rq, prev);
+        ...
+    }
+    cfs_rq-&amp;gt;curr = NULL;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Using &lt;code&gt;prev-&amp;gt;on_rq&lt;/code&gt;, the &lt;code&gt;put_prev_entity()&lt;/code&gt; checks if the thread is
+already on a run queue, in which case nothing should be done. Otherwise,
+the running thread needs to update its virtual runtime and enqueue into
+the &lt;code&gt;cfs_rq&lt;/code&gt;. The &lt;code&gt;cfs_rq&lt;/code&gt; is implemented with a red-black (RB) tree,
+where threads are sorted according to their virtual runtime.&lt;/p&gt;
+
+&lt;h3 id=&#34;choosing-the-thread-to-run-next&#34;&gt;Choosing the thread to run next&lt;/h3&gt;
+
+&lt;p&gt;Choosing the next thread to run in the CFS is the business of
+&lt;code&gt;pick_next_task_fair()&lt;/code&gt;, whose main body is implemented by a sub-routine
+&lt;code&gt;pick_next_entity()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;static struct sched_entity *pick_next_entity(struct cfs_rq *cfs_rq)
+{
+    struct sched_entity *se = __pick_first_entity(cfs_rq);
+    struct sched_entity *left = se;
+    if (cfs_rq-&amp;gt;skip == se) {
+        struct sched_entity *second = __pick_next_entity(se);
+        if (second &amp;amp;&amp;amp; wakeup_preempt_entity(second, left) &amp;lt; 1)
+            se = second;
+    }
+    if (cfs_rq-&amp;gt;last &amp;amp;&amp;amp; wakeup_preempt_entity(cfs_rq-&amp;gt;last, left) &amp;lt; 1)
+        se = cfs_rq-&amp;gt;last;
+
+    if (cfs_rq-&amp;gt;next &amp;amp;&amp;amp; wakeup_preempt_entity(cfs_rq-&amp;gt;next, left) &amp;lt; 1)
+        se = cfs_rq-&amp;gt;next;
+    ...
+    return se;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here, &lt;code&gt;wakeup_preempt_entity()&lt;/code&gt; is the means to
+balance fairness in terms of virtual time among threads. Specifically,
+what &lt;code&gt;wakeup_preempt_entity(se1, se2)&lt;/code&gt; does is to compare the virtual
+times of &lt;code&gt;se1&lt;/code&gt; and &lt;code&gt;se2&lt;/code&gt;, and return $-1$ if &lt;code&gt;se1&lt;/code&gt; has run shorter than
+&lt;code&gt;se2&lt;/code&gt;, $0$ if &lt;code&gt;se1&lt;/code&gt; has long than &lt;code&gt;se2&lt;/code&gt; but not long enough, and $1$ if
+thread 1 has run long enough. Keeping things fair between threads using
+this function, the thread to run next is picked in the following order.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Pick the thread that has the smallest virtual runtime.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Pick the “next&amp;rdquo; thread that woke last but failed to preempt on
+wake-up, since it may need to run in a hurry.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Pick the “last&amp;rdquo; thread that ran last for cache locality.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Do not run the “skip&amp;rdquo; process, if something else is available.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;real-time-rt-scheduler&#34;&gt;Real-Time (RT) Scheduler&lt;/h2&gt;
+
+&lt;h3 id=&#34;the-run-queue-of-the-rt-scheduler&#34;&gt;The run queue of the RT scheduler&lt;/h3&gt;
+
+&lt;p&gt;The RT scheduler’s run queue, represented by &lt;code&gt;struct rt_rq&lt;/code&gt;, is mainly
+implemented with an array, each element of which is the head of a linked
+list that manages the threads of a particular priority.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;struct rt_prio_array {
+    DECLARE_BITMAP(bitmap, MAX_RT_PRIO+1);
+    struct list_head queue[MAX_RT_PRIO];
+};
+
+struct rt_rq {
+    struct rt_prio_array active;
+    ...
+    int curr;
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;All real-time threads whose priority is &lt;code&gt;x&lt;/code&gt; are inserted into a linked list headed by
+&lt;code&gt;active.queue[x]&lt;/code&gt;. When there exists at least one thread in
+&lt;code&gt;active.queue[x]&lt;/code&gt;, the &lt;code&gt;x&lt;/code&gt;-th bit of &lt;code&gt;active.bitmap&lt;/code&gt; is set.&lt;/p&gt;
+
+&lt;h3 id=&#34;execution-and-scheduling-polices&#34;&gt;Execution and scheduling polices&lt;/h3&gt;
+
+&lt;p&gt;A newly queued thread is always placed at the end of each list of a
+corresponding priority in the run queue. The first task on the list of
+the highest priority available is taken out to run.&lt;/p&gt;
+
+&lt;p&gt;There are two scheduling polices applied for the RT scheduler, which are
+&lt;code&gt;SCHED_FIFO&lt;/code&gt; and &lt;code&gt;SCHED_RR&lt;/code&gt;. The difference between the two becomes
+distinct in &lt;code&gt;task_tick_rt()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;static void task_tick_rt(struct rq *rq, struct task_struct *p, int queued)
+{
+    struct sched_rt_entity *rt_se = &amp;amp;p-&amp;gt;rt;
+
+    update_curr_rt(rq);
+
+    watchdog(rq, p);
+
+    /*
+     * RR tasks need a special form of timeslice management.
+     * FIFO tasks have no timeslices.
+     */
+    if (p-&amp;gt;policy != SCHED_RR)
+        return;
+
+    if (--p-&amp;gt;rt.time_slice)
+        return;
+
+    p-&amp;gt;rt.time_slice = sched_rr_timeslice;
+
+    /*
+     * Requeue to the end of queue if we (and all of our ancestors) are the
+     * only element on the queue
+     */
+    for_each_sched_rt_entity(rt_se) {
+        if (rt_se-&amp;gt;run_list.prev != rt_se-&amp;gt;run_list.next) {
+            requeue_task_rt(rq, p, 0);
+            set_tsk_need_resched(p);
+            return;
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The threads with &lt;code&gt;SCHED_FIFO&lt;/code&gt; can run until they stop or yield. There is
+nothing to be done every tick interrupt. The &lt;code&gt;SCHED_RR&lt;/code&gt; threads are
+given a time slice, which is decremented by 1 on the tick interrupt.
+When this time slice becomes zero, &lt;code&gt;SCHED_RR&lt;/code&gt; threads are enqueued
+again.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Mobile visual clothing search</title>
+      <link>https://helix979.github.io/jkoo/publication/clothing-search/</link>
+      <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://helix979.github.io/jkoo/publication/clothing-search/</guid>
+      <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

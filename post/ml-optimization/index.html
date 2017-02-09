@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.18.1" />
+  <meta name="author" content="Jinkyu Koo">
+  <meta name="description" content="research scientist / dad / ice hockey player in dreams">
+
+  
+  
+  
+    
+  
+  
+    
+    
+    <link rel="stylesheet" href="/jkoo/css/highlight.min.css">
+    
+  
+  <link rel="stylesheet" href="/jkoo/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/jkoo/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/jkoo/css/academicons.min.css">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700|Merriweather|Roboto+Mono">
+  <link rel="stylesheet" href="/jkoo/css/hugo-academic.css">
+  
+
+  <link rel="alternate" href="https://helix979.github.io/jkoo/index.xml" type="application/rss+xml" title="Jinkyu Koo">
+  <link rel="feed" href="https://helix979.github.io/jkoo/index.xml" type="application/rss+xml" title="Jinkyu Koo">
+
+  <link rel="icon" type="image/png" href="/jkoo/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/jkoo/img/apple-touch-icon.png">
+
+  <link rel="canonical" href="https://helix979.github.io/jkoo/post/ml-optimization/">
+
+  
+
+  <title>Optimization | Jinkyu Koo</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#navbar-main" data-offset="71">
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/jkoo/">Jinkyu Koo</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/jkoo/#about">
+            
+            <span>Home</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/jkoo/#ml">
+            
+            <span>Machine Learning</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/jkoo/#misc">
+            
+            <span>Misc</span>
+          </a>
+        </li>
+
+        
+        
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+  <div class="article-container">
+    <h1 itemprop="name">Optimization</h1>
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    <time datetime="2017-01-31 23:59:55 -0500 EST" itemprop="datePublished">
+      Tue, Jan 31, 2017
+    </time>
+  </span>
+
+  
+  
+  
+  
+
+  
+  
+  
+  <span class="article-tags">
+    <i class="fa fa-tags"></i>
+    
+    <a href="/jkoo/tags/ml">ml</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fml-optimization%2f"
+         target="_blank">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Optimization&amp;url=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fml-optimization%2f"
+         target="_blank">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fml-optimization%2f&amp;title=Optimization"
+         target="_blank">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fml-optimization%2f&amp;title=Optimization"
+         target="_blank">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Optimization&amp;body=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fml-optimization%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<p>Machine learning often ends up with a mathematical optimization problem,
+typically minimizing a cost function $J(\mathbf{w})$ for a given parameter $\mathbf{w} = \begin{bmatrix} w_0 &amp; w_1 &amp; \cdots &amp; w_n \end{bmatrix}^{T} \in \mathbb{R}^{n+1}$ that has the form:</p>
+
+<p>$$
+J(\mathbf{w})=\frac{1}{M} \sum_{m=1}^{M} J_m(\mathbf{w}).
+\tag{opt:1}\label{eq:opt}
+$$</p>
+
+<p>Here, $J_m(\mathbf{w})$ is the cost associated with the
+$m$-th observation in a training set, and $M$ denotes the total number
+of observations. Thus, one can say that given the parameter
+$\mathbf{w}$, the cost function $J(\mathbf{w})$ represents the average
+cost over all observations in the training set. Among all the possible
+parameters, the one that results in the smallest value of the cost
+function is called the <strong>minimizer, or solution</strong>, and we denote it by $\mathbf{w}^{*}$.
+The term &ldquo;learning&rdquo; in the machine learning means a
+procedure for finding the solution $\mathbf{w}^{*}$.</p>
+
+<h2 id="gradient-descent"><strong>Gradient descent</strong></h2>
+
+<p>Now, how can we find the solution $\mathbf{w}^{*}$ to \eqref{eq:opt}? One
+simple way is the <strong>gradient descent</strong>. The method of gradient descent
+is to find a <strong>local minimum</strong> of a cost function $J(\mathbf{w})$,
+taking steps in the opposite direction to the gradient
+$\nabla{J(\mathbf{w})}$, where</p>
+
+<p>$$
+\nabla{J(\mathbf{w})})=
+\begin{bmatrix}
+\frac{\partial}{\partial w_0} J(\mathbf{w}) \\<br />
+\frac{\partial}{\partial w_1} J(\mathbf{w}) \\<br />
+\vdots \\<br />
+\frac{\partial}{\partial w_n} J(\mathbf{w})
+\end{bmatrix}.
+$$</p>
+
+<p>Consider the Taylor series of
+$J(\mathbf{w}-\alpha \nabla{J(\mathbf{w})})$ as a function of $\alpha$:
+$$J(\mathbf{w}-\alpha \nabla{J(\mathbf{w})})=J(\mathbf{w})-\alpha\Vert \nabla{J(\mathbf{w})}\Vert^2 + o(\alpha).$$
+If $\nabla{J(\mathbf{w})} \ne 0$, then for sufficiently small
+$\alpha&gt;0$, we have
+$$J(\mathbf{w}-\alpha \nabla{J(\mathbf{w})})&lt;J(\mathbf{w}).$$ This means
+that the parameter $\mathbf{w}-\alpha \nabla{J(\mathbf{w})}$ leads to
+the smaller value of the cost function than the parameter $\mathbf{w}$.
+Intuitively, the gradient $\nabla{J(\mathbf{w})}$ is the direction of
+the maximum rate of increase at the parameter $\mathbf{w}$, so moving in
+the opposite direction lowers the value of the cost function.</p>
+
+<p>Thus, we can start with a random guess $\mathbf{w}^{(0)}$ and keep
+moving to $\mathbf{w}^{(1)}$, $\mathbf{w}^{(2)}$, $\ldots$,
+$\mathbf{w}^{(t)}$ in such a way that
+$$
+\mathbf{w}^{(t+1)} = \mathbf{w}^{(t)}-\alpha \nabla{J(\mathbf{w}^{(t)})},
+\tag{opt:2}\label{eq:gd}
+$$
+or in other form
+$$
+w_{j}^{(t+1)} = w_{j}^{(t)}-\alpha \left. \frac{\partial J(\mathbf{w})}{\partial w_{j}} \right\vert_{\mathbf{w}=\mathbf{w}^{(t)}}\text{ for all } j.
+\label{eq:gd_element}
+$$
+Then, for sufficiently small $\alpha&gt;0$, we have, for every $t$,
+$$J(\mathbf{w}^{(t+1)}) &lt; J(\mathbf{w}^{(t)}),$$ and $\mathbf{w}^{(t)}$
+converges to a local minimum as $t$ grows. When the cost function
+$J(\mathbf{w})$ is convex, the local minimum is also the global minimum,
+so in such a case, $\mathbf{w}^{(t)}$ can converge to the solution
+$\mathbf{w}^{*}$. For non-convex cost functions, the gradient descent
+does not guarantee us finding the global minimum. Instead, depending on
+the initial guess, we will end up with different local minimum, which is
+exemplified in Figure 1.</p>
+
+
+<figure >
+    
+        <img src="/img/gd_initial.PNG" alt="The red and green dots represent the trajectories of the gradient descent corresponding to the initial values $w^{(0)}=-135$ and $w^{(0)}=30$, respectively." />
+    
+    
+    <figcaption>
+        <h4>The effect of the initial guess when $J(w)=(w&#43;90)(w-50)(w/2&#43;50)(w-90)/1000000$.</h4>
+        <p>
+        The red and green dots represent the trajectories of the gradient descent corresponding to the initial values $w^{(0)}=-135$ and $w^{(0)}=30$, respectively.
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+
+
+<h2 id="learning-rate"><strong>Learning rate</strong></h2>
+
+<p>In \eqref{eq:gd}, the value of $\alpha$ is called the <strong>learning rate</strong>. This value determines how fast or slow the parameter moves
+towards the optimal solution. Figure 2 illustrates
+the effect of the learning rate.</p>
+
+
+<figure >
+    
+        <img src="/img/gd_learning_rate.PNG" />
+    
+    
+    <figcaption>
+        <h4>The effect of the learning rate when $J(w)=\frac{1}{2}w^2$ and $w^{(0)}=-20$.</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<p>If $\alpha$ is too small, the gradient descent may take too long to converge. In contrast, the gradient descent
+may fail to converge with too large value of $\alpha$.</p>
+
+<p>Choosing the proper value of the learning rate is not that trivial. In
+practice, we often use simply a small enough constant by keeping
+decreasing the value until the parameter seems to converge to a certain
+point. Or in order to get more accurate solution, one can halve the
+value of the learning rate as convergence slows down over iterations.
+Another method is to adaptively change the learning rate at every
+iteration $t$ in the way that the difference
+$ J(\mathbf{w}^{(t)})-J(\mathbf{w}^{(t+1)})$ is maximized. For more
+detail on this method, refer to the <strong>steepest descent</strong>.</p>
+
+<h2 id="stochastic-gradient-descent"><strong>Stochastic gradient descent</strong></h2>
+
+<p>From \eqref{eq:opt}, the gradient $\nabla{J(\mathbf{w})}$ is represented
+as
+$$
+\nabla{J(\mathbf{w})}=\frac{1}{M} \sum_{m=1}^{M} \nabla{J_m(\mathbf{w})}.
+\label{eq:gradient}
+$$
+ This implies that computing $\nabla{J(\mathbf{w})}$ is equivalent to taking the average of
+$\nabla{J_m(\mathbf{w})}$, the gradient of the cost specific to the
+$m$-th observation, over the full training set. However, in practice,
+the training set is often very large, and thus averaging over the entire
+set can take a significant time. For this reason, the <strong>stochastic
+gradient descent</strong> simply approximates the true gradient by a
+gradient at a single observation as follows:
+$$\nabla{J(\mathbf{w})}\approxeq\nabla{J_m(\mathbf{w})}.
+\label{eq:gradient_approx}$$ Thus, with the stochastic gradient descent,
+the parameter update equation in \eqref{eq:gd} can be rewritten as
+$$
+\mathbf{w}^{(t+1)} = \mathbf{w}^{(t)}-\alpha \nabla{J_t(\mathbf{w}^{(t)})}.
+\label{eq:sto_gd}
+$$</p>
+
+<p>As a compromise between the true gradient and the gradient at a single
+observation, one may also consider the gradient averaged over a few
+training samples.</p>
+
+<h3 id="practice .unnumbered"><strong>Practice</strong></h3>
+
+<p>Tensorflow provides a function that implements the gradient descent
+algorithm. Thus, you can just use it without deriving an actual
+gradient. What you need to do is to choose the value of the learning
+rate. The following shows an example.</p>
+
+<pre><code>import tensorflow as tf
+import numpy as np
+
+w = tf.Variable(100.0)  # initial guess = 100.0
+J = tf.pow(w, 2)        # J(w) = w^2
+
+optimizer = tf.train.GradientDescentOptimizer(0.05)     # learning rate = 0.05
+train = optimizer.minimize(J)
+
+# Initialize variables
+init = tf.initialize_all_variables()
+
+sess = tf.InteractiveSession()
+sess.run(init)
+
+for step in range(0, 201):
+    sess.run(train)
+    if step % 20 == 0:
+        print &quot;%3d, %10.5f, %10.5f&quot; % (step, w.eval(), J.eval())
+
+sess.close()        
+</code></pre>
+
+<p>The output of the script would be as follows:</p>
+
+<pre><code>  0,   90.00000, 8100.00000
+ 20,   10.94190,  119.72514
+ 40,    1.33028,    1.76964
+ 60,    0.16173,    0.02616
+ 80,    0.01966,    0.00039
+100,    0.00239,    0.00001
+120,    0.00029,    0.00000
+140,    0.00004,    0.00000
+160,    0.00000,    0.00000
+180,    0.00000,    0.00000
+200,    0.00000,    0.00000
+</code></pre>
+
+    </div>
+  </div>
+
+</article>
+
+<div class="container">
+  <nav>
+  <ul class="pager">
+    
+    <li class="previous"><a href="https://helix979.github.io/jkoo/post/python-tutorial/"><span
+      aria-hidden="true">&larr;</span> Python in half an hour</a></li>
+    
+
+    
+    <li class="next"><a href="https://helix979.github.io/jkoo/post/ml-linear_regression/">Linear Regression <span
+      aria-hidden="true">&rarr;</span></a></li>
+    
+  </ul>
+</nav>
+
+</div>
+
+<div class="article-container">
+  
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2017 Jinkyu Koo &middot; 
+
+      Powered by the <a href="https://github.com/gcushen/hugo-academic" target="_blank">Academic
+      theme</a> for <a href="http://gohugo.io" target="_blank">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/ScrollToPlugin.min.js"></script>
+    <script src="/jkoo/js/jquery-1.12.3.min.js"></script>
+    <script src="/jkoo/js/bootstrap.min.js"></script>
+    <script src="/jkoo/js/isotope.pkgd.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js"></script>
+    <script src="/jkoo/js/hugo-academic.js"></script>
+    
+
+    
+
+    
+    
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" },
+                   extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js"],
+                   noErrors: {
+                        multiLine: true
+                   }
+            },        
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                displayMath: [['$$','$$'], ['\[','\]']]
+            }
+        });
+    </script>
+    <script async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"></script>
+    
+
+  </body>
+</html>
+

@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.18.1" />
+  <meta name="author" content="Jinkyu Koo">
+  <meta name="description" content="research scientist / dad / ice hockey player in dreams">
+
+  
+  
+  
+    
+  
+  
+    
+    
+    <link rel="stylesheet" href="/jkoo/css/highlight.min.css">
+    
+  
+  <link rel="stylesheet" href="/jkoo/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/jkoo/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/jkoo/css/academicons.min.css">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700|Merriweather|Roboto+Mono">
+  <link rel="stylesheet" href="/jkoo/css/hugo-academic.css">
+  
+
+  <link rel="alternate" href="https://helix979.github.io/jkoo/index.xml" type="application/rss+xml" title="Jinkyu Koo">
+  <link rel="feed" href="https://helix979.github.io/jkoo/index.xml" type="application/rss+xml" title="Jinkyu Koo">
+
+  <link rel="icon" type="image/png" href="/jkoo/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/jkoo/img/apple-touch-icon.png">
+
+  <link rel="canonical" href="https://helix979.github.io/jkoo/post/os-scheduler/">
+
+  
+
+  <title>Linux kernel scheduler | Jinkyu Koo</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#navbar-main" data-offset="71">
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/jkoo/">Jinkyu Koo</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/jkoo/#about">
+            
+            <span>Home</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/jkoo/#ml">
+            
+            <span>Machine Learning</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/jkoo/#misc">
+            
+            <span>Misc</span>
+          </a>
+        </li>
+
+        
+        
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+  <div class="article-container">
+    <h1 itemprop="name">Linux kernel scheduler</h1>
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    <time datetime="2015-01-05 11:00:00 &#43;0000 UTC" itemprop="datePublished">
+      Mon, Jan 5, 2015
+    </time>
+  </span>
+
+  
+
+  
+  
+  
+  <span class="article-tags">
+    <i class="fa fa-tags"></i>
+    
+    <a href="/jkoo/tags/os">os</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fos-scheduler%2f"
+         target="_blank">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Linux%20kernel%20scheduler&amp;url=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fos-scheduler%2f"
+         target="_blank">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fos-scheduler%2f&amp;title=Linux%20kernel%20scheduler"
+         target="_blank">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fos-scheduler%2f&amp;title=Linux%20kernel%20scheduler"
+         target="_blank">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Linux%20kernel%20scheduler&amp;body=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fos-scheduler%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<h3 id="what-is-the-kernel">What is the kernel?</h3>
+
+<p>The kernel is fundamental part of an operating system (OS) that manages
+the computer’s hardwares, and allows softwares to run and use hardware
+resources in shared manners. Typically, the hardware resources to take
+into account are: (1) processors, (2) memory, and (3) input/output (I/O)
+devices such as keyboard, disk drives, network interface cards, and so
+on.</p>
+
+<p>Rough distinction between an OS and a kernel is that an OS is the kernel
+plus some useful utilities and applications such as administration tools
+and GUIs.</p>
+
+<h3 id="monolithic-kernels-and-modules">Monolithic kernels and modules</h3>
+
+<p>Linux has a monolithic kernel that contains all of the code necessary to
+perform every kernel related task in a single binary file. However,
+Linux can extend its functionality by adding modules. Here, the modules
+are pieces of code that can be loaded and unloaded into the kernel upon
+demand while a system is up and running.</p>
+
+<p><br></p>
+
+<h1 id="process">Process</h1>
+
+<p>A process is an instance of a computer program that is being executed.
+Each process has its own address space, which is protected from being
+accessed by other processes except through a legitimate means, that is,
+an inter-process communication mechanism.</p>
+
+<p>The address space is typically partitioned into several regions: text, data, bss, heap and stack. The
+text segment contains the compiled code of a program, <em>i.e.</em>, a set of
+instructions. The data segment stores initialized global and static
+variables, and constant variables like strings. The uninitialized global
+and static variables are located in the bss segment. The heap is the
+region set aside for dynamic memory allocation. The stack is where local
+variables are allocated within functions.</p>
+
+
+<figure >
+    
+        <img src="/img/address_space.PNG" alt="No sharing between processes; threads within a process share text, data, bss." />
+    
+    
+    <figcaption>
+        <h4>Address spaces.</h4>
+        <p>
+        No sharing between processes; threads within a process share text, data, bss.
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+
+
+<p>A thread is also the programmed code in execution. The thread is the
+smallest unit that can be managed independently by a kernel scheduler.
+However, unlike a process, the thread runs inside the address space of a
+process that it belongs to (refer to Figure 1.)
+Multiple threads can exist within the same process and share memory.
+Thanks to the shared memory, threads can easily communicate with one
+another. Although each thread has a separate stack for local variables
+and function calls, the stacks are allocated from the shared data area
+in the process’ address space.</p>
+
+<p>In Linux kernel terms, a thread is often called a task. In the meantime,
+since by default Linux kernel creates a process with a single thread by
+which actual work of the process is done, a thread may look like a
+process. For that reason, we sometimes refer to a process as a task as
+well.</p>
+
+<h3 id="creating-a-new-process-fork-and-exec">Creating a new process: fork() and exec()</h3>
+
+<p>Linux kernel generates a new process using <code>fork()</code> system call directly
+followed by <code>exec()</code> system call.</p>
+
+<p>When a process invokes <code>fork()</code>, a separate address space is created for
+a new process (called a child process), and all the memory segments of
+the original process (called a parent process) are copied into there. As
+a result, both the parent and the child have the exact same content in
+their own address space. The <code>fork()</code> returns the process ID (PID) of a
+new child process to the parent process, and returns zero to the child
+process.</p>
+
+<p>When the child process calls <code>exec()</code>, all data in the original program
+is replaced with a running copy of the new program. In other words,
+<code>exec()</code> replaces the current process with a new process of an
+executable binary file specified in its arguments.</p>
+
+<h3 id="waiting-until-a-child-process-terminates">Waiting until a child process terminates</h3>
+
+<p>The <code>wait()</code> system call allows the parent process to halt execution
+until its child process finishes. A call to <code>wait()</code> returns the PID of
+the child process on success.</p>
+
+<h3 id="zombie-processes">Zombie processes</h3>
+
+<p>When a child process terminates, it still exists as an entry in the
+process table. This entry is required until the parent process reads its
+child’s exit status by calling <code>wait()</code> system call, which then removes
+the entry from the process table.</p>
+
+<p>Thus, the ended child process becomes a meaningless process and just
+remains until the parent process terminates or it calls <code>wait()</code>. The
+process in this defunct state is called the zombie process.</p>
+
+<h3 id="copy-on-write">Copy-on-write</h3>
+
+<p>A naive approach to implement <code>fork()</code> is that when <code>fork()</code> is called,
+the kernel literally makes the copies of all the data belonging to the
+parent process, and puts them into the address space for the child
+process. This is inefficient in that although it takes too much time to
+duplicate the data, the child may not use any of them in certain cases.
+For example, if the child issues <code>exec()</code> right after <code>fork()</code>, all the
+effort to copy becomes wasteful. Even when the data is indeed used in
+the child, read-only data can just be shared by having pointers without
+burdensome copying jobs.</p>
+
+<p>To avoid such inefficiency, the Linux kernel uses what is called the
+copy-on-write to implement <code>fork()</code>. The copy-on-write is a technique by
+which copying involved in <code>fork()</code> occurs only when either the parent or
+the child writes. Instead of duplicating all the data upon <code>fork()</code>, the
+parent and the child share the data, marking them to be read-only. When
+some page (the smallest unit of data for memory management) is modified
+by any of the two processes, a page fault occurs, which makes each
+process get a unique copy of the page marked read-write.</p>
+
+<h3 id="pid-tid-ppid-and-tgid">PID, TID, PPID, and TGID</h3>
+
+<p>The smallest scheduling entity in the Linux kernel is a thread, not a
+process. Each thread is assigned a unique number for this purpose. In
+the kernel terms, confusingly enough, this number is called a process ID
+(PID). The process that threads belong to is accounted for as the thread
+group ID (TGID).</p>
+
+<p>When a new process starts by invoking <code>fork()</code>, it is assigned a new
+TGID. This newly forked process is created with a single thread, whose
+PID is the same as the TGID. The parent’s TGID is called a parent PID
+(PPID). If the thread creates another thread, the new thread gets a
+different PID, but the same TGID is taken over.</p>
+
+<p>In the mean time, some user space applications (<em>e.g.</em>, <code>ps</code>) have a
+different (probably better) naming convention: the PID and the TGID in
+kernel-space view are, respectively, called a thread ID (TID) and a PID
+in these userland applications. Figure 2 summarizes the
+relationship among these IDs.</p>
+
+
+<figure >
+    
+        <img src="/img/pid.PNG" />
+    
+    
+    <figcaption>
+        <h4>Relationship among PID, TID, PPID, and TGID.</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<p><br></p>
+
+<h1 id="scheduler">Scheduler</h1>
+
+<h3 id="what-the-scheduler-does">What the scheduler does</h3>
+
+<p>In modern computer systems, there may be many threads waiting to be
+served at the same time. Thus, one of the most important jobs of the
+kernel is to decide which thread to run for how long. The part of the
+kernel in charge of this business is called the scheduler.</p>
+
+<p>On a single processor system, the scheduler alternates different threads
+in a time-division manner, which may lead to the illusion of multiple
+threads running concurrently. On a multi-processor system, the scheduler
+assigns a thread at each processor so that the threads can be truly
+concurrent.</p>
+
+<h3 id="priority">Priority</h3>
+
+<p>Most of scheduling algorithms are priority-based. A thread is assigned a
+priority according to its importance and need for processor time. The
+general idea, which isn’t exactly implemented on Linux, is that threads
+with a higher priority run before those with a lower priority, whereas
+threads with the same priority are scheduled in a round-robin fashion.</p>
+
+<h3 id="preemptive-scheduling">Preemptive scheduling</h3>
+
+
+<figure >
+    
+        <img src="/img/preemption.PNG" />
+    
+    
+    <figcaption>
+        <h4>Preemption.</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<p>Linux kernel features a preemptive scheduling, which means that a thread
+can stop to execute another thread before it completes as shown in
+Figure 3. A thread can be preempted by a pending thread
+that is more important (<em>e.g.</em>, of a higher priority). The preempted
+thread resumes its execution after the preempting thread finishes or
+blocks.</p>
+
+<h3 id="context-switching">Context switching</h3>
+
+<p>All information that describes the states of the currently running
+thread is referred to as the “context&rdquo;. The context of a thread are
+mainly the contents of hardware registers including the program counter,
+the address space, and memory map (which will be explained later).
+Simply put, the context tells up to what point the instructions of the
+thread is executed, what the outcomes is, and where the content of
+memory pertinent to the thread exist. These are all you need to know in
+order to resume the thread at a later time.</p>
+
+<p>When a processor changes a thread to execute from one to another (as a
+result of scheduling for instance), the context of the old thread is
+saved somewhere, and the context of the new thread gets loaded. This
+procedure is called the context switching. The context switching happens
+fast and frequently enough that the users feel like the threads are
+running at the same time.</p>
+
+<h3 id="thread-states">Thread states</h3>
+
+
+<figure >
+    
+        <img src="/img/state.PNG" />
+    
+    
+    <figcaption>
+        <h4>Thread states.</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<p>The scheduler needs to know which threads are runnable at a given time
+so that it can choose a right one to run next. For that reason, each
+thread maintains its current state. In general terms, a thread may stay
+in one out of the following states (see also Figure 4).</p>
+
+<ul>
+<li><p>Ready: The thread is ready to run, but not allowed to, because all
+processors are busy executing other threads. The ready thread is
+awaiting execution until the scheduler chooses itself to run next.</p></li>
+
+<li><p>Running: Instructions of the thread are being executed on a
+processor.</p></li>
+
+<li><p>Blocked: The thread is blocked waiting for some external event such
+as I/O or a signal. The blocked thread is not a candidate to
+schedule, <em>i.e.</em>, it cannot run.</p></li>
+</ul>
+
+<h3 id="io-bound-vs.-cpu-bound">I/O-bound vs. CPU-bound</h3>
+
+<p>Threads (or processes) can be classified into two major types: I/O-bound
+and CPU-bound.</p>
+
+<p>The I/O-bound threads are mostly waiting for arrivals of inputs (<em>e.g.</em>,
+keyboard strokes) or the completion of outputs (<em>e.g.</em>, writing into
+disks). In general, these threads do not stay running for very long, and
+block themselves voluntarily to wait for I/O events. What matters with
+the I/O-bound threads is that they need to be processed in quick, since
+otherwise users may feel that the system has no good responsiveness.
+Therefore, a common rule is that a scheduler puts more urgency into
+serving the I/O-bound threads.</p>
+
+<p>The CPU-bound threads are ones that spend much of their time in doing
+calculations (<em>e.g.</em>, compiling a program). Since there are not many I/O
+events involved, they tend to run as long as the scheduler allows.
+Typically, users do not expect the system to be responsive while the
+CPU-bound threads are running. Thus, the CPU-bound threads are picked to
+run by a scheduler less frequently. However, once chosen, they holds a
+CPU for a longer time.</p>
+
+<h3 id="real-time-vs.-non-real-time">Real-time vs. non-real-time</h3>
+
+<p>Another criterion that categorizes threads is if they are real-time
+threads or not.</p>
+
+<p>The real-time threads are ones that should be processed with a strict
+time constraint, often referred to as a deadline. The operational
+correctness of a real-time thread depends not only on computation
+results, but also on whether the results are produced before the
+deadline. Therefore, the scheduler, in general, takes care of the
+real-time threads with a high priority.</p>
+
+<p>Real-time threads can be further classified into hard real-time or soft
+real-time ones by the consequence of missing a deadline. Hard real-time
+threads require all deadlines to be met with no exception; otherwise, a
+system may fall into catastrophic failure. For the soft real-time
+threads, missing a deadline results in degraded quality for the intended
+service, but a system can still go on.</p>
+
+<p>Non-real-time threads are not associated with any deadlines. They could
+be human-interactive threads or batch threads. Here, the batch threads
+are ones that process a large amount of data without manual
+intervention. For the batch threads, a fast response time is not
+critical, and so they can be scheduled to run as resources allow.</p>
+
+<p><br></p>
+
+<h2 id="core-scheduler">Core Scheduler</h2>
+
+<h3 id="scheduling-classes">Scheduling classes</h3>
+
+<p>One may say that the Linux kernel scheduler consists of mainly two
+different scheduling algorithms, which are what are called the real-time
+scheduler and the completely fair scheduler. Scheduling classes allow
+for implementing these algorithms in a modular way. In detail, a
+scheduling class is a set of function pointers, defined through
+<code>struct sched_class</code>.</p>
+
+<pre><code>struct sched_class {
+    const struct sched_class *next;
+    ...
+    struct task_struct * (*pick_next_task) (struct rq *rq, struct task_struct *prev);
+    void (*put_prev_task) (struct rq *rq, struct task_struct *p);
+    ...
+    void (*task_tick) (struct rq *rq, struct task_struct *p, int queued);
+    ...
+};
+</code></pre>
+
+<p>Each scheduling algorithm gets an instance of
+<code>struct sched_class</code> and connects the function pointers with their
+corresponding implementations.</p>
+
+<p>The <code>rt_sched_class</code> implements so-called real-time (RT) scheduler.</p>
+
+<pre><code>const struct sched_class rt_sched_class = {
+    .next           = &amp;fair_sched_class,
+    ...
+    .pick_next_task     = pick_next_task_rt,
+    .put_prev_task      = put_prev_task_rt,
+    ...
+    .task_tick      = task_tick_rt,
+    ...
+};
+</code></pre>
+
+<p>As its name implies, the RT scheduler targets to deals with the real-time
+threads. The RT scheduler assigns a priority to every thread to
+schedule, and processes the threads in order of their priorities. The RT
+scheduler is proved good enough by many people’s experience, but there
+is no guarantee that all deadlines are met. Namely, the RT scheduler in
+the Linux kernel only addresses the needs of threads with soft real-time
+requirements.</p>
+
+<p>The completely fair scheduler (CFS) is implemented by the
+<code>fair_sched_class</code>.</p>
+
+<pre><code>const struct sched_class fair_sched_class = {
+    .next           = &amp;idle_sched_class,
+    ...
+    .pick_next_task     = pick_next_task_fair,
+    .put_prev_task      = put_prev_task_fair,
+    ...
+    .task_tick      = task_tick_fair,
+    ...
+};
+</code></pre>
+
+<p>The CFS also assigns a priority to a thread.
+However, unlike in the RT scheduler, this priority does not directly
+mean the order of being processed. Rather, it decides how long a thread
+can occupies a processor compared to others. In other words, the
+priority in CFS determines the proportion of processor time that a
+thread can use. Threads with a high priority can hold a processor longer
+than threads with a low priority. Meanwhile, the CFS may allow a
+long-waited low-priority thread to run even though there are
+high-priority threads ready. This is because each thread is guaranteed
+to use its own fraction of processor time for a certain time interval
+according to its priority, which is why the term “fair&rdquo; comes in the
+name of this scheduling algorithm.</p>
+
+<p>The core logics of the kernel scheduler iterate over scheduler classes
+in order of their priority: <code>rt_sched_class</code> processed prior to
+<code>fair_sched_class</code>. That way, codes in the <code>rt_sched_class</code> does not
+need to interact with codes in the <code>fair_sched_class</code>.</p>
+
+<h3 id="scheduling-policies">Scheduling policies</h3>
+
+<p>When created, each thread gets assigned a scheduling policy that is in
+turn treated by a specific scheduling algorithm. Different scheduling
+policies may result in different outcomes even with the same scheduling
+algorithm.</p>
+
+<p>The RT scheduler supports the following two scheduling policies:</p>
+
+<ul>
+<li><p><code>SCHED_RR</code>: Threads of this type run one by one for a pre-defined
+time interval in their turn (round robin).</p></li>
+
+<li><p><code>SCHED_FIFO</code>: Threads of this type run until done once selected
+(first-in/first-out).</p></li>
+</ul>
+
+<p>The scheduling polices dealt with by the CFS include:</p>
+
+<ul>
+<li><p><code>SCHED_BATCH</code>: This policy handles the threads that have a
+batch-characteristic, <em>i.e.</em>, CPU-bounded and non-interactive.
+Threads of this type never preempt non-idle threads.</p></li>
+
+<li><p><code>SCHED_NORMAL</code>: Normal threads fall into this type.</p></li>
+</ul>
+
+<h3 id="run-queues">Run queues</h3>
+
+<p>The core scheduler manages ready threads by enqueueing them into a run
+queue, which is implemented by <code>struct rq</code>.</p>
+
+<pre><code>struct rq {
+    ...
+    struct cfs_rq cfs;
+    struct rt_rq rt;
+    ...
+    struct task_struct *curr, *idle, *stop;
+    ...
+    u64 clock;
+    ...
+};
+</code></pre>
+
+<p>Each CPU has its own run queue, <em>i.e.</em>, there are as many run queues as the number of CPUs in a
+system. A ready thread can belong to a single run queue at a time, since
+it is impossible that multiple CPUs process the same thread
+simultaneously. Here comes the need of load balancing among CPUs in
+multi-core systems. Without a special effort to balance load, threads
+may wait in a specific CPU’s run queue, while other CPUs have nothing in
+their run queue, which, of course, means performance degradation.</p>
+
+<p>A run queue includes <code>struct cfs_rq cfs</code> and <code>struct rt_rq rt</code>, which
+are sub-run queues for the CFS and the RT scheduler, respectively.
+Enqueueing a thread into a run queue eventually means enqueueing it into
+either of these sub-run queues depending on the scheduler class of the
+thread. The thread that is currently running on a CPU is pointed by
+<code>struct task_struct *curr</code> defined in the run queue of the CPU. The
+per-run queue variable <code>clock</code> is used to store the latest time at which
+the corresponding CPU reads a clock source.</p>
+
+<h3 id="the-main-body-__schedule">The main body: <code>__schedule()</code></h3>
+
+<p>The function <code>__schedule()</code> is the main body of the core scheduler. What
+it does includes putting the previously running thread into a run queue,
+picking a new thread to run next, and lastly switching context between
+the two threads.</p>
+
+<pre><code>static void __sched __schedule(void)
+{
+    ...
+    cpu = smp_processor_id();
+    rq = cpu_rq(cpu);
+    prev = rq-&gt;curr;
+    ...
+    put_prev_task(rq, prev);
+    ...
+    next = pick_next_task(rq);
+    ...
+    if (likely(prev != next)) {
+        ...
+        rq-&gt;curr = next;
+        ...
+        context_switch(rq, prev, next);
+        ...
+    }
+    ...
+}
+</code></pre>
+
+<p>Most work in <code>__schedule()</code> is delegated to the scheduling classes. For
+example, when <code>put_prev_task()</code> is invoked in <code>__schedule()</code>, actual
+work is done by the function registered to the function pointer
+<code>put_prev_task</code> of the scheduling class that the previously running task
+belongs to.</p>
+
+<pre><code>static void put_prev_task(struct rq *rq, struct task_struct *prev)
+{
+    ...
+    prev-&gt;sched_class-&gt;put_prev_task(rq, prev);
+}
+</code></pre>
+
+<p>As shown in <code>rt_sched_class</code> and <code>fair_sched_class</code>, this is <code>put_prev_task_rt()</code> for the RT
+scheduler and <code>put_prev_task_fair()</code> for the CFS. A similar thing
+applies when <code>pick_next_task()</code> is invoked.</p>
+
+<pre><code>#define for_each_class(class) \
+   for (class = sched_class_highest; class; class = class-&gt;next)
+
+static inline struct task_struct *pick_next_task(struct rq *rq)
+{
+    const struct sched_class *class;
+    struct task_struct *p;
+    ...
+    for_each_class(class) {
+        p = class-&gt;pick_next_task(rq);
+        if (p)
+            return p;
+    }
+    ...
+}
+</code></pre>
+
+<p>The function
+<code>pick_next_task()</code> seeks the next-running thread using the function
+pointer <code>pick_next_task</code> of a scheduling class by which
+<code>pick_next_task_fair()</code> and <code>pick_next_task_rt()</code> are called for the CFS
+and the RT scheduler, respectively. Note that by the <code>for_each_class(class)</code> loop,
+scheduling classes are processed one by one in order of their priority,
+by which <code>fair_sched_class</code> can be taken care of only if there is
+nothing to do with the <code>rt_sched_class</code>.</p>
+
+<p>The function <code>__schedule()</code> is invoked at many places of the kernel,
+where there is a need to reschedule threads. One of such cases is after
+interrupt handling, since by an interrupt, some thread (<em>e.g.</em>, a
+high-priority RT thread) may need to run immediately. Another case is
+when someone calls it explicitly. For example, a system call
+<code>sched_yield()</code> that causes the calling thread to relinquish the CPU is
+implemented using <code>__schedule()</code>.</p>
+
+<h3 id="periodic-accounting-scheduler_tick">Periodic accounting: <code>scheduler_tick()</code></h3>
+
+<p>The function <code>scheduler_tick()</code> is periodically called by the kernel
+with the frequency <code>HZ</code>, which is the tick rate of the system timer
+defined on system boot.</p>
+
+<pre><code>void scheduler_tick(void)
+{
+    int cpu = smp_processor_id();
+    struct rq *rq = cpu_rq(cpu);
+    struct task_struct *curr = rq-&gt;curr;
+    ...
+    update_rq_clock(rq);
+    curr-&gt;sched_class-&gt;task_tick(rq, curr, 0);
+    ...
+}
+</code></pre>
+
+<p>The first thing among what <code>scheduler_tick()</code>
+does is updating clocks invoking <code>update_rq_clock()</code>. The
+<code>update_rq_clock()</code> reads a clock source and updates the <code>clock</code> of the
+run queue, which the scheduler’s time accounting is based on. The second
+thing is checking if the current thread is running for too long, and if
+it is, setting a flag that indicates that <code>__schedule()</code> must be called
+to replace the running task with another. This done by calling
+<code>task_tick</code> in a scheduler class. Again, actual work is delegated to a
+scheduler-class-specific function pointed by this function pointer.</p>
+
+<p><br></p>
+
+<h2 id="completely-fair-scheduler-cfs">Completely Fair Scheduler (CFS)</h2>
+
+<h3 id="nice-values-priorities-in-the-cfs">Nice values: priorities in the CFS</h3>
+
+
+<figure >
+    
+        <img src="/img/nice.PNG" />
+    
+    
+    <figcaption>
+        <h4>Nice-to-weight conversion.</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<p>The priority managed by the CFS is called the nice value in particular,
+which ranges between $-20$ and $19$. Lower values mean higher priorities
+(<em>i.e.</em>, $-20$ for the highest priority and $19$ for the lowest
+priority). The default nice value is $0$ unless otherwise inherited from
+a parent process. Each nice value has a corresponding weight value,
+which predefined as Figure 5. Note that there is an
+inverse relationship between weight values and nice values. The weight
+value determines how large proportion of CPU time a thread gets compared
+to other threads. Refer to “time slice&rdquo; for more detail.</p>
+
+<h3 id="time-slice">Time slice</h3>
+
+<p>The CFS sets what is called a time slice that is an interval for which a
+thread is allowed to run without being preempted. The time slice for a
+thread is proportional to the weight of the thread divided by the total
+weight of all threads in a run queue. Therefore, the thread that has a
+relatively high priority is likely to run longer than the other ready
+threads.</p>
+
+<p>The function <code>__scheduler_tick</code> that is periodically called by a timer
+interrupt invokes <code>task_tick</code> of the scheduling class of the current
+thread. In the CFS, this function pointer eventually executes the
+function <code>check_preempt_tick()</code>.</p>
+
+<pre><code>static void check_preempt_tick(struct cfs_rq *cfs_rq, struct sched_entity *curr)
+{
+    ...
+    ideal_runtime = sched_slice(cfs_rq, curr);
+    delta_exec = curr-&gt;sum_exec_runtime - curr-&gt;prev_sum_exec_runtime;
+    if (delta_exec &gt; ideal_runtime) {
+        resched_task(rq_of(cfs_rq)-&gt;curr);
+        ...
+        return;
+    }
+    ...
+}
+</code></pre>
+
+<p>The <code>check_preempt_tick()</code> is responsible for checking if the current
+thread is running any longer than its time slice. If that is the case,
+<code>check_preempt_tick()</code> calls <code>resched_task()</code> that marks that
+<code>__schedule()</code> should be executed now to change the running thread. The
+function <code>sched_slice()</code> is the one that calculates the time slice for
+the currently running thread.</p>
+
+<pre><code>static u64 sched_slice(struct cfs_rq *cfs_rq, struct sched_entity *se)
+{
+    u64 slice = __sched_period(cfs_rq-&gt;nr_running + !se-&gt;on_rq);
+    ...
+    cfs_rq = cfs_rq_of(se);
+    load = &amp;cfs_rq-&gt;load;
+    ...
+    slice = calc_delta_mine(slice, se-&gt;load.weight, load);
+    ...
+    return slice;
+}
+</code></pre>
+
+<p>The Linux kernel sets a scheduling period during which all ready threads
+are guaranteed to run at least once. The function <code>__sched_period</code>
+updates the scheduling period considering the number of ready threads.</p>
+
+<pre><code>static u64 __sched_period(unsigned long nr_running)
+{
+    u64 period = sysctl_sched_latency;
+    unsigned long nr_latency = sched_nr_latency;
+    if (unlikely(nr_running &gt; nr_latency)) {
+        period = sysctl_sched_min_granularity;
+        period *= nr_running;
+    }
+    return period;
+}
+</code></pre>
+
+<p>By default, the kernel targets to
+serve <code>sched_nr_latency</code> threads for <code>sysctl_sched_latency</code> ms, assuming
+that a thread is supposed to run at a time for at least
+<code>sysctl_min_granularity</code> ms, which is defined as follows:</p>
+
+<p>$$
+\mbox{sysctl_min_granularity}=\frac{\mbox{sysctl_sched_latency}}{\mbox{sched_nr_latency}}
+$$</p>
+
+<p>That is, the default scheduling period is <code>sysctl_sched_latency</code> ms.
+However, if there are more than <code>sched_nr_latency</code> threads in a run
+queue, the scheduling period is set to <code>sysctl_min_granularity</code> ms
+multiplied by the number of ready threads.</p>
+
+<p>The updated scheduling period is scaled by the function
+<code>calc_delta_mine()</code> that finalizes the time slice for the currently
+running thread in the following way:</p>
+
+<p>$$
+\mbox{time slice of the current thread} \\<br />
+= (\mbox{scheduling period}) * \left(\frac{\mbox{weight of the current thread}}{\mbox{sum of the weights of all threads}}\right).
+$$</p>
+
+<h3 id="virtual-runtime">Virtual runtime</h3>
+
+<p>Time accounting in the CFS is done by using the so-called virtual
+runtime. For a given thread, its virtual runtime is defined as follows:</p>
+
+<p>$$
+\mbox{virtual runtime} = (\mbox{actual runtime}) * 1024 / \mbox{weight}.
+$$</p>
+
+<p>Since a weight is proportional to a priority, the virtual runtime of a
+high priority thread goes slower than that of a low priority thread,
+when the actual runtime is the same. Note that in the above, $1024$ is
+the weight value for the nice $0$. Thus, the virtual runtime for the
+thread of nice $0$ is equal to its actual runtime.</p>
+
+<p>All updates to the virtual runtime are performed in <code>update_curr()</code>.</p>
+
+<pre><code>static void update_curr(struct cfs_rq *cfs_rq)
+{
+    struct sched_entity *curr = cfs_rq-&gt;curr;
+    u64 now = rq_of(cfs_rq)-&gt;clock_task;
+    unsigned long delta_exec;
+    ...
+    delta_exec = (unsigned long)(now - curr-&gt;exec_start);
+    ...
+    __update_curr(cfs_rq, curr, delta_exec);
+    curr-&gt;exec_start = now;
+    ...
+}
+</code></pre>
+
+<p><code>clock_task</code> is used to get a timestamp <code>now</code> at the moment when
+<code>update_curr()</code> is invoked. The <code>clock_task</code> returns <code>rq-&gt;clock</code> minus
+time stolen by handling IRQs. <code>curr-&gt;exec_start</code> holds the timestamp
+that was made when the current thread updated its virtual runtime most
+recently. Thus, the difference between <code>now</code> and <code>curr-&gt;exec_start</code> is
+the actual runtime elapsed since the last update to the virtual runtime
+of the current thread. This actual time increment is fed into
+<code>__update_curr()</code> where conversion to virtual time increment is done by <code>calc_delta_fair()</code> below.</p>
+
+<pre><code>static inline void
+__update_curr(struct cfs_rq *cfs_rq, struct sched_entity *curr,
+          unsigned long delta_exec)
+{
+    ...
+    delta_exec_weighted = calc_delta_fair(delta_exec, curr);
+    curr-&gt;vruntime += delta_exec_weighted;
+    ...
+}
+</code></pre>
+
+<h3 id="putting-a-running-thread-back-into-a-runqueue">Putting a running thread back into a runqueue</h3>
+
+<p>In order to change the running thread, the previously-running thread
+should be first back into a runqueue. For this matter, the CFS uses
+<code>put_prev_task_fair()</code> that in turn calls <code>put_prev_entity()</code>.</p>
+
+<pre><code>static void put_prev_entity(struct cfs_rq *cfs_rq, struct sched_entity *prev)
+{
+    if (prev-&gt;on_rq)
+        update_curr(cfs_rq);
+    ...
+    if (prev-&gt;on_rq) {
+        ...
+        __enqueue_entity(cfs_rq, prev);
+        ...
+    }
+    cfs_rq-&gt;curr = NULL;
+}
+</code></pre>
+
+<p>Using <code>prev-&gt;on_rq</code>, the <code>put_prev_entity()</code> checks if the thread is
+already on a run queue, in which case nothing should be done. Otherwise,
+the running thread needs to update its virtual runtime and enqueue into
+the <code>cfs_rq</code>. The <code>cfs_rq</code> is implemented with a red-black (RB) tree,
+where threads are sorted according to their virtual runtime.</p>
+
+<h3 id="choosing-the-thread-to-run-next">Choosing the thread to run next</h3>
+
+<p>Choosing the next thread to run in the CFS is the business of
+<code>pick_next_task_fair()</code>, whose main body is implemented by a sub-routine
+<code>pick_next_entity()</code>.</p>
+
+<pre><code>static struct sched_entity *pick_next_entity(struct cfs_rq *cfs_rq)
+{
+    struct sched_entity *se = __pick_first_entity(cfs_rq);
+    struct sched_entity *left = se;
+    if (cfs_rq-&gt;skip == se) {
+        struct sched_entity *second = __pick_next_entity(se);
+        if (second &amp;&amp; wakeup_preempt_entity(second, left) &lt; 1)
+            se = second;
+    }
+    if (cfs_rq-&gt;last &amp;&amp; wakeup_preempt_entity(cfs_rq-&gt;last, left) &lt; 1)
+        se = cfs_rq-&gt;last;
+
+    if (cfs_rq-&gt;next &amp;&amp; wakeup_preempt_entity(cfs_rq-&gt;next, left) &lt; 1)
+        se = cfs_rq-&gt;next;
+    ...
+    return se;
+}
+</code></pre>
+
+<p>Here, <code>wakeup_preempt_entity()</code> is the means to
+balance fairness in terms of virtual time among threads. Specifically,
+what <code>wakeup_preempt_entity(se1, se2)</code> does is to compare the virtual
+times of <code>se1</code> and <code>se2</code>, and return $-1$ if <code>se1</code> has run shorter than
+<code>se2</code>, $0$ if <code>se1</code> has long than <code>se2</code> but not long enough, and $1$ if
+thread 1 has run long enough. Keeping things fair between threads using
+this function, the thread to run next is picked in the following order.</p>
+
+<ol>
+<li><p>Pick the thread that has the smallest virtual runtime.</p></li>
+
+<li><p>Pick the “next&rdquo; thread that woke last but failed to preempt on
+wake-up, since it may need to run in a hurry.</p></li>
+
+<li><p>Pick the “last&rdquo; thread that ran last for cache locality.</p></li>
+
+<li><p>Do not run the “skip&rdquo; process, if something else is available.</p></li>
+</ol>
+
+<p><br></p>
+
+<h2 id="real-time-rt-scheduler">Real-Time (RT) Scheduler</h2>
+
+<h3 id="the-run-queue-of-the-rt-scheduler">The run queue of the RT scheduler</h3>
+
+<p>The RT scheduler’s run queue, represented by <code>struct rt_rq</code>, is mainly
+implemented with an array, each element of which is the head of a linked
+list that manages the threads of a particular priority.</p>
+
+<pre><code>struct rt_prio_array {
+    DECLARE_BITMAP(bitmap, MAX_RT_PRIO+1);
+    struct list_head queue[MAX_RT_PRIO];
+};
+
+struct rt_rq {
+    struct rt_prio_array active;
+    ...
+    int curr;
+    ...
+}
+</code></pre>
+
+<p>All real-time threads whose priority is <code>x</code> are inserted into a linked list headed by
+<code>active.queue[x]</code>. When there exists at least one thread in
+<code>active.queue[x]</code>, the <code>x</code>-th bit of <code>active.bitmap</code> is set.</p>
+
+<h3 id="execution-and-scheduling-polices">Execution and scheduling polices</h3>
+
+<p>A newly queued thread is always placed at the end of each list of a
+corresponding priority in the run queue. The first task on the list of
+the highest priority available is taken out to run.</p>
+
+<p>There are two scheduling polices applied for the RT scheduler, which are
+<code>SCHED_FIFO</code> and <code>SCHED_RR</code>. The difference between the two becomes
+distinct in <code>task_tick_rt()</code>.</p>
+
+<pre><code>static void task_tick_rt(struct rq *rq, struct task_struct *p, int queued)
+{
+    struct sched_rt_entity *rt_se = &amp;p-&gt;rt;
+
+    update_curr_rt(rq);
+
+    watchdog(rq, p);
+
+    /*
+     * RR tasks need a special form of timeslice management.
+     * FIFO tasks have no timeslices.
+     */
+    if (p-&gt;policy != SCHED_RR)
+        return;
+
+    if (--p-&gt;rt.time_slice)
+        return;
+
+    p-&gt;rt.time_slice = sched_rr_timeslice;
+
+    /*
+     * Requeue to the end of queue if we (and all of our ancestors) are the
+     * only element on the queue
+     */
+    for_each_sched_rt_entity(rt_se) {
+        if (rt_se-&gt;run_list.prev != rt_se-&gt;run_list.next) {
+            requeue_task_rt(rq, p, 0);
+            set_tsk_need_resched(p);
+            return;
+        }
+    }
+}
+</code></pre>
+
+<p>The threads with <code>SCHED_FIFO</code> can run until they stop or yield. There is
+nothing to be done every tick interrupt. The <code>SCHED_RR</code> threads are
+given a time slice, which is decremented by 1 on the tick interrupt.
+When this time slice becomes zero, <code>SCHED_RR</code> threads are enqueued
+again.</p>
+
+    </div>
+  </div>
+
+</article>
+
+<div class="container">
+  <nav>
+  <ul class="pager">
+    
+
+    
+    <li class="next"><a href="https://helix979.github.io/jkoo/post/python-tutorial/">Python in half an hour <span
+      aria-hidden="true">&rarr;</span></a></li>
+    
+  </ul>
+</nav>
+
+</div>
+
+<div class="article-container">
+  
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2017 Jinkyu Koo &middot; 
+
+      Powered by the <a href="https://github.com/gcushen/hugo-academic" target="_blank">Academic
+      theme</a> for <a href="http://gohugo.io" target="_blank">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/ScrollToPlugin.min.js"></script>
+    <script src="/jkoo/js/jquery-1.12.3.min.js"></script>
+    <script src="/jkoo/js/bootstrap.min.js"></script>
+    <script src="/jkoo/js/isotope.pkgd.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js"></script>
+    <script src="/jkoo/js/hugo-academic.js"></script>
+    
+
+    
+
+    
+    
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" },
+                   extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js"],
+                   noErrors: {
+                        multiLine: true
+                   }
+            },        
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                displayMath: [['$$','$$'], ['\[','\]']]
+            }
+        });
+    </script>
+    <script async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"></script>
+    
+
+  </body>
+</html>
+
