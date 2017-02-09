@@ -421,7 +421,7 @@ exemplified in Figure 1.&lt;/p&gt;
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;https://helix979.github.io/jkoo/img/gd_initial.png&#34; alt=&#34;The red and green dots represent the trajectories of the gradient descent corresponding to the initial values $w^{(0)}=-135$ and $w^{(0)}=30$, respectively.&#34; /&gt;
+        &lt;img src=&#34;img/gd_initial.png&#34; alt=&#34;The red and green dots represent the trajectories of the gradient descent corresponding to the initial values $w^{(0)}=-135$ and $w^{(0)}=30$, respectively.&#34; /&gt;
     
     
     &lt;figcaption&gt;
@@ -446,7 +446,7 @@ the effect of the learning rate.&lt;/p&gt;
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;https://helix979.github.io/jkoo/img/gd_learning_rate.png&#34; /&gt;
+        &lt;img src=&#34;img/gd_learning_rate.png&#34; /&gt;
     
     
     &lt;figcaption&gt;
