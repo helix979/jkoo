@@ -58,7 +58,7 @@ variables are allocated within functions.&lt;/p&gt;
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;https://helix979.github.io/jkoo/img/address_space.PNG&#34; alt=&#34;No sharing between processes; threads within a process share text, data, bss.&#34; /&gt;
+        &lt;img src=&#34;https://helix979.github.io/jkoo/img/address_space.png&#34; alt=&#34;No sharing between processes; threads within a process share text, data, bss.&#34; /&gt;
     
     
     &lt;figcaption&gt;
@@ -169,7 +169,7 @@ relationship among these IDs.&lt;/p&gt;
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;https://helix979.github.io/jkoo/img/pid.PNG&#34; /&gt;
+        &lt;img src=&#34;https://helix979.github.io/jkoo/img/pid.png&#34; /&gt;
     
     
     &lt;figcaption&gt;
@@ -210,7 +210,7 @@ threads with the same priority are scheduled in a round-robin fashion.&lt;/p&gt;
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;https://helix979.github.io/jkoo/img/preemption.PNG&#34; /&gt;
+        &lt;img src=&#34;https://helix979.github.io/jkoo/img/preemption.png&#34; /&gt;
     
     
     &lt;figcaption&gt;
@@ -251,7 +251,7 @@ running at the same time.&lt;/p&gt;
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;https://helix979.github.io/jkoo/img/state.PNG&#34; /&gt;
+        &lt;img src=&#34;https://helix979.github.io/jkoo/img/state.png&#34; /&gt;
     
     
     &lt;figcaption&gt;
@@ -586,7 +586,7 @@ scheduler-class-specific function pointed by this function pointer.&lt;/p&gt;
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;https://helix979.github.io/jkoo/img/nice.PNG&#34; /&gt;
+        &lt;img src=&#34;https://helix979.github.io/jkoo/img/nice.png&#34; /&gt;
     
     
     &lt;figcaption&gt;
