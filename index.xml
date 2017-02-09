@@ -71,7 +71,7 @@ simple linear regression. Figure 1 shows an example of the simple linear regress
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;https://helix979.github.io/jkoo/img/simple_linear.png&#34; alt=&#34;The blue dots represent the training data $\{(x_{m,1}, y_{m})\}_{m=1}^{M}$. The result of the simple linear regression is the red line&#34; /&gt;
+        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/simple_linear.png&#34; alt=&#34;The blue dots represent the training data $\{(x_{m,1}, y_{m})\}_{m=1}^{M}$. The result of the simple linear regression is the red line&#34; /&gt;
     
     
     &lt;figcaption&gt;
@@ -225,7 +225,7 @@ sess.close()
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;https://helix979.github.io/jkoo/img/linear_one.png&#34; /&gt;
+        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/linear_one.png&#34; /&gt;
     
     
     &lt;figcaption&gt;
@@ -327,7 +327,7 @@ sess.close()
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;https://helix979.github.io/jkoo/img/linear_multiple.png&#34; /&gt;
+        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/linear_multiple.png&#34; /&gt;
     
     
     &lt;figcaption&gt;
@@ -446,7 +446,7 @@ the effect of the learning rate.&lt;/p&gt;
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;img/gd_learning_rate.png&#34; /&gt;
+        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/gd_learning_rate.png&#34; /&gt;
     
     
     &lt;figcaption&gt;
@@ -1261,7 +1261,7 @@ variables are allocated within functions.&lt;/p&gt;
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;https://helix979.github.io/jkoo/img/address_space.png&#34; alt=&#34;No sharing between processes; threads within a process share text, data, bss.&#34; /&gt;
+        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/address_space.png&#34; alt=&#34;No sharing between processes; threads within a process share text, data, bss.&#34; /&gt;
     
     
     &lt;figcaption&gt;
@@ -1372,7 +1372,7 @@ relationship among these IDs.&lt;/p&gt;
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;https://helix979.github.io/jkoo/img/pid.png&#34; /&gt;
+        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/pid.png&#34; /&gt;
     
     
     &lt;figcaption&gt;
@@ -1413,7 +1413,7 @@ threads with the same priority are scheduled in a round-robin fashion.&lt;/p&gt;
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;https://helix979.github.io/jkoo/img/preemption.png&#34; /&gt;
+        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/preemption.png&#34; /&gt;
     
     
     &lt;figcaption&gt;
@@ -1454,7 +1454,7 @@ running at the same time.&lt;/p&gt;
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;https://helix979.github.io/jkoo/img/state.png&#34; /&gt;
+        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/state.png&#34; /&gt;
     
     
     &lt;figcaption&gt;
@@ -1789,7 +1789,7 @@ scheduler-class-specific function pointed by this function pointer.&lt;/p&gt;
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;https://helix979.github.io/jkoo/img/nice.png&#34; /&gt;
+        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/nice.png&#34; /&gt;
     
     
     &lt;figcaption&gt;
