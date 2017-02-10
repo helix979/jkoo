@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.18.1" />
+  <meta name="author" content="Jinkyu Koo">
+  <meta name="description" content="research scientist / dad / ice hockey player in dreams">
+
+  
+  
+  
+    
+  
+  
+    
+    
+    <link rel="stylesheet" href="/jkoo/css/highlight.min.css">
+    
+  
+  <link rel="stylesheet" href="/jkoo/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/jkoo/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/jkoo/css/academicons.min.css">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700|Merriweather|Roboto+Mono">
+  <link rel="stylesheet" href="/jkoo/css/hugo-academic.css">
+  
+
+  <link rel="alternate" href="https://helix979.github.io/jkoo/index.xml" type="application/rss+xml" title="Jinkyu Koo">
+  <link rel="feed" href="https://helix979.github.io/jkoo/index.xml" type="application/rss+xml" title="Jinkyu Koo">
+
+  <link rel="icon" type="image/png" href="/jkoo/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/jkoo/img/apple-touch-icon.png">
+
+  <link rel="canonical" href="https://helix979.github.io/jkoo/post/ml-logistic/">
+
+  
+
+  <title>Logistic Regression | Jinkyu Koo</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#navbar-main" data-offset="71">
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/jkoo/">Jinkyu Koo</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/jkoo/#about">
+            
+            <span>Home</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/jkoo/#pub">
+            
+            <span>Publications</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/jkoo/#patent">
+            
+            <span>US Patents</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/jkoo/#ml">
+            
+            <span>Machine Learning</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/jkoo/#misc">
+            
+            <span>Misc</span>
+          </a>
+        </li>
+
+        
+        
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+  <div class="article-container">
+    <h1 itemprop="name">Logistic Regression</h1>
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    <time datetime="2017-02-09 23:59:55 -0500 EST" itemprop="datePublished">
+      Thu, Feb 9, 2017
+    </time>
+  </span>
+
+  
+  
+  
+  
+
+  
+  
+  
+  <span class="article-tags">
+    <i class="fa fa-tags"></i>
+    
+    <a href="/jkoo/tags/ml">ml</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fml-logistic%2f"
+         target="_blank">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Logistic%20Regression&amp;url=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fml-logistic%2f"
+         target="_blank">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fml-logistic%2f&amp;title=Logistic%20Regression"
+         target="_blank">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fml-logistic%2f&amp;title=Logistic%20Regression"
+         target="_blank">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Logistic%20Regression&amp;body=https%3a%2f%2fhelix979.github.io%2fjkoo%2fpost%2fml-logistic%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<p>Logistic regression is a classification method for analyzing a set of
+data in which there are one or more independent variables (inputs) that
+determine a binary outcome $0$ or $1$.</p>
+
+<h3 id="hypothesis-function">Hypothesis function</h3>
+
+<p>Suppose that we are given $M$ data samples, denoting the $m$-th
+observation pair of an input vector and an output by
+$\mathbf{x}_{m} = \begin{bmatrix} x_0 &amp; x_1 &amp; \cdots &amp; x_n \end{bmatrix}^{T} \in \mathbb{R}^{n+1}$
+and $y_{m} \in {0,1}$, respectively. We call $\mathbf{x}_{m}$ a
+positive sample if $y_{m}=1$ and a negative sample if $y_{m}=0$.</p>
+
+<p>Now, consider $P(y_{m} \vert \mathbf{x}_{m})$, a conditional probability
+of $y_{m}$ given $\mathbf{x}_{m}$. The <strong>hypothesis function</strong>
+$h_{\mathbf{w}}(\mathbf{x}_{m})$ of logistic regression models the
+conditional probability of a positive sample (<em>i.e.</em>, $y_{m}=1$) as</p>
+
+<p>$$
+P(y_{m}=1 \vert \mathbf{x}_{m})=h_{\mathbf{w}}(\mathbf{x}_{m}).
+$$</p>
+
+<p>Here, the hypothesis function $h_{\mathbf{w}}(\mathbf{x}_{m})$ is
+defined using the <strong>sigmoid function</strong> $s(z)=\frac{1}{1 + e^{-z}}$
+as follows:</p>
+
+<p>$$
+h_{\mathbf{w}}(\mathbf{x}_{m})=s(\mathbf{w}^T \mathbf{x}_{m})=\frac{1}{1 + e^{-\mathbf{w}^T \mathbf{x}_{m}}}.
+$$</p>
+
+<p>As shown in Figure 1, the sigmoid function $s(z)$ is a
+‘S’-shape curve that converges to 1 as $z \rightarrow \infty$ and 0 as
+$z \rightarrow -\infty$. Since $h_{\mathbf{w}}(\mathbf{x}_{m})$ attempts
+to model a probability, the property of the sigmoid function $s(z)$ that
+is bounded between 0 and 1 is a good fit for our purpose.</p>
+
+
+<figure >
+    
+        <img src="/jkoo/img/sigmoid.png" />
+    
+    
+    <figcaption>
+        <h4>sigmoid function $s(z)=\frac{1}{1 &#43; e^{-z}}$.</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<p>What is next is to choose $\mathbf{w}$ well so that we can have a high
+value of $h_{\mathbf{w}}(\mathbf{x}_{m})$ for $\mathbf{x}_{m}$ that
+corresponds to $y_{m}=1$, and a low value for $\mathbf{x}_{m}$ that
+corresponds to $y_{m}=0$.</p>
+
+<h3 id="cost-function">Cost function</h3>
+
+<p>Since $P(y_{m}=1 \vert \mathbf{x}_{m})=h_{\mathbf{w}}(\mathbf{x}_{m})$
+by our definition, we have</p>
+
+<p>$$
+P(y_{m}=0 \vert \mathbf{x}_{m})=1-h_{\mathbf{w}}(\mathbf{x}_{m}).
+$$</p>
+
+<p>For all the observations in the training set, the likelihood
+$l(\mathbf{w})$ can then be written as</p>
+
+<p>$$
+l(\mathbf{w})=\prod_{m=1}^{M} h_{\mathbf{w}}(\mathbf{x}_{m})^{y_{m}} ( 1 - h_{\mathbf{w}}(\mathbf{x}_{m}) )^{1-{y_{m}}}.
+\tag{logi:1}\label{eq:lr_likelihood}
+$$</p>
+
+<p>Logistic regression chooses the
+parameter $\mathbf{w}$ that maximizes the likelihood of observing the
+samples, represented in \eqref{eq:lr_likelihood}. Thus, we define the
+<strong>cost function</strong> $J(\mathbf{w})$ as</p>
+
+<p>$$\scriptsize
+\begin{aligned}
+J(\mathbf{w})
+&amp;= -\frac{1}{M}\log l(\mathbf{w}) \\<br />
+&amp;= -\frac{1}{M}\sum_{m=1}^{M} \left( y_{m} \log h_{\mathbf{w}}(\mathbf{x}_{m}) +  ( 1-{y_{m}}) \log( 1 - h_{\mathbf{w}}(\mathbf{x}_{m}) ) \right).
+\end{aligned}\tag{logi:2}\label{eq:lr_cost}
+$$</p>
+
+<p>Note that minimizing \eqref{eq:lr_cost} is equivalent to maximizing
+\eqref{eq:lr_likelihood}.</p>
+
+<h3 id="learning">Learning</h3>
+
+<p>The solution $\mathbf{w}^{*}$ of logistic regression can be obtained by
+minimizing the cost function in \eqref{eq:lr_cost}. Again, such a
+minimization can be done by using the gradient descent. Hence, we first
+obtain the partial derivatives of $J(\mathbf{w})$ as follows:</p>
+
+<p>$$\tiny
+\begin{aligned}
+&amp;\frac{\partial J(\mathbf{w})}{\partial w_j} \\<br />
+&amp;=-\frac{1}{M} \sum_{m=1}^M \left( y_{m} \frac{1}{s(\mathbf{w}^{T} \mathbf{x}_{m})} - (1 - y_{m})\frac{1}{1-s(\mathbf{w}^{T} \mathbf{x}_{m})} \right) \frac{\partial}{\partial w_j}s(\mathbf{w}^{T} \mathbf{x}_{m}) \\<br />
+&amp;=-\frac{1}{M} \sum_{m=1}^M \left( y_{m} \frac{1}{s(\mathbf{w}^{T} \mathbf{x}_{m})} - (1 - y_{m})\frac{1}{1-s(\mathbf{w}^{T} \mathbf{x}_{m})} \right) s(\mathbf{w}^{T} \mathbf{x}_{m})(1-s(\mathbf{w}^{T} \mathbf{x}_{m}))\frac{\partial}{\partial w_j}\mathbf{w}^{T} \mathbf{x}_{m}\\<br />
+&amp;=-\frac{1}{M} \sum_{m=1}^M \left( y_{m} (1-s(\mathbf{w}^{T} \mathbf{x}_{m})) - (1 - y_{m})s(\mathbf{w}^{T} \mathbf{x}_{m}) \right)x_{m,j} \\<br />
+&amp;=\frac{1}{M} \sum_{m=1}^M (h_{\mathbf{w}} (\mathbf{x}_{m})- y_{m})x_{m,j}.
+\end{aligned}\label{eq:logistic_derivative}
+$$</p>
+
+<p>It is worth noting that
+the sigmoid function $s(z)$ has an easy-to-calculate derivative:
+$$\begin{aligned}
+\frac{ds(z)}{dz}=s(z)(1-s(z)).\end{aligned}$$ Now, the gradient descent
+equations for logistic regression are</p>
+
+<p>$$
+\begin{aligned}
+w_{j}^{(t+1)}
+&amp;= w_{j}^{(t)}-\frac{\alpha}{M} \sum_{m=1}^{M} (h_{\mathbf{w}^{(t)}} (\mathbf{x}_{m})- y_{m})x_{m,j} \\<br />
+&amp;= w_{j}^{(t)}-\frac{\alpha}{M} \sum_{m=1}^{M} \left(\frac{1}{1 + e^{-\mathbf{w}^{(t)T} \mathbf{x}_{m}}}- y_{m} \right)x_{m,j}
+\end{aligned}
+$$</p>
+
+<p>for all $j$.</p>
+
+<h3 id="prediction">Prediction</h3>
+
+<p>Given a new input vector
+$\mathbf{x} = \begin{bmatrix} 1 &amp; x_1 &amp; \ldots &amp; x_n \end{bmatrix}^{T}$,
+we should predict $y$ in the following rule.</p>
+
+<p>$$
+y = \left\{
+\begin{matrix}
+1 &amp; \text{if } h_{\mathbf{w}^{*}} (\mathbf{x}) \ge 0.5,\\<br />
+0 &amp; \text{if } h_{\mathbf{w}^{*}} (\mathbf{x}) &lt; 0.5.\\<br />
+\end{matrix} \right.
+\tag{logi:3}\label{eq:lr_decision}
+$$</p>
+
+<p>That way we can achieve the minimum error rate in classification. (Why? Refer to Bayes decision rule for detailed
+reason.)</p>
+
+<p>Since
+$h_{\mathbf{w}^{*}} (\mathbf{x})=s\left(\mathbf{w}^{*T} \mathbf{x}\right)$
+and $s(z) \ge 0.5 $ when $z \ge 0$, the decision rule in
+\eqref{eq:lr_decision} is equivalent to</p>
+
+<p>$$
+y = \left\{
+\begin{matrix}
+1 &amp; \text{if } \mathbf{w}^{*T} \mathbf{x} \ge 0,\\<br />
+0 &amp; \text{if } \mathbf{w}^{*T} \mathbf{x} &lt; 0.\\<br />
+\end{matrix}
+\right.
+\label{eq:lr_decision2}
+$$</p>
+
+<p>Note that the solution to the linear equation
+$\mathbf{w}^{*T} \mathbf{x}=0$ is the decision boundary separating the
+two predicted classes. Figure 2 shows an example
+where the decision boundary is a line.</p>
+
+
+<figure >
+    
+        <img src="/jkoo/img/logistic.png" />
+    
+    
+    <figcaption>
+        <h4>Decision boundary (the blue line) learned by logistic regression separates the data samples, where the green dots and red x’s belong to a different class.</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<h3 id="practice">Practice</h3>
+
+<p>Figure 2 can be obtained by the following.</p>
+
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+import tensorflow as tf
+
+n_data = 50
+r_x = 10
+noise_std = 5
+
+class0 = []
+class1 = []
+x = None
+y = None
+#--------------------------------------------------------
+def create_data():
+    global class0, class1, x, y
+
+    slope_1, y_intercept_1 = 1, 5
+    slope_2, y_intercept_2 = 1, 0
+
+    for i in range(n_data):
+        x_1 = np.random.rand() * r_x
+        x_2 = slope_1 * x_1 + y_intercept_1 + (np.random.rand() - 0.5) * noise_std
+        class0.append([x_1, x_2, 0])
+
+        x_1 = np.random.rand() * r_x
+        x_2 = slope_2 * x_1 + y_intercept_2 + (np.random.rand() - 0.5) * noise_std
+        class1.append([x_1, x_2, 1])
+
+    dataset = sorted(class0+class1, key=lambda data: data[0])
+    x1, x2, y = zip(*dataset)
+    x = np.vstack((np.float32(np.array(x1)), np.float32(np.array(x2))))
+    y = np.array(y)
+#--------------------------------------------------------
+def draw(w, w_0):
+    xr = np.arange(0,r_x, 0.1)
+    yr  = -(w[0][0] * xr + w_0[0] )/w[0][1]
+
+    for x1, x2, y in class0:
+        plt.plot(x1, x2, 'go', markersize=10)
+
+    for x1, x2, y in class1:
+        plt.plot(x1, x2, 'rx', markersize=10, mew=2)
+
+    plt.plot(xr, yr, lw=2)
+    plt.xlim(0, r_x)
+    plt.xlabel('$x_1$', fontsize=20)
+    plt.ylabel('$x_2$', fontsize=20)
+    plt.gcf().subplots_adjust(bottom=0.15)
+    plt.savefig('logistic.pdf')
+#--------------------------------------------------------
+
+# Create data
+# x of shape [2, n_data], y of shape [1, n_data]
+create_data()
+
+# Write a model
+w = tf.Variable(tf.random_uniform([1, 2], -1.0, 1.0))
+w_0 = tf.Variable(tf.random_uniform([1], -1.0, 1.0))
+z = tf.matmul(w, x) + w_0   # w_0 is broadcasted
+
+y_hat = 1 / (1+tf.exp(-z))
+cost = -tf.reduce_sum(y*tf.log(y_hat) + (1-y)*(tf.log(1-y_hat))) / len(y)
+
+optimizer = tf.train.GradientDescentOptimizer(0.001)
+train = optimizer.minimize(cost)
+
+sess=tf.InteractiveSession()
+
+# Initialize variables
+init = tf.initialize_all_variables()
+sess.run(init)
+
+# Training
+step = 0
+while 1:
+    try:
+        step += 1
+        sess.run(train)
+        if step % 100 == 0:
+            print step, sess.run(cost), sess.run(w), sess.run(w_0)
+
+    # Ctrl+c will stop training
+    except KeyboardInterrupt:
+        break
+
+# Plot the sample data and decision boundary
+draw(sess.run(w), sess.run(w_0))
+
+sess.close()
+</code></pre>
+
+<h3 id="one-versus-rest-handling-multiclass-classification">One versus rest: handling multiclass classification</h3>
+
+<p>What if there are more than two classes to classify? What is called the
+one-versus-rest strategy is a way of extending any binary classifier
+(including the Logistic regression classifier) to handle multiclass
+classification problems. The one-versus-rest strategy changes a
+multiclass classification into multiple binary classifications, training
+a single classifier per class. The data samples that belongs to a class
+are treated as positive samples of the class and all others as negative
+samples.</p>
+
+<p>Consider $y_m={1,2,\ldots,K}$, <em>i.e.</em>, we have to decide one out
+of $K$ classes. Using the Logistic regression as an example, we can make
+a binary classifier for the class of $y_m=k$ with a corresponding
+parameter vector $\mathbf{w}_k \in \mathbb{R}^{n+1}$ as</p>
+
+<p>$$
+\begin{aligned}
+\mathbf{h}_{\mathbf{w}_k}(\mathbf{x}_{m}) =\frac{1}{1 + e^{-\mathbf{w}_k^T \mathbf{x}_{m}}}  \text{ for } k=1,2,\ldots,K.
+\end{aligned}
+$$</p>
+
+<p>The hypothesis function
+$\mathbf{h}_{\mathbf{W}}(\mathbf{x}_{m}) \in \mathbb{R}^{K}$ of the
+multiclass classification problem can then be expressed as
+$$\begin{aligned}
+\mathbf{h}_{\mathbf{W}}(\mathbf{x}_{m}) =
+\begin{bmatrix}
+\mathbf{h}_{\mathbf{w}_1}(\mathbf{x}_{m}) \\<br />
+\mathbf{h}_{\mathbf{w}_2}(\mathbf{x}_{m}) \\<br />
+\vdots \\<br />
+\mathbf{h}_{\mathbf{w}_K}(\mathbf{x}_{m}) \\<br />
+\end{bmatrix},\end{aligned}
+$$</p>
+
+<p>where $\mathbf{W}$ is a parameter matrix
+given as $$\begin{aligned}
+\mathbf{W} =
+\begin{bmatrix} \mathbf{w}_1 &amp; \mathbf{w}_2 &amp; \cdots &amp; \mathbf{w}_K \end{bmatrix}.\end{aligned}$$
+Note that for instance, when $y_m=1$, the first element of
+$\mathbf{h}_{\mathbf{W}}(\mathbf{x}_{m})$, namely
+$\mathbf{h}_{\mathbf{w}_1}(\mathbf{x}_{m})$, should be high and the
+other elements should be low, since samples of the class $y_m=1$ are
+treated as positives only for the class $y_m=1$ and as negatives for the
+classes $y_m=2,3,\ldots, K$. Roughly speaking, this is achieved by
+choosing $\mathbf{W}$ in such a way that
+$\mathbf{h}_{\mathbf{W}}(\mathbf{x}_{m})$ is made as close to
+$\mathbf{e}_k$ as possible when $y_m=k$, where $\mathbf{e}_k$ is the
+$k$-th standard basis vector in $\mathbb{R}^{K}$, that is,
+$$\begin{aligned}
+\mathbf{e}_1 = \begin{bmatrix} 1 \\<br />
+0 \\<br />
+\vdots \\<br />
+0
+\end{bmatrix},
+\mathbf{e}_2 = \begin{bmatrix} 0 \\<br />
+1 \\<br />
+\vdots \\<br />
+0
+\end{bmatrix},
+\ldots,
+\mathbf{e}_K = \begin{bmatrix} 0 \\<br />
+0 \\<br />
+\vdots \\<br />
+1
+\end{bmatrix}.
+\label{eq:std_basis}\end{aligned}$$ Formally, the optimal $\mathbf{W}$
+is chosen when we minimize the following cost function:</p>
+
+<p>$$\small
+\begin{aligned}
+J(\mathbf{W})
+= -\frac{1}{M}\sum_{m=1}^{M} \sum_{k=1}^{K}
+\left( \mathbf{1}_{m}(k) \log h_{\mathbf{w}_k}(\mathbf{x}_{m}) +  ( 1-\mathbf{1}_{m}(k)) \log( 1 - h_{\mathbf{w}_k}(\mathbf{x}_{m}) ) \right),
+\label{eq:logistic_cost_multi}\end{aligned}
+$$</p>
+
+<p>where $\mathbf{1}_{m}(k)$
+is an indicator function, defined as</p>
+
+<p>$$\begin{aligned}
+\mathbf{1}_{m}(k) =
+\left\{
+\begin{matrix}
+1 &amp; \text{if } y_{m}=k,\\<br />
+0 &amp; \text{if } y_{m} \neq k.
+\end{matrix} \right.
+\label{eq:indicator}\end{aligned}
+$$</p>
+
+    </div>
+  </div>
+
+</article>
+
+<div class="container">
+  <nav>
+  <ul class="pager">
+    
+    <li class="previous"><a href="https://helix979.github.io/jkoo/post/ml-linear_regression/"><span
+      aria-hidden="true">&larr;</span> Linear Regression</a></li>
+    
+
+    
+  </ul>
+</nav>
+
+</div>
+
+<div class="article-container">
+  
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2017 Jinkyu Koo &middot; 
+
+      Powered by the <a href="https://github.com/gcushen/hugo-academic" target="_blank">Academic
+      theme</a> for <a href="http://gohugo.io" target="_blank">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/ScrollToPlugin.min.js"></script>
+    <script src="/jkoo/js/jquery-1.12.3.min.js"></script>
+    <script src="/jkoo/js/bootstrap.min.js"></script>
+    <script src="/jkoo/js/isotope.pkgd.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js"></script>
+    <script src="/jkoo/js/hugo-academic.js"></script>
+    
+
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-91702722-1', 'auto');
+        ga('send', 'pageview');
+
+         
+        var links = document.querySelectorAll('a');
+        Array.prototype.map.call(links, function(item) {
+            if (item.host != document.location.host) {
+                item.addEventListener('click', function() {
+                    var action = item.getAttribute('data-action') || 'follow';
+                    ga('send', 'event', 'outbound', action, item.href);
+                });
+            }
+        });
+    </script>
+    
+
+    
+    
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" },
+                   extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js"],
+                   noErrors: {
+                        multiLine: true
+                   }
+            },        
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                displayMath: [['$$','$$'], ['\[','\]']]
+            }
+        });
+    </script>
+    <script async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"></script>
+    
+
+  </body>
+</html>
+
