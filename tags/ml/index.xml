@@ -305,7 +305,7 @@ plt.savefig(&#39;softmax_test.pdf&#39;)
 sess.close()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Figure 1 is what we may get from the codes above.&lt;/p&gt;
+&lt;p&gt;Figure 1 is what we may get from the code above.&lt;/p&gt;
 
 
 &lt;figure &gt;
