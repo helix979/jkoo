@@ -550,12 +550,12 @@ $$\begin{aligned}
 \label{eq:std_basis}\end{aligned}$$ Formally, the optimal $\mathbf{W}$
 is chosen when we minimize the following cost function:</p>
 
-<p>$$\small
+<p>$$\tiny
 \begin{aligned}
 J(\mathbf{W})
 = -\frac{1}{M}\sum_{m=1}^{M} \sum_{k=1}^{K}
 \left( \mathbf{1}_{m}(k) \log h_{\mathbf{w}_k}(\mathbf{x}_{m}) +  ( 1-\mathbf{1}_{m}(k)) \log( 1 - h_{\mathbf{w}_k}(\mathbf{x}_{m}) ) \right),
-\label{eq:logistic_cost_multi}\end{aligned}
+\end{aligned}\tag{logi:4}\label{eq:logistic_cost_multi}
 $$</p>
 
 <p>where $\mathbf{1}_{m}(k)$
@@ -568,7 +568,7 @@ is an indicator function, defined as</p>
 1 &amp; \text{if } y_{m}=k,\\<br />
 0 &amp; \text{if } y_{m} \neq k.
 \end{matrix} \right.
-\label{eq:indicator}\end{aligned}
+\end{aligned}\tag{logi:5}\label{eq:indicator}
 $$</p>
 
     </div>
@@ -584,6 +584,9 @@ $$</p>
       aria-hidden="true">&larr;</span> Linear Regression</a></li>
     
 
+    
+    <li class="next"><a href="https://helix979.github.io/jkoo/post/ml-softmax/">Softmax Regression <span
+      aria-hidden="true">&rarr;</span></a></li>
     
   </ul>
 </nav>

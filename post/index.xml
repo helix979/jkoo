@@ -11,6 +11,320 @@
     <atom:link href="/jkoo/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Softmax Regression</title>
+      <link>https://helix979.github.io/jkoo/post/ml-softmax/</link>
+      <pubDate>Sat, 11 Feb 2017 23:59:55 -0500</pubDate>
+      
+      <guid>https://helix979.github.io/jkoo/post/ml-softmax/</guid>
+      <description>
+
+&lt;p&gt;Softmax regression is a classification method that generalizes logistic
+regression to multiclass problems in which possible outcomes are more
+than two. For this reason, softmax regression is also called multinomial
+logistic regression.&lt;/p&gt;
+
+&lt;h3 id=&#34;generalization-from-logistic-regression&#34;&gt;Generalization from logistic regression&lt;/h3&gt;
+
+&lt;p&gt;In logistic regression, we have modelled the conditional probabilities
+as $$\begin{aligned}
+P(y_{m}=1 \vert \mathbf{x}_{m})=\frac{1}{1 + e^{-\mathbf{w}^T \mathbf{x}_{m}}}
+\end{aligned}
+\tag{sm:1}\label{eq:cond1}
+$$
+ and
+ $$\begin{aligned}
+P(y_{m}=0 \vert \mathbf{x}_{m})=\frac{e^{-\mathbf{w}^T \mathbf{x}_{m}}}{1 + e^{-\mathbf{w}^T \mathbf{x}_{m}}},
+\end{aligned}
+\tag{sm:2}\label{eq:cond2}
+$$
+ which can be modified to
+$$\begin{aligned}
+P(y_{m}=1 \vert \mathbf{x}_{m})=\frac{e^{\mathbf{w}_1^T \mathbf{x}_{m}}}{e^{\mathbf{w}_1^T \mathbf{x}_{m}} + e^{(\mathbf{w}_1-\mathbf{w})^T \mathbf{x}_{m}}}
+\end{aligned}
+\tag{sm:3}\label{eq:cond3}
+$$
+ and
+ $$\begin{aligned}
+P(y_{m}=0 \vert \mathbf{x}_{m})=\frac{e^{(\mathbf{w}_1-\mathbf{w})^T \mathbf{x}_{m}}}{e^{\mathbf{w}_1^T \mathbf{x}_{m}} + e^{(\mathbf{w}_1-\mathbf{w})^T \mathbf{x}_{m}}}
+\end{aligned}
+\tag{sm:4}\label{eq:cond4}
+$$&lt;/p&gt;
+
+&lt;p&gt;Note that \eqref{eq:cond3} and
+\eqref{eq:cond4} are made by multiplying
+$\frac{e^{\mathbf{w}_1^T \mathbf{x}_{m}}}{e^{\mathbf{w}_1^T \mathbf{x}_{m}}}$
+to \eqref{eq:cond1} and \eqref{eq:cond2}, respectively. Letting
+$\mathbf{w}_0=\mathbf{w}_1-\mathbf{w}$, we can rewrite \eqref{eq:cond3}
+and \eqref{eq:cond4} as follows: $$\begin{aligned}
+P(y_{m}=k \vert \mathbf{x}_{m})=\frac{e^{\mathbf{w}_k^T \mathbf{x}_{m}}}{\sum_{i=0}^{1} e^{\mathbf{w}_i^T \mathbf{x}_{m}}} \text{ for } k=0,1.
+\label{eq:cond5}\end{aligned}$$ Thus, the conditional probabilities can
+be thought of as the ones that exponentiate weighted inputs and then
+normalize them. In such a sense, softmax regression considers more than
+two classes, say $K$ of them like $y_{m} \in {1,2,\ldots,K}$, with the
+model of conditional probabilities in the following: $$\begin{aligned}
+P(y_{m}=k \vert \mathbf{x}_{m})=\frac{e^{\mathbf{w}_k^T \mathbf{x}_{m}}}{\sum_{i=1}^{K} e^{\mathbf{w}_i^T \mathbf{x}_{m}}} \text{ for } k=1,2,\ldots,K.
+\label{eq:cond6}\end{aligned}$$ Here,
+$\mathbf{w}_1, \mathbf{w}_2, \ldots, \mathbf{w}_K \in \mathbb{R}^{n+1}$
+are the parameter vectors of our model.&lt;/p&gt;
+
+&lt;h3 id=&#34;hypothesis-function&#34;&gt;Hypothesis function&lt;/h3&gt;
+
+&lt;p&gt;Let a parameter matrix $\mathbf{W} \in \mathbb{R}^{(n+1) \times K}$ be&lt;/p&gt;
+
+&lt;p&gt;$$
+\begin{aligned}
+\mathbf{W} =
+\begin{bmatrix} \mathbf{w}_1 &amp;amp; \mathbf{w}_2 &amp;amp; \cdots &amp;amp; \mathbf{w}_K
+\end{bmatrix}.
+\end{aligned}
+$$&lt;/p&gt;
+
+&lt;p&gt;Then, we define the hypothesis function of softmax regression, denoted
+by $\mathbf{h}_{\mathbf{W}}(\mathbf{x}_{m}) \in \mathbb{R}^{K}$, as
+$$\begin{aligned}
+\mathbf{h}_{\mathbf{W}}(\mathbf{x}_{m}) =
+\begin{bmatrix}
+P(y_{m}=1 \vert \mathbf{x}_{m}) \\&lt;br /&gt;
+P(y_{m}=2 \vert \mathbf{x}_{m}) \\&lt;br /&gt;
+\vdots \\&lt;br /&gt;
+P(y_{m}=K \vert \mathbf{x}_{m}) \\&lt;br /&gt;
+\end{bmatrix}
+= \frac{1}{\sum_{i=1}^{K} e^{\mathbf{w}_i^T \mathbf{x}_{m}}}
+\begin{bmatrix}
+e^{\mathbf{w}_1^T \mathbf{x}_{m}} \\&lt;br /&gt;
+e^{\mathbf{w}_2^T \mathbf{x}_{m}} \\&lt;br /&gt;
+\vdots \\&lt;br /&gt;
+e^{\mathbf{w}_k^T \mathbf{x}_{m}} \\&lt;br /&gt;
+\end{bmatrix}.\end{aligned}$$ The parameter matrix $\mathbf{W}$ should
+be chosen in such a way that for $y_{m}=k$, the $k$-th element of
+$\mathbf{h}_{\mathbf{W}}(\mathbf{x}_{m})$ becomes the largest among all
+the elements.&lt;/p&gt;
+
+&lt;p&gt;Note that $\mathbf{h}_{\mathbf{W}}(\mathbf{x}_{m})$ can be represented
+as $$\begin{aligned}
+\mathbf{h}_{\mathbf{W}}(\mathbf{x}_{m}) =
+\sigma(\mathbf{W}^{T} \mathbf{x}_{m}),\end{aligned}$$ where
+$\sigma(\mathbf{z})$ for
+$\mathbf{z} = \begin{bmatrix} z_1 &amp;amp; z_2 &amp;amp; \ldots &amp;amp; z_K \end{bmatrix}^{T} \in \mathbb{R}^{K}$
+is called the &lt;strong&gt;softmax function&lt;/strong&gt; and is given as $$\begin{aligned}
+\sigma(\mathbf{z})=
+\begin{bmatrix}
+\sigma(\mathbf{z};1) \\&lt;br /&gt;
+\sigma(\mathbf{z};2) \\&lt;br /&gt;
+\vdots \\&lt;br /&gt;
+\sigma(\mathbf{z};K) \\&lt;br /&gt;
+\end{bmatrix}\end{aligned}$$ with $$\begin{aligned}
+\sigma(\mathbf{z};i) = \frac{e^{z_i}}{\sum_{k=1}^{K} e^{z_k}}.
+\end{aligned}\tag{sm:5}\label{eq:sm_sigma}$$ The derivatives of the softmax
+function have a nice property to remember:&lt;/p&gt;
+
+&lt;p&gt;$$\begin{aligned}
+\frac{\partial \sigma(\mathbf{z};i)}{\partial z_j}=
+\left\{
+\begin{matrix}
+\sigma(\mathbf{z};i) (1 - \sigma(\mathbf{z};i)) &amp;amp; \text{if } i=j,\\&lt;br /&gt;
+-\sigma(\mathbf{z};i)\sigma(\mathbf{z};j) &amp;amp; \text{if } i \neq j.\\&lt;br /&gt;
+\end{matrix} \right.\end{aligned}
+$$&lt;/p&gt;
+
+&lt;h3 id=&#34;cost-function&#34;&gt;Cost function&lt;/h3&gt;
+
+&lt;p&gt;The likelihood $l(\mathbf{W})$ of all data samples in the training set
+can be represented as follows: $$\begin{aligned}
+l(\mathbf{W})=\prod_{m=1}^{M}\prod_{k=1}^{K} \left( \frac{e^{\mathbf{w}_k^T \mathbf{x}_{m}}}{\sum_{i=1}^{K} e^{\mathbf{w}_i^T \mathbf{x}_{m}}} \right)^{\mathbf{1}_{m}(k)},
+\label{eq:sm_likelihood}\end{aligned}$$ where the indicator function
+$\mathbf{1}_{m}(k)$ is the same as &lt;a href=&#34;https://helix979.github.io/jkoo/jkoo/post/ml-logistic/#mjx-eqn-eqindicator&#34; target=&#34;_blank&#34;&gt;(logi:5)&lt;/a&gt;. Softmax
+regression attempts to find the parameter matrix $\mathbf{W}$ that
+maximizes the likelihood $l(\mathbf{W})$. This causes the $k$-th element
+of $\mathbf{h}_{\mathbf{W}}(\mathbf{x}_{m})$ to be larger than any other
+when $y_{m}=k$. Towards this end, the cost function is defined in a form
+of a negative log-likelihood, as in logistic regression:&lt;/p&gt;
+
+&lt;p&gt;$$
+\begin{aligned}
+J(\mathbf{W})
+&amp;amp;= -\frac{1}{M}\log l(\mathbf{W}) \\&lt;br /&gt;
+&amp;amp;= -\frac{1}{M}\sum_{m=1}^{M} \sum_{k=1}^{K}
+{\mathbf{1}_{m}(k)} \log\left( \frac{e^{\mathbf{w}_k^T \mathbf{x}_{m}}}{\sum_{i=1}^{K} e^{\mathbf{w}_i^T \mathbf{x}_{m}}} \right).
+\end{aligned}\tag{sm:6}\label{eq:sm_cost}
+$$&lt;/p&gt;
+
+&lt;p&gt;It is worth noting that when $K=2$,
+\eqref{eq:sm_cost} is equivalent to &lt;a href=&#34;https://helix979.github.io/jkoo/jkoo/post/ml-logistic/#mjx-eqn-eqlogistic_cost_multi&#34; target=&#34;_blank&#34;&gt;(logi:4)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;learning&#34;&gt;Learning&lt;/h3&gt;
+
+&lt;p&gt;There is no known closed-form solution that minimizes the cost function
+$J(\mathbf{W})$ in \eqref{eq:sm_cost}. Thus, we can apply the gradient
+descent here as well. Using the notation in \eqref{eq:sm_sigma}, it is
+easy to see:
+$$\small
+\begin{aligned}
+\frac{\partial J(\mathbf{W})}{\partial \mathbf{w}_j}=
+-\frac{1}{M}\sum_{m=1}^{M} \sum_{k=1}^{K}
+\mathbf{1}_{m}(k) \left(\frac{1}{\sigma(\mathbf{W}^T \mathbf{x}_{m};k)} \cdot \frac{\partial \sigma(\mathbf{W}^T \mathbf{x}_{m};k)}{\partial (\mathbf{w}_j^T \mathbf{x}_{m})} \right) \mathbf{x}_{m}
+\end{aligned}
+$$&lt;/p&gt;
+
+&lt;p&gt;Focusing on the difference between the term when $k=j$ and the terms
+when $k \neq j$ of the inner summation, we continue to develop the
+derivative equation as follows:&lt;/p&gt;
+
+&lt;p&gt;$$\tiny
+\begin{aligned}
+\frac{\partial J(\mathbf{W})}{\partial \mathbf{w}_j}
+&amp;amp;=-\frac{1}{M}\sum_{m=1}^{M} \left( \mathbf{1}_{m}(j)(1-\sigma(\mathbf{W}^T \mathbf{x}_{m};j))-\sum_{k \neq j} \mathbf{1}_{m}(k)\sigma(\mathbf{W}^T \mathbf{x}_{m};j) \right) \mathbf{x}_{m} \\&lt;br /&gt;
+&amp;amp;=-\frac{1}{M}\sum_{m=1}^{M} \left( \mathbf{1}_{m}(j)-\left(\sum_{k=1}^{K} \mathbf{1}_{m}(k) \right)\sigma(\mathbf{W}^T \mathbf{x}_{m};j) \right) \mathbf{x}_{m} \\&lt;br /&gt;
+&amp;amp;=-\frac{1}{M}\sum_{m=1}^{M} \left( \mathbf{1}_{m}(j)-\sigma(\mathbf{W}^T \mathbf{x}_{m};j) \right) \mathbf{x}_{m}.
+\end{aligned}
+$$&lt;/p&gt;
+
+&lt;p&gt;Therefore, the gradient descent equations of softmax regression are
+given by $$\begin{aligned}
+\mathbf{w}_{j}^{(t+1)}=\mathbf{w}_{j}^{(t)}-\frac{\alpha}{M}\sum_{m=1}^{M} \left( \mathbf{1}_{m}(j)-\sigma(\mathbf{W}^{(t)T} \mathbf{x}_{m};j) \right) \mathbf{x}_{m}
+\end{aligned}
+$$
+for all $j$.&lt;/p&gt;
+
+&lt;h3 id=&#34;prediction&#34;&gt;Prediction&lt;/h3&gt;
+
+&lt;p&gt;Denoting a new input vector by
+$\mathbf{x} = \begin{bmatrix} 1 &amp;amp; x_1 &amp;amp; \ldots &amp;amp; x_n \end{bmatrix}^{T}$
+and the solution by $\mathbf{W}^{*} =
+\begin{bmatrix} \mathbf{w}_1^{*} &amp;amp; \mathbf{w}_2^{*} &amp;amp; \cdots &amp;amp; \mathbf{w}_K^{*} \end{bmatrix}$,
+we decide $y=k$ when the largest element of
+$\mathbf{h}_{\mathbf{W}^{*}}(\mathbf{x})$ is the $k$-th. In other words,
+the prediction rule is given by: $$\begin{aligned}
+y=\arg\max_{k}\left( \frac{e^{\mathbf{w}_k^{*T} \mathbf{x}}}{\sum_{i=1}^{K} e^{\mathbf{w}_i^{*T} \mathbf{x}}} \right).\end{aligned}$$&lt;/p&gt;
+
+&lt;h3 id=&#34;practice&#34;&gt;Practice&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;import numpy as np
+import matplotlib.pyplot as plt
+import tensorflow as tf
+import random
+import sys
+
+
+n_data = 10000
+r_x = 10
+n_class = 3
+n_batch = 10
+
+#---------------------------------------------------------------------
+def create_data(n):
+    &amp;quot;&amp;quot;&amp;quot;
+    This function will make a set of data such that
+    a random number between c*r_x and (c+1)*r_x is given a label c. 
+    &amp;quot;&amp;quot;&amp;quot;
+    dataset = []
+    for i in range(n):
+        c = np.random.randint(n_class)
+        x_1 = np.random.rand() * r_x + c*r_x
+        y = c
+        sample = [x_1, y]
+        dataset.append(sample)
+    random.shuffle(dataset)
+    point_, label_ = zip(*dataset)
+    _point_ = np.float32(np.array([point_]))
+    _label_ = np.zeros([n_class, n])
+    for i in range(len(label_)):
+        _label_[label_[i]][i] = 1
+    return _point_, _label_
+#---------------------------------------------------------------------
+
+# Create a dataset for training
+point, label = create_data(n_data)
+
+# Placeholders to take data in
+x = tf.placeholder(tf.float32, [1, None])
+y = tf.placeholder(tf.float32, [n_class, None])
+
+# Write a model
+w_1 = tf.Variable(tf.random_uniform([n_class, 1], -1.0, 1.0))
+w_0 = tf.Variable(tf.random_uniform([n_class, 1], -1.0, 1.0))
+y_hat = tf.nn.softmax(w_1 * x + w_0)
+cost = -tf.reduce_sum(y*tf.log(y_hat))/n_batch
+optimizer = tf.train.GradientDescentOptimizer(0.001)
+train = optimizer.minimize(cost)
+
+label_hat_ = tf.argmax(y_hat,0)
+correct_cnt = tf.equal(tf.argmax(y,0), label_hat_)
+accuracy = tf.reduce_mean(tf.cast(correct_cnt, &amp;quot;float&amp;quot;))
+
+
+sess = tf.InteractiveSession()
+
+# Initialize variables
+init = tf.initialize_all_variables()
+sess.run(init)
+
+# Learning
+step = 0
+while 1:
+    try:
+        step += 1
+        if (n_data == n_batch): # Gradient descent
+            start = 0
+            end = n_data
+        else: # Stochastic gradient descent
+            start = step * n_batch
+            end = start + n_batch
+            if (start &amp;gt;=n_data) or (end &amp;gt;=n_data):
+                break
+        batch_xs = point[:, start:end]
+        batch_ys = label[:, start:end]
+
+        train.run(feed_dict={x: batch_xs, y: batch_ys})
+
+        if step % 10 == 0:
+            print step
+            print w_1.eval()
+            print w_0.eval()
+
+    # With gradient descent, ctrl+c will stop training
+    except KeyboardInterrupt:
+        break
+
+
+# Create another dataset for test
+point_t, label_t = create_data(100)
+rate = accuracy.eval(feed_dict={x: point_t, y: label_t})
+print &amp;quot;\n\n accuracy = %s\n&amp;quot; % (rate)
+
+# Plot the test results
+plt.plot(point_t[0,:], label_hat_.eval(feed_dict={x: point_t}), &#39;o&#39;)
+plt.grid()
+plt.ylim(-1, n_class)
+
+xt = range(0, n_class*10+1, 10)
+yt = range(-1, n_class, 1)
+plt.step(xt, yt, &#39;r--&#39;)
+
+plt.savefig(&#39;softmax_test.pdf&#39;)
+
+sess.close()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Figure 1 is what we may get from the codes above.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/softmax_test.png&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Blue dots that are not on the red line indicate classification errors.&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+</description>
+    </item>
+    
+    <item>
       <title>Logistic Regression</title>
       <link>https://helix979.github.io/jkoo/post/ml-logistic/</link>
       <pubDate>Thu, 09 Feb 2017 23:59:55 -0500</pubDate>
@@ -354,12 +668,12 @@ $$\begin{aligned}
 \label{eq:std_basis}\end{aligned}$$ Formally, the optimal $\mathbf{W}$
 is chosen when we minimize the following cost function:&lt;/p&gt;
 
-&lt;p&gt;$$\small
+&lt;p&gt;$$\tiny
 \begin{aligned}
 J(\mathbf{W})
 = -\frac{1}{M}\sum_{m=1}^{M} \sum_{k=1}^{K}
 \left( \mathbf{1}_{m}(k) \log h_{\mathbf{w}_k}(\mathbf{x}_{m}) +  ( 1-\mathbf{1}_{m}(k)) \log( 1 - h_{\mathbf{w}_k}(\mathbf{x}_{m}) ) \right),
-\label{eq:logistic_cost_multi}\end{aligned}
+\end{aligned}\tag{logi:4}\label{eq:logistic_cost_multi}
 $$&lt;/p&gt;
 
 &lt;p&gt;where $\mathbf{1}_{m}(k)$
@@ -372,7 +686,7 @@ is an indicator function, defined as&lt;/p&gt;
 1 &amp;amp; \text{if } y_{m}=k,\\&lt;br /&gt;
 0 &amp;amp; \text{if } y_{m} \neq k.
 \end{matrix} \right.
-\label{eq:indicator}\end{aligned}
+\end{aligned}\tag{logi:5}\label{eq:indicator}
 $$&lt;/p&gt;
 </description>
     </item>
@@ -491,7 +805,7 @@ $$&lt;/p&gt;
 $$
 \frac{\partial}{\partial w_j} J(\mathbf{w})= \frac{2}{M} \sum_{m=1}^{M} \left(w_0 + w_1 x_{m,1} + \ldots +w_n x_{m,n}-y_{m} \right)x_{m,j}.
 $$
-Therefore, from &lt;a href=&#34;https://helix979.github.io/jkoo/jkoo/post/ml-optimization/#mjx-eqn-eqopt&#34; target=&#34;_blank&#34;&gt;(opt.1)&lt;/a&gt;, the gradient descent equations for
+Therefore, from &lt;a href=&#34;https://helix979.github.io/jkoo/jkoo/post/ml-optimization/#mjx-eqn-eqopt&#34; target=&#34;_blank&#34;&gt;(opt:1)&lt;/a&gt;, the gradient descent equations for
 linear regression are&lt;/p&gt;
 
 &lt;p&gt;$$
