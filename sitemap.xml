@@ -4,46 +4,6 @@
     
     
     <url>
-      <loc>https://helix979.github.io/jkoo/post/ml-svm/</loc>
-      <lastmod>2017-02-14T23:59:55-05:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
-      <loc>https://helix979.github.io/jkoo/post/ml-softmax/</loc>
-      <lastmod>2017-02-11T23:59:55-05:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
-      <loc>https://helix979.github.io/jkoo/post/ml-logistic/</loc>
-      <lastmod>2017-02-09T23:59:55-05:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
-      <loc>https://helix979.github.io/jkoo/post/ml-linear_regression/</loc>
-      <lastmod>2017-02-02T23:59:55-05:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
-      <loc>https://helix979.github.io/jkoo/post/ml-optimization/</loc>
-      <lastmod>2017-01-31T23:59:55-05:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
       <loc>https://helix979.github.io/jkoo/talk/example-talk/</loc>
       <lastmod>2017-01-01T00:00:00+00:00</lastmod>
     </url>
@@ -86,6 +46,54 @@
     <url>
       <loc>https://helix979.github.io/jkoo/project/example-external-project/</loc>
       <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+      <loc>https://helix979.github.io/jkoo/post/ml-ann/</loc>
+      <lastmod>2016-02-16T23:59:55-05:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+      <loc>https://helix979.github.io/jkoo/post/ml-svm/</loc>
+      <lastmod>2016-02-14T23:59:55-05:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+      <loc>https://helix979.github.io/jkoo/post/ml-softmax/</loc>
+      <lastmod>2016-02-11T23:59:55-05:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+      <loc>https://helix979.github.io/jkoo/post/ml-logistic/</loc>
+      <lastmod>2016-02-09T23:59:55-05:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+      <loc>https://helix979.github.io/jkoo/post/ml-linear_regression/</loc>
+      <lastmod>2016-02-02T23:59:55-05:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+      <loc>https://helix979.github.io/jkoo/post/ml-optimization/</loc>
+      <lastmod>2016-01-31T23:59:55-05:00</lastmod>
     </url>
     
   

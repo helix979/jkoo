@@ -142,8 +142,8 @@
 <div class="article-metadata">
 
   <span class="article-date">
-    <time datetime="2017-02-09 23:59:55 -0500 EST" itemprop="datePublished">
-      Thu, Feb 9, 2017
+    <time datetime="2016-02-09 23:59:55 -0500 EST" itemprop="datePublished">
+      Tue, Feb 9, 2016
     </time>
   </span>
 
@@ -547,7 +547,7 @@ $$\begin{aligned}
 \vdots \\<br />
 1
 \end{bmatrix}.
-\label{eq:std_basis}\end{aligned}$$ Formally, the optimal $\mathbf{W}$
+\end{aligned}\tag{logi:4}\label{eq:std_basis}$$ Formally, the optimal $\mathbf{W}$
 is chosen when we minimize the following cost function:</p>
 
 <p>$$\tiny
@@ -555,7 +555,7 @@ is chosen when we minimize the following cost function:</p>
 J(\mathbf{W})
 = -\frac{1}{M}\sum_{m=1}^{M} \sum_{k=1}^{K}
 \left( \mathbf{1}_{m}(k) \log h_{\mathbf{w}_k}(\mathbf{x}_{m}) +  ( 1-\mathbf{1}_{m}(k)) \log( 1 - h_{\mathbf{w}_k}(\mathbf{x}_{m}) ) \right),
-\end{aligned}\tag{logi:4}\label{eq:logistic_cost_multi}
+\end{aligned}\tag{logi:5}\label{eq:logistic_cost_multi}
 $$</p>
 
 <p>where $\mathbf{1}_{m}(k)$
@@ -568,7 +568,7 @@ is an indicator function, defined as</p>
 1 &amp; \text{if } y_{m}=k,\\<br />
 0 &amp; \text{if } y_{m} \neq k.
 \end{matrix} \right.
-\end{aligned}\tag{logi:5}\label{eq:indicator}
+\end{aligned}\tag{logi:6}\label{eq:indicator}
 $$</p>
 
     </div>

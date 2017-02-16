@@ -11,9 +11,426 @@
     <atom:link href="/jkoo/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Example Talk</title>
+      <link>https://helix979.github.io/jkoo/talk/example-talk/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://helix979.github.io/jkoo/talk/example-talk/</guid>
+      <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://gcushen.github.io/hugo-academic-demo/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Deep Learning</title>
+      <link>https://helix979.github.io/jkoo/project/deep-learning/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://helix979.github.io/jkoo/project/deep-learning/</guid>
+      <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+
+&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
+
+&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
+
+&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
+
+&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>External Project</title>
+      <link>https://helix979.github.io/jkoo/project/example-external-project/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://helix979.github.io/jkoo/project/example-external-project/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Artificial Neural Networks</title>
+      <link>https://helix979.github.io/jkoo/post/ml-ann/</link>
+      <pubDate>Tue, 16 Feb 2016 23:59:55 -0500</pubDate>
+      
+      <guid>https://helix979.github.io/jkoo/post/ml-ann/</guid>
+      <description>
+
+&lt;p&gt;An artificial neural network (ANN) is a machine learning model inspired
+by biological neural networks in a human brain. ANNs offer an elegant
+way to formulate a complex non-linear hypothesis, due to their
+hierarchical virtue of layering non-linear units. Even though possible,
+using an ANN for regression is considered overkill in many cases. Thus,
+our discussion will be focused on the use for classification.&lt;/p&gt;
+
+&lt;h3 id=&#34;perceptrons&#34;&gt;Perceptrons&lt;/h3&gt;
+
+&lt;p&gt;A neuron, illustrated in Figure 1, is a core
+component of a human brain that transmits electrical signals from one
+place to others.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/neuron.jpg&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Structure of a biological neuron.&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;ANN’s neuron, which we call a perceptron, is limited imitation of the
+real neuron. A perceptron has multiple input channels like dendrites and
+a single output channel like an axon, as shown in Figure 2.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/perceptron.png&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;A perceptron.&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;For given inputs ${ x_{1}, x_{2}, \ldots, x_{n} }$, a perceptron first makes a weighted
+input $z$, defined as $$\begin{align}
+z=\sum_{i=0}^{n} w_i x_i,\nonumber\end{align}$$ in which $w_i$ is a weight for
+an input $x_i$. Here, $x_0$ is called a bias input that is always set to
+1, and normally omitted from the illustration of a perceptron. Then, the
+weighted input $z$ is processed by an activation function $a(z)$ to
+yield the output. There are many choices to define the activation
+function. A few examples are listed below:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Sigmoid (or also known as logistic) $$\begin{align}
+a(z) = \frac{1}{1 + e^{-z}}
+\tag{ann:1}\label{eq:act_sigmoid}\end{align}$$&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Rectified linear unit (often called Relu in short) $$\begin{align}
+a(z) = \max(0,z)\nonumber\end{align}$$&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Hyperbolic tangent $$\begin{align}
+a(z)=\tanh(z)\nonumber\end{align}$$&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As Figure 3 shows, a family of activation
+functions regulates the output to stay at zero until the weighted input
+$z$ is larger than a certain threshold at which the output quickly
+increases.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/activation.png&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Plots of activation functions.&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;h3 id=&#34;structure-of-anns&#34;&gt;Structure of ANNs&lt;/h3&gt;
+
+&lt;p&gt;An ANN is an interconnected group of perceptrons, as exemplified in
+Figure 4.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/nn.png&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;An artificial neural network.&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;As indicated, outputs of the perceptrons in a layer are fed into the
+next layer as inputs until the final layer, called an output layer,
+produces outputs. Here, the first layer is called an input layer where
+we enter sample observations ${ x_{1}, x_{2}, \ldots, x_{n} }$. The
+layers between the input layer and output layer are called hidden
+layers. Adding more hidden layers allows us to model a more complex
+non-linear function, since the final outputs are composition of multiple
+activation functions, which are non-linear.&lt;/p&gt;
+
+&lt;p&gt;Let $a_i^{[l]}$ be the output of the $i$-th perceptron at layer $l$ with
+$a_0^{[l]}=1$ (bias units) and $a_i^{[1]}=x_i$ (inputs). Now, we
+represent the weighted input to the $i$-th perceptron at layer $l$ as
+$$\begin{align}
+z_i^{[l]}=\sum_{j=0}^{n^{[l-1]}}w_{ij}^{[l-1]} a_j^{[l-1]},\nonumber\end{align}$$
+where $n^{[l-1]}$ is the number of perceptrons at layer $(l-1)$, and
+$w_{ij}^{[l-1]}$ denotes the weight from the $j$-th perceptron at layer
+$(l-1)$ to the $i$-th perceptron at layer $l$. Then, we can write
+$a_i^{[l]}$ as $$\begin{align}
+a_i^{[l]} = a(z_i^{[l]}).\nonumber\end{align}$$&lt;/p&gt;
+
+&lt;h3 id=&#34;multiclass-classification&#34;&gt;Multiclass classification&lt;/h3&gt;
+
+&lt;p&gt;Given an observation pair of an input vector
+$\mathbf{x}_{m} = \begin{bmatrix} x_{m,0} &amp;amp; x_{m,1} &amp;amp; \cdots &amp;amp; x_{m,n} \end{bmatrix}^{T} \in \mathbb{R}^{n+1}$
+and an output $y_{m} \in {1,2,\ldots,K }$ for $m=1,2,\ldots,M$,
+suppose that we want to make a multiclass classifier using an ANN and
+the one-versus-rest strategy. Then, since there $K$ classes to classify,
+the output layer needs to have $K$ perceptrons, one of which results in
+a high value when a corresponding data comes in. The hypothesis function
+is simply the vector that represents the output layer. That is, assuming
+that there are $L$ layers, the hypothesis function
+$\mathbf{h}_{\mathbf{W}}(\mathbf{x}_{m})$ is given as $$\begin{align}
+\mathbf{h}_{\mathbf{W}}(\mathbf{x}_{m})=
+\begin{bmatrix}
+a_{m,1}^{[L]} \\&lt;br /&gt;
+a_{m,2}^{[L]} \\&lt;br /&gt;
+\vdots \\&lt;br /&gt;
+a_{m,K}^{[L]} \\&lt;br /&gt;
+\end{bmatrix},\nonumber\end{align}$$ where $\mathbf{W}$ is a set of all weights
+${ w_{ij}^{[l]} }$, and $a_{m,i}^{[l]}$ denotes $a_{i}^{[l]}$ when
+$\mathbf{x}_{m}$ is entered into an ANN. For example, if the activation
+functions are defined by the sigmoid in \eqref{eq:act_sigmoid}, what we
+need to do for training is to choose $w_{ij}^{[l]}$ for all $i,j,l$ so
+that $\mathbf{h}(\mathbf{x}_{m})$ gets close to $\mathbf{e}_k$ given in
+&lt;a href=&#34;https://helix979.github.io/jkoo/jkoo/post/ml-logistic/#mjx-eqn-eqstd_basis&#34; target=&#34;_blank&#34;&gt;(logi:4)&lt;/a&gt; when $y_m=k$. Similarly to &lt;a href=&#34;https://helix979.github.io/jkoo/jkoo/post/ml-logistic/#mjx-eqn-eqlogistic_cost_multi&#34; target=&#34;_blank&#34;&gt;(logi:5)&lt;/a&gt;, the cost function $J(\mathbf{W})$ is
+then defined as $$\begin{align}
+J(\mathbf{W})
+= \frac{1}{M}\sum_{m=1}^{M} J_m(\mathbf{W}),
+\label{eq:nn_cost_multi}\nonumber\end{align}$$ where $$\begin{align}
+J_m(\mathbf{W})
+= -\sum_{k=1}^{K}
+\left( \mathbf{1}_{m}(k) \log(a_{m,k}^{[L]}) +  ( 1-\mathbf{1}_{m}(k)) \log( 1 - a_{m,k}^{[L]} ) \right).
+\label{eq:nn_cost_multi2}\nonumber\end{align}$$&lt;/p&gt;
+
+&lt;h3 id=&#34;backpropagation&#34;&gt;Backpropagation&lt;/h3&gt;
+
+&lt;p&gt;In order to have the optimal $\mathbf{W}$, we need to minimize the cost
+function $J(\mathbf{W})$, which can be done by using the gradient
+descent. In this case, the gradient descent equations are&lt;/p&gt;
+
+&lt;p&gt;$$
+\begin{align}
+w_{ij}^{[l](t+1)} = w_{ij}^{[l](t)} - \alpha \left. \frac{\partial J(\mathbf{W})}{\partial w_{ij}^{[l]}} \right \vert_{\mathbf{W}=\mathbf{W}^{(t)}}
+\tag{ann:2}\label{eq:ann_gd}.
+\end{align}
+$$&lt;/p&gt;
+
+&lt;p&gt;However, it is not easy to derive a
+closed-form of $\partial J(\mathbf{W}) / \partial w_{ij}^{[l]}$, since
+$J(\mathbf{W})$ is a composite function of sigmoids. For this reason,
+training an ANN is conducted in conjunction with backpropagation.&lt;/p&gt;
+
+&lt;p&gt;The backpropagation, an abbreviation for “backward propagation of
+errors&amp;rdquo;, provides an alternative way to compute
+$\partial J(\mathbf{W}) / \partial w_{ij}^{[l]}$. To see this, we first
+define an error $\delta_{m,i}^{[l]}$ of the $i$-th perceptron at layer
+$l$ according to $\mathbf{x}_{m}$ as $$\begin{align}
+\delta_{m,i}^{[l]} = \frac{\partial J_m(\mathbf{W})}{\partial z_{m,i}^{[l]}},
+\tag{ann:3}\label{eq:ann_bp0}\end{align}$$ in which $z_{m,i}^{[l]}$ denotes
+$z_{i}^{[l]}$ when $\mathbf{x}_{m}$ comes into the network. Then, we
+first note that $$\begin{align}
+\frac{\partial J(\mathbf{W})}{\partial w_{ij}^{[l]}}
+&amp;amp;= \frac{1}{M}\sum_{m=1}^{M} \frac{\partial J_m(\mathbf{W})}{\partial w_{ij}^{[l]}} \nonumber\\&lt;br /&gt;
+&amp;amp;= \frac{1}{M}\sum_{m=1}^{M} \frac{\partial z_{m,i}^{[l+1]}}{\partial w_{ij}^{[l]}}\frac{\partial J_m(\mathbf{W})}{\partial z_{m,i}^{[l+1]}} \nonumber\\&lt;br /&gt;
+&amp;amp;=\frac{1}{M}\sum_{m=1}^{M}a_{m,j}^{[l]} \delta_{m,i}^{[l+1]}. \tag{ann:4}\label{eq:ann_bp1}\end{align}$$
+This means that since $a_{m,j}^{[l]}$ is a known value (computed through
+the ANN), $\partial J(\mathbf{W}) / \partial w_{ij}^{[l]}$ can be
+calculated by obtaining $\delta_{m,i}^{[l+1]}$.&lt;/p&gt;
+
+&lt;p&gt;In the meantime, using a chain rule, we have $$\begin{align}
+\delta_{m,i}^{[l]} &amp;amp; = \frac{\partial J(\mathbf{W})}{\partial z_{m,i}^{[l]}}  \nonumber\\&lt;br /&gt;
+&amp;amp; = \sum_k \frac{\partial J(\mathbf{W})}{\partial z_{m,k}^{[l+1]}} \frac{\partial z_{m,k}^{[l+1]}}{\partial z_{m,i}^{[l]}} \nonumber\\\
+&amp;amp; = \sum_k \delta_{m,k}^{[l+1]} \frac{\partial z_{m,k}^{[l+1]}}{\partial z_{m,i}^{[l]}}.\nonumber\end{align}$$
+Since
+$z_{m,k}^{[l+1]} = \sum_r w_{kr}^{[l]} a_{m,r}^{[l]} = \sum_r w_{kr}^{[l]} a(z_{m,r}^{[l]})$,
+we know $$\begin{align}
+\frac{\partial z_{m,k}^{[l+1]}}{\partial z_{m,i}^{[l]}} = w_{ki}^{[l]} a&amp;rsquo;(z_{m,i}^{[l]}).\nonumber\end{align}$$
+Therefore, we can represent $\delta_{m,i}^{[l]}$ as $$\begin{align}
+\delta_{m,i}^{[l]} = a&amp;rsquo;(z_{m,i}^{[l]}) \sum_k \delta_{m,k}^{[l+1]} w_{ki}^{[l]}.
+\tag{ann:5}\label{eq:ann_bp2}\end{align}$$ Notice in \eqref{eq:ann_bp2} that
+$a&amp;rsquo;(z_{m,i}^{[l]})$ and $w_{ki}^{[l]}$ are all known. Thus, we see that
+$\delta_{m,i}^{[l]}$ is determined by $ \delta_{m,k}^{[l+1]}$ for all
+$k$. In other words, once we know $\delta_{m,i}^{[L]}$ for all $i$, then
+we can compute $\delta_{m,i}^{[L-1]}$, $\delta_{m,i}^{[L-2]}$, $\ldots$,
+$\delta_{m,i}^{[2]}$ for all $i$ iteratively using \eqref{eq:ann_bp2}.&lt;/p&gt;
+
+&lt;p&gt;Fortunately, we can easily compute $\delta_{m,i}^{[L]}$, expressing it
+in terms of the output activation, $$\begin{align}
+\delta_{m,i}^{[L]} &amp;amp;= \frac{\partial J_m(\mathbf{W})}{\partial a_{m,i}^{[L]}} \frac{\partial a_{m,i}^{[L]}}{\partial z_{m,i}^{[L]}} \nonumber\\&lt;br /&gt;
+&amp;amp;= \frac{\partial J_m(\mathbf{W})}{\partial a_{m,i}^{[L]}} a&amp;rsquo;(z_{m,i}^{[L]}). \tag{ann:6}\label{eq:ann_bp3}\end{align}$$
+Here, $a&amp;rsquo;(z_{m,i}^{[L]})$ is known, and
+$\partial J_m(\mathbf{W})/\partial a_{m,i}^{[L]}$ can also be calculated
+without difficult, since $J_m(\mathbf{W})$ is a function of
+$a_{m,i}^{[L]}$.&lt;/p&gt;
+
+&lt;p&gt;In summary, backpropagation represented by four equations
+\eqref{eq:ann_bp0}, \eqref{eq:ann_bp1} \eqref{eq:ann_bp2}, and
+\eqref{eq:ann_bp3}, is an algorithm to compute $\delta_{m,i}^{[l]}$
+iteratively from $l=L$ to $l=2$, by which we can eventually obtain
+$\partial J(\mathbf{W}) / \partial w_{ij}^{[l]}$. Now, the gradient
+descent with backpropagation can be stated as follows.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Choose the initial value of $w_{ij}^{[l]}$ randomly.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Do the following for $m=1,2,\ldots,M$.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Set $a_{m,i}^{[1]} = x_{m,i}$.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Perform forward propagation to compute $a_{m,i}^{[l]}$ for
+$l = 2,3,\dots ,L$.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Perform backpropagation to compute $\delta_{m,i}^{[l]}$ for
+$l = L, L-1,\dots ,2$.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set
+$\frac{\partial J(\mathbf{W})}{\partial w_{ij}^{[l]}}=\frac{1}{M}\sum_{m=1}^{M}a_{m,j}^{[l]} \delta_{m,i}^{[l+1]}$.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Update $w_{ij}^{[l]}$ using \eqref{eq:ann_gd}.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Repeat steps 2 to 4 until convergence.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;practice&#34;&gt;Practice&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;import numpy as np
+import matplotlib.pyplot as plt
+import tensorflow as tf
+import random
+import sys
+
+
+n_data = 10000
+r_x = 10
+n_class = 3
+
+#---------------------------------------------------------------------
+def create_data(n):
+    &amp;quot;&amp;quot;&amp;quot;
+    This function will make a set of data such that
+    a random number between c*r_x and (c+1)*r_x is given a label c. 
+    &amp;quot;&amp;quot;&amp;quot;
+    dataset = []
+    for i in range(n):
+        c = np.random.randint(n_class)
+        x_1 = np.random.rand() * r_x + c*r_x
+        y = c
+        sample = [x_1, y]
+        dataset.append(sample)
+    random.shuffle(dataset)
+    point_, label_ = zip(*dataset)
+    _point_ = np.float32(np.array([point_]))
+    _label_ = np.zeros([n_class, n])
+    for i in range(len(label_)):
+        _label_[label_[i]][i] = 1
+    return _point_, _label_
+#---------------------------------------------------------------------
+
+# Create a dataset for training
+point, label = create_data(n_data)
+
+# Placeholders to take data in
+x = tf.placeholder(tf.float32, [1, None])
+y = tf.placeholder(tf.float32, [n_class, None])
+
+# Write a model
+w1 = tf.Variable(tf.random_uniform([4, 1], -1.0, 1.0))
+w1_0 = tf.Variable(tf.random_uniform([4, 1], -1.0, 1.0))
+layer2 = tf.sigmoid(tf.matmul(w1, x) + w1_0)
+
+w2 = tf.Variable(tf.random_uniform([n_class, 4], -1.0, 1.0))
+w2_0 = tf.Variable(tf.random_uniform([n_class, 1], -1.0, 1.0))
+layer3 = tf.sigmoid(tf.matmul(w2, layer2) + w2_0)
+
+cost = -tf.reduce_sum(y*tf.log(layer3)+(1-y)*tf.log(1-layer3))/n_data
+optimizer = tf.train.GradientDescentOptimizer(0.001)
+train = optimizer.minimize(cost)
+
+# Compute accuracy
+label_hat_ = tf.argmax(layer3,0)
+correct_cnt = tf.equal(tf.argmax(y,0), label_hat_)
+accuracy = tf.reduce_mean(tf.cast(correct_cnt, &amp;quot;float&amp;quot;))
+
+
+sess = tf.InteractiveSession()
+
+# Initialize variables
+init = tf.initialize_all_variables()
+sess.run(init)
+
+# Learning
+step = 0
+while 1:
+    try:
+        step += 1
+        train.run(feed_dict={x: point, y: label})
+
+        if step % 100 == 0:
+            print step
+            print w1.eval()
+            print w1_0.eval()
+            print w2.eval()
+            print w2_0.eval()
+
+    # Ctrl+c will stop training
+    except KeyboardInterrupt:
+        break
+
+
+# Create another dataset for test
+point_t, label_t = create_data(100)
+rate = accuracy.eval(feed_dict={x: point_t, y: label_t})
+print &amp;quot;\n\n accuracy = %s\n&amp;quot; % (rate)
+
+# Plot the test results
+plt.plot(point_t[0,:], label_hat_.eval(feed_dict={x: point_t}), &#39;o&#39;)
+plt.grid()
+plt.ylim(-1, n_class)
+
+xt = range(0, n_class*10+1, 10)
+yt = range(-1, n_class, 1)
+plt.step(xt, yt, &#39;r--&#39;)
+
+plt.savefig(&#39;ann_test.pdf&#39;)
+
+sess.close()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Figure 5 is what you may get from the code above.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/ann_test.png&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Blue dots that are not on the red line indicate classification errors.&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+</description>
+    </item>
+    
+    <item>
       <title>Support Vector Machines</title>
       <link>https://helix979.github.io/jkoo/post/ml-svm/</link>
-      <pubDate>Tue, 14 Feb 2017 23:59:55 -0500</pubDate>
+      <pubDate>Sun, 14 Feb 2016 23:59:55 -0500</pubDate>
       
       <guid>https://helix979.github.io/jkoo/post/ml-svm/</guid>
       <description>
@@ -1028,7 +1445,7 @@ to be consistent with most of other SVM literature.&lt;/p&gt;
     <item>
       <title>Softmax Regression</title>
       <link>https://helix979.github.io/jkoo/post/ml-softmax/</link>
-      <pubDate>Sat, 11 Feb 2017 23:59:55 -0500</pubDate>
+      <pubDate>Thu, 11 Feb 2016 23:59:55 -0500</pubDate>
       
       <guid>https://helix979.github.io/jkoo/post/ml-softmax/</guid>
       <description>
@@ -1148,7 +1565,7 @@ $$&lt;/p&gt;
 can be represented as follows: $$\begin{aligned}
 l(\mathbf{W})=\prod_{m=1}^{M}\prod_{k=1}^{K} \left( \frac{e^{\mathbf{w}_k^T \mathbf{x}_{m}}}{\sum_{i=1}^{K} e^{\mathbf{w}_i^T \mathbf{x}_{m}}} \right)^{\mathbf{1}_{m}(k)},
 \label{eq:sm_likelihood}\end{aligned}$$ where the indicator function
-$\mathbf{1}_{m}(k)$ is the same as &lt;a href=&#34;https://helix979.github.io/jkoo/jkoo/post/ml-logistic/#mjx-eqn-eqindicator&#34; target=&#34;_blank&#34;&gt;(logi:5)&lt;/a&gt;. Softmax
+$\mathbf{1}_{m}(k)$ is the same as &lt;a href=&#34;https://helix979.github.io/jkoo/jkoo/post/ml-logistic/#mjx-eqn-eqindicator&#34; target=&#34;_blank&#34;&gt;(logi:6)&lt;/a&gt;. Softmax
 regression attempts to find the parameter matrix $\mathbf{W}$ that
 maximizes the likelihood $l(\mathbf{W})$. This causes the $k$-th element
 of $\mathbf{h}_{\mathbf{W}}(\mathbf{x}_{m})$ to be larger than any other
@@ -1165,7 +1582,7 @@ J(\mathbf{W})
 $$&lt;/p&gt;
 
 &lt;p&gt;It is worth noting that when $K=2$,
-\eqref{eq:sm_cost} is equivalent to &lt;a href=&#34;https://helix979.github.io/jkoo/jkoo/post/ml-logistic/#mjx-eqn-eqlogistic_cost_multi&#34; target=&#34;_blank&#34;&gt;(logi:4)&lt;/a&gt;.&lt;/p&gt;
+\eqref{eq:sm_cost} is equivalent to &lt;a href=&#34;https://helix979.github.io/jkoo/jkoo/post/ml-logistic/#mjx-eqn-eqlogistic_cost_multi&#34; target=&#34;_blank&#34;&gt;(logi:5)&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3 id=&#34;learning&#34;&gt;Learning&lt;/h3&gt;
 
@@ -1342,7 +1759,7 @@ sess.close()
     <item>
       <title>Logistic Regression</title>
       <link>https://helix979.github.io/jkoo/post/ml-logistic/</link>
-      <pubDate>Thu, 09 Feb 2017 23:59:55 -0500</pubDate>
+      <pubDate>Tue, 09 Feb 2016 23:59:55 -0500</pubDate>
       
       <guid>https://helix979.github.io/jkoo/post/ml-logistic/</guid>
       <description>
@@ -1680,7 +2097,7 @@ $$\begin{aligned}
 \vdots \\&lt;br /&gt;
 1
 \end{bmatrix}.
-\label{eq:std_basis}\end{aligned}$$ Formally, the optimal $\mathbf{W}$
+\end{aligned}\tag{logi:4}\label{eq:std_basis}$$ Formally, the optimal $\mathbf{W}$
 is chosen when we minimize the following cost function:&lt;/p&gt;
 
 &lt;p&gt;$$\tiny
@@ -1688,7 +2105,7 @@ is chosen when we minimize the following cost function:&lt;/p&gt;
 J(\mathbf{W})
 = -\frac{1}{M}\sum_{m=1}^{M} \sum_{k=1}^{K}
 \left( \mathbf{1}_{m}(k) \log h_{\mathbf{w}_k}(\mathbf{x}_{m}) +  ( 1-\mathbf{1}_{m}(k)) \log( 1 - h_{\mathbf{w}_k}(\mathbf{x}_{m}) ) \right),
-\end{aligned}\tag{logi:4}\label{eq:logistic_cost_multi}
+\end{aligned}\tag{logi:5}\label{eq:logistic_cost_multi}
 $$&lt;/p&gt;
 
 &lt;p&gt;where $\mathbf{1}_{m}(k)$
@@ -1701,7 +2118,7 @@ is an indicator function, defined as&lt;/p&gt;
 1 &amp;amp; \text{if } y_{m}=k,\\&lt;br /&gt;
 0 &amp;amp; \text{if } y_{m} \neq k.
 \end{matrix} \right.
-\end{aligned}\tag{logi:5}\label{eq:indicator}
+\end{aligned}\tag{logi:6}\label{eq:indicator}
 $$&lt;/p&gt;
 </description>
     </item>
@@ -1709,7 +2126,7 @@ $$&lt;/p&gt;
     <item>
       <title>Linear Regression</title>
       <link>https://helix979.github.io/jkoo/post/ml-linear_regression/</link>
-      <pubDate>Thu, 02 Feb 2017 23:59:55 -0500</pubDate>
+      <pubDate>Tue, 02 Feb 2016 23:59:55 -0500</pubDate>
       
       <guid>https://helix979.github.io/jkoo/post/ml-linear_regression/</guid>
       <description>
@@ -2039,7 +2456,7 @@ sess.close()
     <item>
       <title>Optimization</title>
       <link>https://helix979.github.io/jkoo/post/ml-optimization/</link>
-      <pubDate>Tue, 31 Jan 2017 23:59:55 -0500</pubDate>
+      <pubDate>Sun, 31 Jan 2016 23:59:55 -0500</pubDate>
       
       <guid>https://helix979.github.io/jkoo/post/ml-optimization/</guid>
       <description>
@@ -2238,43 +2655,6 @@ sess.close()
 200,    0.00000,    0.00000
 &lt;/code&gt;&lt;/pre&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>Example Talk</title>
-      <link>https://helix979.github.io/jkoo/talk/example-talk/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://helix979.github.io/jkoo/talk/example-talk/</guid>
-      <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://gcushen.github.io/hugo-academic-demo/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Deep Learning</title>
-      <link>https://helix979.github.io/jkoo/project/deep-learning/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://helix979.github.io/jkoo/project/deep-learning/</guid>
-      <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
-
-&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
-
-&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
-
-&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
-
-&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>External Project</title>
-      <link>https://helix979.github.io/jkoo/project/example-external-project/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://helix979.github.io/jkoo/project/example-external-project/</guid>
-      <description></description>
     </item>
     
     <item>

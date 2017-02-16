@@ -142,8 +142,8 @@
 <div class="article-metadata">
 
   <span class="article-date">
-    <time datetime="2017-02-11 23:59:55 -0500 EST" itemprop="datePublished">
-      Sat, Feb 11, 2017
+    <time datetime="2016-02-11 23:59:55 -0500 EST" itemprop="datePublished">
+      Thu, Feb 11, 2016
     </time>
   </span>
 
@@ -329,7 +329,7 @@ $$</p>
 can be represented as follows: $$\begin{aligned}
 l(\mathbf{W})=\prod_{m=1}^{M}\prod_{k=1}^{K} \left( \frac{e^{\mathbf{w}_k^T \mathbf{x}_{m}}}{\sum_{i=1}^{K} e^{\mathbf{w}_i^T \mathbf{x}_{m}}} \right)^{\mathbf{1}_{m}(k)},
 \label{eq:sm_likelihood}\end{aligned}$$ where the indicator function
-$\mathbf{1}_{m}(k)$ is the same as <a href="/jkoo/post/ml-logistic/#mjx-eqn-eqindicator" target="_blank">(logi:5)</a>. Softmax
+$\mathbf{1}_{m}(k)$ is the same as <a href="/jkoo/post/ml-logistic/#mjx-eqn-eqindicator" target="_blank">(logi:6)</a>. Softmax
 regression attempts to find the parameter matrix $\mathbf{W}$ that
 maximizes the likelihood $l(\mathbf{W})$. This causes the $k$-th element
 of $\mathbf{h}_{\mathbf{W}}(\mathbf{x}_{m})$ to be larger than any other
@@ -346,7 +346,7 @@ J(\mathbf{W})
 $$</p>
 
 <p>It is worth noting that when $K=2$,
-\eqref{eq:sm_cost} is equivalent to <a href="/jkoo/post/ml-logistic/#mjx-eqn-eqlogistic_cost_multi" target="_blank">(logi:4)</a>.</p>
+\eqref{eq:sm_cost} is equivalent to <a href="/jkoo/post/ml-logistic/#mjx-eqn-eqlogistic_cost_multi" target="_blank">(logi:5)</a>.</p>
 
 <h3 id="learning">Learning</h3>
 
