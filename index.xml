@@ -2967,11 +2967,13 @@ add2 = lambda arg1, arg2: arg1+arg2
 add2(1,2)                  #3#
 
 # Lambda expressions may be used when you pass an argument that is a function.
-a = [(4,2),(1,3)]
-sorted(a, key=lambda x:x[0])    #[(1, 3), (4, 2)]#
-                                # Sort by the first element of tuples
-sorted(a, key=lambda x:x[1])    #[(4, 2), (1, 3)]#
-                                # Sort by the second element of tuples
+a = [(1,1),(1,0),(2,0),(2,1)]
+sorted(a, key=lambda x:x[0])        #[(1, 1), (1, 0), (2, 0), (2, 1)]#
+                                    # Sort by the first element of tuples
+sorted(a, key=lambda x:x[1])        #[(1, 0), (2, 0), (1, 1), (2, 1)]#
+                                    # Sort by the second element of tuples
+sorted(a, key=lambda x:(x[0],x[1])) #[(1, 0), (1, 1), (2, 0), (2, 1)]#
+                                    # Sort by the first and then the second
 
 # To change global variables within a function
 x = 1
