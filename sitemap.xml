@@ -150,6 +150,14 @@
     
     
     <url>
+      <loc>https://helix979.github.io/jkoo/categories/</loc>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
       <loc>https://helix979.github.io/jkoo/tags/deep-learning/</loc>
       <lastmod>2016-04-27T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -161,15 +169,6 @@
     <url>
       <loc>https://helix979.github.io/jkoo/tags/demo/</loc>
       <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-      <loc>https://helix979.github.io/jkoo/home/</loc>
-      <lastmod>2016-04-20T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -223,6 +222,7 @@
     
     <url>
       <loc>https://helix979.github.io/jkoo/publication_types/</loc>
+      <lastmod>2013-07-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -240,6 +240,7 @@
     
     <url>
       <loc>https://helix979.github.io/jkoo/tags/</loc>
+      <lastmod>2016-04-27T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
