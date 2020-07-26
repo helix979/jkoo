@@ -8,7 +8,57 @@
     <language>en-us</language>
     <copyright>&amp;copy; 2017 Jinkyu Koo</copyright>
     <lastBuildDate>Wed, 20 Apr 2016 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/jkoo/home/" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://helix979.github.io/jkoo/home/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>https://helix979.github.io/jkoo/home/about/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://helix979.github.io/jkoo/home/about/</guid>
+      <description>Contact Info Name: Jinkyu Koo (구진규 in Korean; 具珍奎 in Hanja) Address: 465 Northwestern Ave EE building, Mailbox #162 West Lafayette, IN 47907 Email: kooj@purdue.edu Office: +1-765-494-3550 I am a research scientist, working with Prof. Saurabh Bagchi in the Dependable Computing Systems Laboratory (DCSL) at Purdue University. I had worked in industry for about 7 years as a software engineer on Linux systems and as a research engineer on the physical layer of wireless communication systems.</description>
+    </item>
+    
+    <item>
+      <title>Publications</title>
+      <link>https://helix979.github.io/jkoo/home/pub/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://helix979.github.io/jkoo/home/pub/</guid>
+      <description>J. Koo, C. Saumya, M. Kulkarni, and S. Bagchi, &amp;ldquo;PySE: Automatic Worst-Case Test Generation by Reinforcement Learning,&amp;rdquo;
+At the 12th IEEE International Conference on Software Testing, Verification, and Validation (ICST), Apr. 2019. (Acceptance rate = 28.1%)
+ C. Saumya, J. Koo, M. Kulkarni, and S. Bagchi, &amp;ldquo;XSTRESSOR: Automatic Generation of Large-Scale Worst-Case Test Inputs by Inferring Path Conditions,&amp;rdquo; At the 12th IEEE International Conference on Software Testing, Verification, and Validation (ICST), Apr.</description>
+    </item>
+    
+    <item>
+      <title>US Patents</title>
+      <link>https://helix979.github.io/jkoo/home/patent/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://helix979.github.io/jkoo/home/patent/</guid>
+      <description>J. Koo, Y.K. Cho, C.Y. Oh, S.R. Jeong, T.Y. Kim, D.S. Park, J.Y. Jung, J.Y. Choi, E.T. Lim, C.H. Suh, J.H. Jang, “Apparatus and method for performing ranging in a communication system,” Patent number: US8059525, Issue date: Nov 15, 2011
+ C.H. Suh, J. Koo, D.S. Park, Y.K. Cho, E.T. Lim, J.S. Woo, “System and method for acquiring cell in a frequency overlay communication system,” Patent number: US7852813, Issue date: Dec 14, 2010</description>
+    </item>
+    
+    <item>
+      <title>Recent Posts</title>
+      <link>https://helix979.github.io/jkoo/home/ml/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://helix979.github.io/jkoo/home/ml/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Recent Posts</title>
+      <link>https://helix979.github.io/jkoo/home/misc/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://helix979.github.io/jkoo/home/misc/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

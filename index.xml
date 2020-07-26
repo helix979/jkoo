@@ -68,17 +68,10 @@ our discussion will be focused on the use for classification.&lt;/p&gt;
 component of a human brain that transmits electrical signals from one
 place to others.&lt;/p&gt;
 
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/neuron.jpg&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Structure of a biological neuron.&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/neuron.jpg&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;Structure of a biological neuron.&lt;/h4&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
@@ -86,17 +79,10 @@ place to others.&lt;/p&gt;
 real neuron. A perceptron has multiple input channels like dendrites and
 a single output channel like an axon, as shown in Figure 2.&lt;/p&gt;
 
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/perceptron.png&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;A perceptron.&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/perceptron.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;A perceptron.&lt;/h4&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
@@ -126,17 +112,10 @@ functions regulates the output to stay at zero until the weighted input
 $z$ is larger than a certain threshold at which the output quickly
 increases.&lt;/p&gt;
 
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/activation.png&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Plots of activation functions.&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/activation.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;Plots of activation functions.&lt;/h4&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
@@ -145,17 +124,10 @@ increases.&lt;/p&gt;
 &lt;p&gt;An ANN is an interconnected group of perceptrons, as exemplified in
 Figure 4.&lt;/p&gt;
 
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/nn.png&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;An artificial neural network.&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/nn.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;An artificial neural network.&lt;/h4&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
@@ -411,17 +383,10 @@ sess.close()
 
 &lt;p&gt;Figure 5 is what you may get from the code above.&lt;/p&gt;
 
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/ann_test.png&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Blue dots that are not on the red line indicate classification errors.&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/ann_test.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;Blue dots that are not on the red line indicate classification errors.&lt;/h4&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 </description>
@@ -455,22 +420,11 @@ to find out the separating hyperplane that has the largest margin. For
 this reason, a SVM classifier is also called a maximum-margin
 classifier.&lt;/p&gt;
 
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/svm_plane.png&#34; alt=&#34;Although both the solid and dashed lines can separate the squares from dots, the solid one would be preferred.&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Separating hyperplanes.&lt;/h4&gt;
-        &lt;p&gt;
-        Although both the solid and dashed lines can separate the squares from dots, the solid one would be preferred.
-        
-            
-        
-        &lt;/p&gt; 
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/svm_plane.png&#34;
+         alt=&#34;Although both the solid and dashed lines can separate the squares from dots, the solid one would be preferred.&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;Separating hyperplanes.&lt;/h4&gt;&lt;p&gt;Although both the solid and dashed lines can separate the squares from dots, the solid one would be preferred.&lt;/p&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
@@ -484,7 +438,7 @@ corresponding label by $y_{m} \in {-1,1}$. The separating hyperplane
 can be represented as the set of points $\mathbf{x} \in \mathbb{R}^{n}$
 that satisfies the following equation: $$\begin{align}
 \mathbf{w}^T\mathbf{x}+b=0,\nonumber\end{align}$$ where
-$\mathbf{w} \in \mathbb{R}^{n}$ and $b \in \mathbb{R}$.&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; Note that
+$\mathbf{w} \in \mathbb{R}^{n}$ and $b \in \mathbb{R}$.&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; Note that
 $\mathbf{w}$ is normal to the hyperplane. If the training samples are
 linearly separable, we can select two hyperplanes that are parallel to
 the separating hyperplane and separate the classes without leaving any
@@ -507,17 +461,10 @@ $$&lt;/p&gt;
 &lt;p&gt;The training samples lying on such
 hyperplanes are called &lt;strong&gt;support vectors&lt;/strong&gt;. Figure 2 describes the support vectors.&lt;/p&gt;
 
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/svm_sv.png&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Support vectors.&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/svm_sv.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;Support vectors.&lt;/h4&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
@@ -786,17 +733,10 @@ sess.close()
 
 &lt;p&gt;Figure 3 shows the result of the code above.&lt;/p&gt;
 
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/svm_hinge.png&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Result of the code above.&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/svm_hinge.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;Result of the code above.&lt;/h4&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
@@ -812,17 +752,10 @@ example. In this case, it is clear that a hyperplane is not a good
 option to separate classes. Rather, a circle-shape decision boundary
 would be a better choice.&lt;/p&gt;
 
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/svm_nonlinear1.png&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;No hyperplane separates data in two dimensions.&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/svm_nonlinear1.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;No hyperplane separates data in two dimensions.&lt;/h4&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
@@ -837,17 +770,10 @@ $\Phi(\mathbf{x})=\begin{bmatrix} x_1 &amp;amp; x_2 &amp;amp; x_1^2+x_2^2 \end{b
 transforms data in Figure 4 into a feature space
 of three dimensions.&lt;/p&gt;
 
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/svm_nonlinear2.png&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Mapped into three dimensions where there is a hyperplane that separates data.&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/svm_nonlinear2.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;Mapped into three dimensions where there is a hyperplane that separates data.&lt;/h4&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
@@ -1414,17 +1340,10 @@ plt.savefig(&#39;svm_classification.pdf&#39;)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Figure 6 is the result of the code above.&lt;br /&gt;
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/svm_classification.png&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Classfication by SVM.&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/svm_classification.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;Classfication by SVM.&lt;/h4&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;/p&gt;
 &lt;div class=&#34;footnotes&#34;&gt;
@@ -1740,17 +1659,10 @@ sess.close()
 
 &lt;p&gt;Figure 1 is what we may get from the code above.&lt;/p&gt;
 
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/softmax_test.png&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Blue dots that are not on the red line indicate classification errors.&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/softmax_test.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;Blue dots that are not on the red line indicate classification errors.&lt;/h4&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 </description>
@@ -1799,17 +1711,10 @@ $z \rightarrow -\infty$. Since $h_{\mathbf{w}}(\mathbf{x}_{m})$ attempts
 to model a probability, the property of the sigmoid function $s(z)$ that
 is bounded between 0 and 1 is a good fit for our purpose.&lt;/p&gt;
 
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/sigmoid.png&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;sigmoid function $s(z)=\frac{1}{1 &amp;#43; e^{-z}}$.&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/sigmoid.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;sigmoid function $s(z)=\frac{1}{1 &amp;#43; e^{-z}}$.&lt;/h4&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
@@ -1922,17 +1827,10 @@ $\mathbf{w}^{*T} \mathbf{x}=0$ is the decision boundary separating the
 two predicted classes. Figure 2 shows an example
 where the decision boundary is a line.&lt;/p&gt;
 
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/logistic.png&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Decision boundary (the blue line) learned by logistic regression separates the data samples, where the green dots and red x’s belong to a different class.&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/logistic.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;Decision boundary (the blue line) learned by logistic regression separates the data samples, where the green dots and red x’s belong to a different class.&lt;/h4&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
@@ -2181,22 +2079,11 @@ $w_1$ and the $y$-intercept $w_0$ of a straight line that fits best to
 given points ${(x_{m,1}, y_{m})}_{m=1}^{M}$. This case is called
 simple linear regression. Figure 1 shows an example of the simple linear regression.&lt;/p&gt;
 
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/simple_linear.png&#34; alt=&#34;The blue dots represent the training data $\{(x_{m,1}, y_{m})\}_{m=1}^{M}$. The result of the simple linear regression is the red line&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Simple linear regression.&lt;/h4&gt;
-        &lt;p&gt;
-        The blue dots represent the training data $\{(x_{m,1}, y_{m})\}_{m=1}^{M}$. The result of the simple linear regression is the red line
-        
-            
-        
-        &lt;/p&gt; 
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/simple_linear.png&#34;
+         alt=&#34;The blue dots represent the training data ${(x{m,1}, y{m})}_{m=1}^{M}$. The result of the simple linear regression is the red line&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;Simple linear regression.&lt;/h4&gt;&lt;p&gt;The blue dots represent the training data ${(x&lt;em&gt;{m,1}, y&lt;/em&gt;{m})}_{m=1}^{M}$. The result of the simple linear regression is the red line&lt;/p&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
@@ -2335,17 +2222,10 @@ draw(w_1.eval(), w_0.eval())
 sess.close()
 &lt;/code&gt;&lt;/pre&gt;
 
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/linear_one.png&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Simple linear gression&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/linear_one.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;Simple linear gression&lt;/h4&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
@@ -2437,17 +2317,10 @@ sess.close()
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Below is what we can obtained from the code.
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/linear_multiple.png&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Linear regression ($n=2$)&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/linear_multiple.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;Linear regression ($n=2$)&lt;/h4&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;/p&gt;
 </description>
@@ -2531,22 +2404,11 @@ does not guarantee us finding the global minimum. Instead, depending on
 the initial guess, we will end up with different local minimum, which is
 exemplified in Figure 1.&lt;/p&gt;
 
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/gd_initial.png&#34; alt=&#34;The red and green dots represent the trajectories of the gradient descent corresponding to the initial values $w^{(0)}=-135$ and $w^{(0)}=30$, respectively.&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;The effect of the initial guess when $J(w)=(w&amp;#43;90)(w-50)(w/2&amp;#43;50)(w-90)/1000000$.&lt;/h4&gt;
-        &lt;p&gt;
-        The red and green dots represent the trajectories of the gradient descent corresponding to the initial values $w^{(0)}=-135$ and $w^{(0)}=30$, respectively.
-        
-            
-        
-        &lt;/p&gt; 
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/gd_initial.png&#34;
+         alt=&#34;The red and green dots represent the trajectories of the gradient descent corresponding to the initial values $w^{(0)}=-135$ and $w^{(0)}=30$, respectively.&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;The effect of the initial guess when $J(w)=(w&amp;#43;90)(w-50)(w/2&amp;#43;50)(w-90)/1000000$.&lt;/h4&gt;&lt;p&gt;The red and green dots represent the trajectories of the gradient descent corresponding to the initial values $w^{(0)}=-135$ and $w^{(0)}=30$, respectively.&lt;/p&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
@@ -2556,17 +2418,10 @@ exemplified in Figure 1.&lt;/p&gt;
 towards the optimal solution. Figure 2 illustrates
 the effect of the learning rate.&lt;/p&gt;
 
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/gd_learning_rate.png&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;The effect of the learning rate when $J(w)=\frac{1}{2}w^2$ and $w^{(0)}=-20$.&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/gd_learning_rate.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;The effect of the learning rate when $J(w)=\frac{1}{2}w^2$ and $w^{(0)}=-20$.&lt;/h4&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
@@ -3336,22 +3191,11 @@ and static variables are located in the bss segment. The heap is the
 region set aside for dynamic memory allocation. The stack is where local
 variables are allocated within functions.&lt;/p&gt;
 
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/address_space.png&#34; alt=&#34;No sharing between processes; threads within a process share text, data, bss.&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Address spaces.&lt;/h4&gt;
-        &lt;p&gt;
-        No sharing between processes; threads within a process share text, data, bss.
-        
-            
-        
-        &lt;/p&gt; 
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/address_space.png&#34;
+         alt=&#34;No sharing between processes; threads within a process share text, data, bss.&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;Address spaces.&lt;/h4&gt;&lt;p&gt;No sharing between processes; threads within a process share text, data, bss.&lt;/p&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
@@ -3447,17 +3291,10 @@ kernel-space view are, respectively, called a thread ID (TID) and a PID
 in these userland applications. Figure 2 summarizes the
 relationship among these IDs.&lt;/p&gt;
 
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/pid.png&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Relationship among PID, TID, PPID, and TGID.&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/pid.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;Relationship among PID, TID, PPID, and TGID.&lt;/h4&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
@@ -3488,17 +3325,10 @@ threads with the same priority are scheduled in a round-robin fashion.&lt;/p&gt;
 
 &lt;h3 id=&#34;preemptive-scheduling&#34;&gt;Preemptive scheduling&lt;/h3&gt;
 
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/preemption.png&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Preemption.&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/preemption.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;Preemption.&lt;/h4&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
@@ -3529,17 +3359,10 @@ running at the same time.&lt;/p&gt;
 
 &lt;h3 id=&#34;thread-states&#34;&gt;Thread states&lt;/h3&gt;
 
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/state.png&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Thread states.&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/state.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;Thread states.&lt;/h4&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
@@ -3864,17 +3687,10 @@ scheduler-class-specific function pointed by this function pointer.&lt;/p&gt;
 
 &lt;h3 id=&#34;nice-values-priorities-in-the-cfs&#34;&gt;Nice values: priorities in the CFS&lt;/h3&gt;
 
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/nice.png&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Nice-to-weight conversion.&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
+&lt;figure&gt;
+    &lt;img src=&#34;https://helix979.github.io/jkoo/jkoo/img/nice.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;Nice-to-weight conversion.&lt;/h4&gt;
+        &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 

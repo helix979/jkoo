@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme" content="hugo-academic">
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.51" />
   <meta name="author" content="Jinkyu Koo">
   <meta name="description" content="research scientist / dad / ice hockey player in dreams">
 
@@ -142,7 +142,7 @@
 <div class="article-metadata">
 
   <span class="article-date">
-    <time datetime="2016-02-02 23:59:55 -0500 EST" itemprop="datePublished">
+    <time datetime="2016-02-02 23:59:55 -0500 -0500" itemprop="datePublished">
       Tue, Feb 2, 2016
     </time>
   </span>
@@ -264,22 +264,11 @@ $w_1$ and the $y$-intercept $w_0$ of a straight line that fits best to
 given points ${(x_{m,1}, y_{m})}_{m=1}^{M}$. This case is called
 simple linear regression. Figure 1 shows an example of the simple linear regression.</p>
 
-
-<figure >
-    
-        <img src="/jkoo/img/simple_linear.png" alt="The blue dots represent the training data $\{(x_{m,1}, y_{m})\}_{m=1}^{M}$. The result of the simple linear regression is the red line" />
-    
-    
-    <figcaption>
-        <h4>Simple linear regression.</h4>
-        <p>
-        The blue dots represent the training data $\{(x_{m,1}, y_{m})\}_{m=1}^{M}$. The result of the simple linear regression is the red line
-        
-            
-        
-        </p> 
-    </figcaption>
-    
+<figure>
+    <img src="/jkoo/img/simple_linear.png"
+         alt="The blue dots represent the training data ${(x{m,1}, y{m})}_{m=1}^{M}$. The result of the simple linear regression is the red line"/> <figcaption>
+            <h4>Simple linear regression.</h4><p>The blue dots represent the training data ${(x<em>{m,1}, y</em>{m})}_{m=1}^{M}$. The result of the simple linear regression is the red line</p>
+        </figcaption>
 </figure>
 
 
@@ -418,17 +407,10 @@ draw(w_1.eval(), w_0.eval())
 sess.close()
 </code></pre>
 
-
-<figure >
-    
-        <img src="/jkoo/img/linear_one.png" />
-    
-    
-    <figcaption>
-        <h4>Simple linear gression</h4>
-        
-    </figcaption>
-    
+<figure>
+    <img src="/jkoo/img/linear_one.png"/> <figcaption>
+            <h4>Simple linear gression</h4>
+        </figcaption>
 </figure>
 
 
@@ -520,17 +502,10 @@ sess.close()
 </code></pre>
 
 <p>Below is what we can obtained from the code.
-
-<figure >
-    
-        <img src="/jkoo/img/linear_multiple.png" />
-    
-    
-    <figcaption>
-        <h4>Linear regression ($n=2$)</h4>
-        
-    </figcaption>
-    
+<figure>
+    <img src="/jkoo/img/linear_multiple.png"/> <figcaption>
+            <h4>Linear regression ($n=2$)</h4>
+        </figcaption>
 </figure>
 </p>
 

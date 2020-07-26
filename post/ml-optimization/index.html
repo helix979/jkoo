@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme" content="hugo-academic">
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.51" />
   <meta name="author" content="Jinkyu Koo">
   <meta name="description" content="research scientist / dad / ice hockey player in dreams">
 
@@ -142,7 +142,7 @@
 <div class="article-metadata">
 
   <span class="article-date">
-    <time datetime="2016-01-31 23:59:55 -0500 EST" itemprop="datePublished">
+    <time datetime="2016-01-31 23:59:55 -0500 -0500" itemprop="datePublished">
       Sun, Jan 31, 2016
     </time>
   </span>
@@ -284,22 +284,11 @@ does not guarantee us finding the global minimum. Instead, depending on
 the initial guess, we will end up with different local minimum, which is
 exemplified in Figure 1.</p>
 
-
-<figure >
-    
-        <img src="/jkoo/img/gd_initial.png" alt="The red and green dots represent the trajectories of the gradient descent corresponding to the initial values $w^{(0)}=-135$ and $w^{(0)}=30$, respectively." />
-    
-    
-    <figcaption>
-        <h4>The effect of the initial guess when $J(w)=(w&#43;90)(w-50)(w/2&#43;50)(w-90)/1000000$.</h4>
-        <p>
-        The red and green dots represent the trajectories of the gradient descent corresponding to the initial values $w^{(0)}=-135$ and $w^{(0)}=30$, respectively.
-        
-            
-        
-        </p> 
-    </figcaption>
-    
+<figure>
+    <img src="/jkoo/img/gd_initial.png"
+         alt="The red and green dots represent the trajectories of the gradient descent corresponding to the initial values $w^{(0)}=-135$ and $w^{(0)}=30$, respectively."/> <figcaption>
+            <h4>The effect of the initial guess when $J(w)=(w&#43;90)(w-50)(w/2&#43;50)(w-90)/1000000$.</h4><p>The red and green dots represent the trajectories of the gradient descent corresponding to the initial values $w^{(0)}=-135$ and $w^{(0)}=30$, respectively.</p>
+        </figcaption>
 </figure>
 
 
@@ -309,17 +298,10 @@ exemplified in Figure 1.</p>
 towards the optimal solution. Figure 2 illustrates
 the effect of the learning rate.</p>
 
-
-<figure >
-    
-        <img src="/jkoo/img/gd_learning_rate.png" />
-    
-    
-    <figcaption>
-        <h4>The effect of the learning rate when $J(w)=\frac{1}{2}w^2$ and $w^{(0)}=-20$.</h4>
-        
-    </figcaption>
-    
+<figure>
+    <img src="/jkoo/img/gd_learning_rate.png"/> <figcaption>
+            <h4>The effect of the learning rate when $J(w)=\frac{1}{2}w^2$ and $w^{(0)}=-20$.</h4>
+        </figcaption>
 </figure>
 
 

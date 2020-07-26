@@ -8,7 +8,18 @@
     <language>en-us</language>
     <copyright>&amp;copy; 2017 Jinkyu Koo</copyright>
     <lastBuildDate>Wed, 20 Apr 2016 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/jkoo/tags/misc/" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://helix979.github.io/jkoo/tags/misc/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Recent Posts</title>
+      <link>https://helix979.github.io/jkoo/home/misc/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://helix979.github.io/jkoo/home/misc/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

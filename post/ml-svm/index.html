@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme" content="hugo-academic">
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.51" />
   <meta name="author" content="Jinkyu Koo">
   <meta name="description" content="research scientist / dad / ice hockey player in dreams">
 
@@ -142,7 +142,7 @@
 <div class="article-metadata">
 
   <span class="article-date">
-    <time datetime="2016-02-14 23:59:55 -0500 EST" itemprop="datePublished">
+    <time datetime="2016-02-14 23:59:55 -0500 -0500" itemprop="datePublished">
       Sun, Feb 14, 2016
     </time>
   </span>
@@ -234,22 +234,11 @@ to find out the separating hyperplane that has the largest margin. For
 this reason, a SVM classifier is also called a maximum-margin
 classifier.</p>
 
-
-<figure >
-    
-        <img src="/jkoo/img/svm_plane.png" alt="Although both the solid and dashed lines can separate the squares from dots, the solid one would be preferred." />
-    
-    
-    <figcaption>
-        <h4>Separating hyperplanes.</h4>
-        <p>
-        Although both the solid and dashed lines can separate the squares from dots, the solid one would be preferred.
-        
-            
-        
-        </p> 
-    </figcaption>
-    
+<figure>
+    <img src="/jkoo/img/svm_plane.png"
+         alt="Although both the solid and dashed lines can separate the squares from dots, the solid one would be preferred."/> <figcaption>
+            <h4>Separating hyperplanes.</h4><p>Although both the solid and dashed lines can separate the squares from dots, the solid one would be preferred.</p>
+        </figcaption>
 </figure>
 
 
@@ -263,7 +252,7 @@ corresponding label by $y_{m} \in {-1,1}$. The separating hyperplane
 can be represented as the set of points $\mathbf{x} \in \mathbb{R}^{n}$
 that satisfies the following equation: $$\begin{align}
 \mathbf{w}^T\mathbf{x}+b=0,\nonumber\end{align}$$ where
-$\mathbf{w} \in \mathbb{R}^{n}$ and $b \in \mathbb{R}$.<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> Note that
+$\mathbf{w} \in \mathbb{R}^{n}$ and $b \in \mathbb{R}$.<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup> Note that
 $\mathbf{w}$ is normal to the hyperplane. If the training samples are
 linearly separable, we can select two hyperplanes that are parallel to
 the separating hyperplane and separate the classes without leaving any
@@ -286,17 +275,10 @@ $$</p>
 <p>The training samples lying on such
 hyperplanes are called <strong>support vectors</strong>. Figure 2 describes the support vectors.</p>
 
-
-<figure >
-    
-        <img src="/jkoo/img/svm_sv.png" />
-    
-    
-    <figcaption>
-        <h4>Support vectors.</h4>
-        
-    </figcaption>
-    
+<figure>
+    <img src="/jkoo/img/svm_sv.png"/> <figcaption>
+            <h4>Support vectors.</h4>
+        </figcaption>
 </figure>
 
 
@@ -565,17 +547,10 @@ sess.close()
 
 <p>Figure 3 shows the result of the code above.</p>
 
-
-<figure >
-    
-        <img src="/jkoo/img/svm_hinge.png" />
-    
-    
-    <figcaption>
-        <h4>Result of the code above.</h4>
-        
-    </figcaption>
-    
+<figure>
+    <img src="/jkoo/img/svm_hinge.png"/> <figcaption>
+            <h4>Result of the code above.</h4>
+        </figcaption>
 </figure>
 
 
@@ -591,17 +566,10 @@ example. In this case, it is clear that a hyperplane is not a good
 option to separate classes. Rather, a circle-shape decision boundary
 would be a better choice.</p>
 
-
-<figure >
-    
-        <img src="/jkoo/img/svm_nonlinear1.png" />
-    
-    
-    <figcaption>
-        <h4>No hyperplane separates data in two dimensions.</h4>
-        
-    </figcaption>
-    
+<figure>
+    <img src="/jkoo/img/svm_nonlinear1.png"/> <figcaption>
+            <h4>No hyperplane separates data in two dimensions.</h4>
+        </figcaption>
 </figure>
 
 
@@ -616,17 +584,10 @@ $\Phi(\mathbf{x})=\begin{bmatrix} x_1 &amp; x_2 &amp; x_1^2+x_2^2 \end{bmatrix}^
 transforms data in Figure 4 into a feature space
 of three dimensions.</p>
 
-
-<figure >
-    
-        <img src="/jkoo/img/svm_nonlinear2.png" />
-    
-    
-    <figcaption>
-        <h4>Mapped into three dimensions where there is a hyperplane that separates data.</h4>
-        
-    </figcaption>
-    
+<figure>
+    <img src="/jkoo/img/svm_nonlinear2.png"/> <figcaption>
+            <h4>Mapped into three dimensions where there is a hyperplane that separates data.</h4>
+        </figcaption>
 </figure>
 
 
@@ -1193,17 +1154,10 @@ plt.savefig('svm_classification.pdf')
 </code></pre>
 
 <p>Figure 6 is the result of the code above.<br />
-
-<figure >
-    
-        <img src="/jkoo/img/svm_classification.png" />
-    
-    
-    <figcaption>
-        <h4>Classfication by SVM.</h4>
-        
-    </figcaption>
-    
+<figure>
+    <img src="/jkoo/img/svm_classification.png"/> <figcaption>
+            <h4>Classfication by SVM.</h4>
+        </figcaption>
 </figure>
 </p>
 <div class="footnotes">

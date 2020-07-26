@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme" content="hugo-academic">
-  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="generator" content="Hugo 0.51" />
   <meta name="author" content="Jinkyu Koo">
   <meta name="description" content="research scientist / dad / ice hockey player in dreams">
 
@@ -249,22 +249,11 @@ and static variables are located in the bss segment. The heap is the
 region set aside for dynamic memory allocation. The stack is where local
 variables are allocated within functions.</p>
 
-
-<figure >
-    
-        <img src="/jkoo/img/address_space.png" alt="No sharing between processes; threads within a process share text, data, bss." />
-    
-    
-    <figcaption>
-        <h4>Address spaces.</h4>
-        <p>
-        No sharing between processes; threads within a process share text, data, bss.
-        
-            
-        
-        </p> 
-    </figcaption>
-    
+<figure>
+    <img src="/jkoo/img/address_space.png"
+         alt="No sharing between processes; threads within a process share text, data, bss."/> <figcaption>
+            <h4>Address spaces.</h4><p>No sharing between processes; threads within a process share text, data, bss.</p>
+        </figcaption>
 </figure>
 
 
@@ -360,17 +349,10 @@ kernel-space view are, respectively, called a thread ID (TID) and a PID
 in these userland applications. Figure 2 summarizes the
 relationship among these IDs.</p>
 
-
-<figure >
-    
-        <img src="/jkoo/img/pid.png" />
-    
-    
-    <figcaption>
-        <h4>Relationship among PID, TID, PPID, and TGID.</h4>
-        
-    </figcaption>
-    
+<figure>
+    <img src="/jkoo/img/pid.png"/> <figcaption>
+            <h4>Relationship among PID, TID, PPID, and TGID.</h4>
+        </figcaption>
 </figure>
 
 
@@ -401,17 +383,10 @@ threads with the same priority are scheduled in a round-robin fashion.</p>
 
 <h3 id="preemptive-scheduling">Preemptive scheduling</h3>
 
-
-<figure >
-    
-        <img src="/jkoo/img/preemption.png" />
-    
-    
-    <figcaption>
-        <h4>Preemption.</h4>
-        
-    </figcaption>
-    
+<figure>
+    <img src="/jkoo/img/preemption.png"/> <figcaption>
+            <h4>Preemption.</h4>
+        </figcaption>
 </figure>
 
 
@@ -442,17 +417,10 @@ running at the same time.</p>
 
 <h3 id="thread-states">Thread states</h3>
 
-
-<figure >
-    
-        <img src="/jkoo/img/state.png" />
-    
-    
-    <figcaption>
-        <h4>Thread states.</h4>
-        
-    </figcaption>
-    
+<figure>
+    <img src="/jkoo/img/state.png"/> <figcaption>
+            <h4>Thread states.</h4>
+        </figcaption>
 </figure>
 
 
@@ -777,17 +745,10 @@ scheduler-class-specific function pointed by this function pointer.</p>
 
 <h3 id="nice-values-priorities-in-the-cfs">Nice values: priorities in the CFS</h3>
 
-
-<figure >
-    
-        <img src="/jkoo/img/nice.png" />
-    
-    
-    <figcaption>
-        <h4>Nice-to-weight conversion.</h4>
-        
-    </figcaption>
-    
+<figure>
+    <img src="/jkoo/img/nice.png"/> <figcaption>
+            <h4>Nice-to-weight conversion.</h4>
+        </figcaption>
 </figure>
 
 

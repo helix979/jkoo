@@ -7,7 +7,9 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017 Jinkyu Koo</copyright>
-    <atom:link href="/jkoo/categories/" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://helix979.github.io/jkoo/categories/index.xml" rel="self" type="application/rss+xml" />
+    
     
   </channel>
 </rss>
